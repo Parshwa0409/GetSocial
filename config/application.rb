@@ -23,5 +23,10 @@ module GetSocial
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Load .env file in development and test environments
+    if Rails.env.development? || Rails.env.test?
+      Dotenv::Railtie.load
+    end
   end
 end

@@ -1,0 +1,35 @@
+<br/>
+<h2 class="text-center">Sign-Up to socialize with your friends 🪩💃</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field my-3 py-2 text-capitalize">
+        <%= f.label :name %>
+        <%= f.text_field :name, class:"form-control", placeholder:"John"%>
+  </div>
+
+  <div class="field my-3 py-2 text-capitalize">
+        <%= f.label :email %>
+        <%= f.text_field :email, class:"form-control", placeholder:"john_doe@gmail.com"%>
+  </div>
+
+  <div class="field my-3 py-2 text-capitalize">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password,class:"form-control", autocomplete: "new-password", placeholder: "******" %>
+  </div>
+
+  <div class="field  field my-3 py-2 text-capitalize">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation,class:"form-control", autocomplete: "new-password", placeholder: "******" %>
+  </div>
+
+  <div class="actions  field my-3 py-2 text-capitalize">
+    <%= f.submit "Sign up",  class: "btn btn-lg btn-success w-100"%>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
