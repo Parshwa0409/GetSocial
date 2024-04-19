@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'profile/git'
+  get 'profile/add'
+  get 'profile/.'
   root "home#index"
   
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
