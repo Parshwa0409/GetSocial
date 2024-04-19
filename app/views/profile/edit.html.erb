@@ -1,2 +1,36 @@
-<h1>Profile#edit</h1>
-<p>Find me in app/views/profile/edit.html.erb</p>
+<h1 class="text-center">Edit Your Profile</h1>
+
+<%= form_for @user, url: profile_path(@user), method: :patch, data: { turbo: false }  do |form| %>
+    <div class="my-3 py-2 text-capitalize">
+        <%= form.label :name%>
+        <%= form.text_field :name, class:"form-control", placeholder:"John Doe"%>
+    </div>
+
+    <div class="my-3 py-2 text-capitalize">
+        <%= form.label :email %>
+        <%= form.email_field :email, class:"form-control", placeholder:"j.doe@gmail.com"%>
+    </div>
+
+    <div class="my-3 py-2 text-capitalize">
+        <%= form.label :bio %>
+        <%= form.text_area :bio, class:"form-control", placeholder:"How would I describe myself to others 🤔"%>
+    </div>
+
+    <div class="my-3 py-2 text-capitalize">
+        <%= form.label :profile_picture %>
+        <%= form.file_field :profile_picture, class:"form-control"%>
+    </div>
+
+    <div class="my-3 py-2 text-capitalize">
+        <%= form.label :cover_photo %>
+        <%= form.file_field :cover_photo, class:"form-control"%>
+    </div>
+
+    <div class="my-3">
+        <%= form.submit "Update My Info!", class:"btn btn-lg btn-block btn-primary w-100"%>
+    </div>
+
+<% end %>
+
+
+<%# button_to "Cancel", root_path , class:"btn btn-lg btn-block btn-danger w-100", data: {confirm: 'Are you sure'}%>

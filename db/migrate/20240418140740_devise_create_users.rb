@@ -32,8 +32,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.string :name
-      t.text :bio
+      t.string :name, null: false
+      t.text :bio, default: "Hey There, I'm Using GetSocial :) "
       t.string :profile_picture
       t.string :cover_photo
 

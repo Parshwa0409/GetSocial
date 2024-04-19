@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   resources :posts
 
-  resources :profile, only: [:show, :edit]
+  # TODO: CHECK HOW TO DO ROUTING ONLY FOR {GET:SHOW} {GET:EDIT} {PATCH:UPDATE}
+  resources :profile
+
   
   get "up" => "rails/health#show", as: :rails_health_check
 

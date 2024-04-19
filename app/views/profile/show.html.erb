@@ -1,4 +1,48 @@
-<h1>Profile#show</h1>
-<p>Find me in app/views/profile/show.html.erb</p>
+<%= stylesheet_link_tag "profile" %>
 
-<%=@user.email%>
+<div id="user-profile">
+
+    <div class="d-flex align-items-center">
+        <% if @user.profile_picture.attached? %>
+            <%= image_tag @user.profile_picture,  id: "user-avatar"%>
+        <% else %>
+            <%#image_tag('/Users/pbpatil/Desktop/GetSocial/app/assets/images/user_avatar.png'),   id: "user-avatar"%>
+        <% end %>
+
+    <%# TODO: FOLLOWER COUNT, FOLLOWING COUNT, POST COUNT%>
+        <div id="user-info">
+            <p><%=@user.email%> </p>
+            <p><%=@user.name%></p>
+            <p><%=@user.bio%></p>
+        </div>
+    </div>
+
+
+    <div id="button-row">
+        <div><%= button_to "Edit Profile", edit_profile_path(@user),method: :get, class: "btn btn-lg btn-primary user-profile-btn w-100"%></div>
+        <pre>               </pre>
+        <div><%= button_to "Log Out", destroy_user_session_path, method: :delete,  class: "btn btn-lg btn-danger user-profile-btn w-100"%></div>
+    </div>
+
+</div>
+<hr/>
+<div id="user-posts">
+    <% @user.posts.each do |post|%>
+        <%= link_to profile_path(current_user), method: :get, class:"post-item" do %>
+                <%= image_tag post.image,  class: "post-image"%>
+        <% end %>
+    <% end %>
+</div>
+
+
+<!-- 
+<% if @user %> 
+    <h1>Name: <%=@user.name%></h1>
+    <% if @user.profile_picture.attached? %>
+        <%= image_tag @user.profile_picture%>
+    <% else %>
+        <%= image_tag('/Users/pbpatil/Desktop/GetSocial/app/assets/images/user_avatar.png')%>
+    <% end %>
+    <%= button_to "LogOut", destroy_user_session_path, method: :delete%>
+<% end %>
+-->

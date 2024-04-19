@@ -1,0 +1,55 @@
+/* #user-profile {} */
+
+#user-avatar {
+  height: 10rem;
+  width: 10rem;
+
+  aspect-ratio: 1;
+
+  padding: 0.25rem;
+  margin-right: 2rem;
+
+  border: 1px solid black;
+  border-radius: 100%;
+}
+
+/* #user-info {} */
+
+#button-row {
+  margin: 1rem 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#button-row > div {
+  width: 100%;
+}
+
+/* TODO: STYLE POSTS PROPERLY */
+#user-posts {
+  padding: 1rem 0 2rem 0;
+
+  height: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.post-item {
+  border: 1px solid black;
+
+  margin: 0 1%;
+
+  width: 31%;
+}
+
+.post-image {
+  aspect-ratio: 1;
+  object-fit: cover;
+
+  width: 100%;
+}
