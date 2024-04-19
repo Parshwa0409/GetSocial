@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  get 'profile/git'
-  get 'profile/add'
-  get 'profile/.'
+  
   root "home#index"
   
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } 
+
+  resources :posts
+
+  resources :profile, only: [:show, :edit]
   
   get "up" => "rails/health#show", as: :rails_health_check
 

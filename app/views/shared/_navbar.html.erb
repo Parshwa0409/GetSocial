@@ -43,7 +43,7 @@
         <% end %>
 
         <!--  -->
-        <%= link_to '#', class: 'list-group-item list-group-item-action py-2 ripple' do %>
+        <%= link_to profile_path(current_user), class: 'list-group-item list-group-item-action py-2 ripple' do %>
           <i class="fa fa-user fa-fw me-3"></i>
           <span>Profile</span>
         <% end %>
