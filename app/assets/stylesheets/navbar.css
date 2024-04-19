@@ -1,0 +1,40 @@
+nav#sidebarMenu {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+nav#sidebarMenu > div.nav-items {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+nav#sidebarMenu > div.nav-items > div > a {
+  margin: 1.5rem 0 0 0;
+  border: none;
+  border-radius: 1rem;
+}
+
+
+
+.nav_item {
+  margin: 1.5rem 0 0 0;
+  border: none;
+  border-radius: 1rem;
+  display: inline;
+}
+
+p.navbar-brand {
+  border: 1px solid black;
+  border-radius: 1rem;
+
+  font-size: 1.75rem;
+  font-family: cursive;
+}
+
+a.list-group-item {
+  font-size: 1.75rem;
+}
