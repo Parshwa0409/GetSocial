@@ -1,2 +1,16 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<h1 class="text-center">New Post</h1>
+<%= form_for @post , url: posts_path, method: :post, data: { turbo: false }  do |form| %>
+    <div class="my-3 py-2 text-capitalize">
+        <%= form.label :caption%>
+        <%= form.text_area :caption, class:"form-control", placeholder:"I'm excited to share a post on GetSocial App 🥳"%>
+    </div>
+
+    <div class="my-3 py-2 text-capitalize">
+        <%= form.label :image %>
+        <%= form.file_field :image, class:"form-control"%>
+    </div>
+
+    <div class="my-3">
+        <%= form.submit "Create New Post", class:"btn btn-lg btn-block btn-primary w-100", id:"create-post-btn"%>
+    </div>
+<% end %>

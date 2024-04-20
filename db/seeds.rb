@@ -1,4 +1,15 @@
 # User.create!(
+#     name: "Parshwa",
+#     email: "parshwapatil9@gmail.com",
+#     password: "password",
+#     bio: "Hey, There I'm Using GetSocial",
+#     profile_picture: {
+#         io: File.open("app/assets/images/user_avatar.png"),
+#         filename: "user_avatar.png"
+#     }
+# )
+
+# User.create!(
 #     name: "Lisha",
 #     email: "l.ranganath@gmail.com",
 #     password: "password",
@@ -31,36 +42,32 @@
 #     }
 # )
 
-# user = User.find(3)
+=begin
+user_ids = (User.first.id..User.last.id).map { |i|  i }
+cars = ['Bugatti', 'Ferrari', 'Koenigsegg', 'Lamborghini', 'McLaren', 'Pagani', 'Porsche']
+captions = [
+    "Engineering excellence at its finest.",
+    "Where passion meets performance.",
+    "Innovative design, breathtaking speed.",
+    "Unleashing the beast within.",
+    "Precision crafted for speed enthusiasts.",
+    "Art and engineering in perfect harmony.",
+    "Legendary performance, everyday usability."
+]
 
-# user.posts.create(
-#     caption:"Ever asked a boy to imagine a car?\nHe imagines a Red Ferrari!",
-#     image:{
-#                 io: File.open("/Users/pbpatil/Downloads/Ferrari.png"),
-#                 filename: "Ferrari.png"
-#             }
-# )
 
-# user.posts.create(
-#     caption:"I'm the ghost 👻",
-#     image:{
-#                 io: File.open("/Users/pbpatil/Downloads/Koenigsegg.png"),
-#                 filename: "Koenigsegg.png"
-#             }
-# )
+6.times do 
+    user = User.find(user_ids.sample())
+    idx = ((0...cars.length).map {|i| i}).sample()
 
-# user.posts.create(
-#     caption:"If only there was a perfect thing in the world, It would be a Pagani 🚀",
-#     image:{
-#                 io: File.open("/Users/pbpatil/Downloads/Pagani.png"),
-#                 filename: "Pagani.png"
-#             }
-# )
+    puts("#{user.name} => #{cars[idx]}: #{captions[idx]}")
 
-User.find(3).posts.create(
-    caption:"I don't have to introduce myself 😈",
-    image:{
-                io: File.open("/Users/pbpatil/Downloads/Bugatti.png"),
-                filename: "Bugatti.png"
-            }
-)
+    user.posts.create(
+        caption:captions[idx],
+        image:{
+                io: File.open("/Users/parshwapatil/Desktop/GetSocial/app/assets/images/#{cars[idx]}.png"),
+                filename: "#{cars[idx]}.png"
+        }
+    )
+end
+=end

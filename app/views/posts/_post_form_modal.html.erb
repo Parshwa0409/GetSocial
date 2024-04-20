@@ -1,0 +1,46 @@
+<%# This is present in the home#index, therefore to create you got to do it from the home /index routes %>
+<div
+  class="modal fade"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">New Post</h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_for post, url: posts_path, method: meth, data: { turbo: false }  do |form| %>
+            <div class="my-3 py-2 text-capitalize">
+                <%= form.label :caption%>
+                <%= form.text_area :caption, class:"form-control", placeholder:"I'm excited to share a post on GetSocial App 🥳"%>
+            </div>
+            <div class="my-3 py-2 text-capitalize">
+                <%= form.label :image %>
+                <%= form.file_field :image, class:"form-control"%>
+            </div>
+            <div class="my-3">
+                <%= form.submit 'Share 📤', class: "btn btn-md btn-block btn-success w-100", id: "create-post-btn", "data-bs-dismiss" => "modal" %>
+
+            </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-md btn-danger w-100" data-bs-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
   
   has_one_attached :profile_picture
   has_one_attached :cover_photo

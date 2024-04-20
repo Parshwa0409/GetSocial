@@ -24,3 +24,22 @@ div#content {
 
 /* navbar */
 
+/* bootstrap */
+.close {
+  float: right;
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1;
+  color: #000;
+  text-shadow: none;
+  opacity: 0.5;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.close:hover {
+  color: #000;
+  opacity: 0.75;
+  text-decoration: none;
+}

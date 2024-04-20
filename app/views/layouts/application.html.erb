@@ -21,11 +21,13 @@
   <body>
     <div class="d-flex">
     <% if user_signed_in? %>
-      <div id="sidebar">
+      <div id="sidebar w-30">
         <%= render partial:"shared/navbar"%>
     </div>
     <% end %>
-    <div id="content" class="container">
+    <div id="content" class="container w-70">
+
+      <%= render partial:"shared/flash"%>
       <%= yield %>
     </div>
     </div>

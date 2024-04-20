@@ -35,8 +35,9 @@
           <i class="fa-solid fa-message fa-fw me-3"></i><span>Messages</span>
         <% end %>
 
-        <!--  -->
-        <%= link_to '#', class: 'list-group-item list-group-item-action py-2 ripple' do %>
+        <!-- WHY MODAL NOT WORKING -->
+
+        <%= link_to root_path, class: 'list-group-item list-group-item-action py-2 ripple', "data-bs-toggle"=>"modal" ,"data-bs-target"=>"#exampleModalCenter" do %>
           <i class="fa fa-plus fa-fw me-3"></i><span>Create</span>
         <% end %>
 

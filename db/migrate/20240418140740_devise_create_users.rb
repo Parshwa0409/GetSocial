@@ -33,7 +33,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       # t.datetime :locked_at
 
       t.string :name, null: false
-      t.text :bio, default: "Hey There, I'm Using GetSocial :) "
+      t.text :bio
       t.string :profile_picture
       t.string :cover_photo
 

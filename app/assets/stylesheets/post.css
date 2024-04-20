@@ -1,0 +1,48 @@
+#post-container {
+  width: 75%;
+  margin: 0 auto;
+}
+
+div#user-details {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+}
+
+.posts-user-avatar {
+  aspect-ratio: 1;
+
+  border: 1px solid black;
+  border-radius: 100%;
+
+  height: 4rem;
+  width: 4rem;
+
+  margin-right: 1rem;
+  padding: 0.25rem;
+}
+
+.posts-user-avatar img {
+  width: 100%; /* Ensure image fills the avatar container */
+  height: 100%; /* Maintain aspect ratio */
+  object-fit: cover; /* Scale and crop image to cover the container */
+}
+
+div#post-picture-container {
+  margin: 0.5rem auto;
+  width: 100%;
+}
+
+.post-picture {
+  object-fit: contain;
+
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+
+  width: 100%;
+}
+
+div#post-caption-container > p > .user-id {
+  font-size: 1.25rem;
+  font-weight: bold;
+}

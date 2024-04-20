@@ -1,2 +1,33 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<%= stylesheet_link_tag "post" %>
+
+<% user = @post.user %>
+
+<div id="post-container">
+  <div id="user-details">
+    <% if user.profile_picture.attached? %>
+      <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
+    <% else %>
+      <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
+    <% end %>
+    <div>
+      <h4><%= user.email%></h4>
+      <h6><%= user.name%></h6>
+    </div>
+  </div>
+  <hr />
+
+  <div id="post-picture-container">
+    <%= image_tag @post.image, class:"post-picture" %>
+  </div>
+
+  <div id="post-buttons">
+    <%# TODO: LIKE BTN %>
+    <%# TODO: COMMENT BTN %>
+    <%# TODO: SHARE BTN %>
+  </div>
+
+  <div id="post-caption-container">
+    <p><span class="user-id"><%=user.email%>:</span> "<%=@post.caption%>"</p>
+  </div>
+  <!-- Comments -->
+</div>

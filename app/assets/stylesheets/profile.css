@@ -1,55 +1,141 @@
-/* #user-profile {} */
-
-#user-avatar {
+/* MY STYLING */
+/* 
+.user-avatar {
   height: 10rem;
   width: 10rem;
+  border: 3px solid #fff; 
+  border-radius: 50%; 
+  overflow: hidden; 
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); 
+} */
 
+/* IMPROVISED AVATAR - CHAT GPT */
+.user-avatar {
   aspect-ratio: 1;
 
-  padding: 0.25rem;
-  margin-right: 2rem;
-
-  border: 1px solid black;
+  border: 1px solid #ddd;
   border-radius: 100%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+
+  height: 11.5rem;
+  width: 11.5rem;
+
+  margin-right: 2rem;
+  padding: 0.25rem;
 }
 
-/* #user-info {} */
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
+/* MY STYLING */
 #button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   margin: 1rem 0;
+
+  width: 100%;
+}
+
+.button-container {
+  margin-right: 10px;
+
+  width: 47.5%;
+}
+
+.button-container:last-child {
+  margin-right: 0;
+}
+
+/* COMBINED */
+#user-info {
+  height: 100%;
   width: 100%;
 
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  font-weight: 500;
+  padding: 1rem;
 }
 
-#button-row > div {
-  width: 100%;
+#user-info h3 {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
 }
 
-/* TODO: STYLE POSTS PROPERLY */
-#user-posts {
-  padding: 1rem 0 2rem 0;
+#user-info h4 {
+  margin-bottom: 0.25rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
 
-  height: 100%;
+#user-info h5 {
+  font-size: 1rem;
+  line-height: 1.5;
 
+  text-align: justify;
+}
+#user-info > h4 > span {
+  margin-right: 4rem;
+}
+
+/* MY - STYLING */
+/* #user-posts {
   display: flex;
   flex-wrap: wrap;
+  height: 100%;
   justify-content: start;
-}
-
-.post-item {
-  border: 1px solid black;
-
-  margin: 0 1%;
-
-  width: 31%;
+  padding: 1rem 0 2rem 0;
 }
 
 .post-image {
   aspect-ratio: 1;
   object-fit: cover;
-
   width: 100%;
+}
+
+.post-item {
+  border: 1px solid black;
+  margin: 0 1%;
+  width: 31%;
+} */
+
+/* CHAT GPT IMPROVISED */
+#user-posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start; /* Center aligns and evenly spaces items */
+  padding: 1rem 0; /* Adjusted padding */
+}
+
+.post-item {
+  flex: 0 0 calc(33.33% - 20px); /* Adjusted width calculation with margin */
+  margin: 10px; /* Added margin for spacing between items */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+  border: 1px solid #ddd; /* Soften the border */
+  border-radius: 5px; /* Rounded corners for a more modern look */
+  overflow: hidden; /* Ensure images fit within container */
+  aspect-ratio: 1; /* Maintain a 1:1 aspect ratio for each post item */
+  transition: transform 0.2s ease-in-out; /* Smooth scaling effect on hover */
+}
+
+.post-item:hover {
+  transform: scale(1.05); /* Scale up slightly on hover */
+}
+
+.post-image {
+  width: 100%; /* Ensure image fills its container */
+  height: 100%; /* Maintain aspect ratio for image */
+  object-fit: cover; /* Scale and crop image to fill container */
+  transition: transform 0.2s ease-in-out; /* Smooth scaling effect on hover */
+}
+
+.post-image:hover {
+  transform: scale(1.1); /* Scale up slightly on hover */
 }

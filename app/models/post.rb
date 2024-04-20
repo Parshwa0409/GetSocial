@@ -1,12 +1,12 @@
 class Post < ApplicationRecord
 
-  belongs_to :user
-  
-  has_one_attached :image
+    belongs_to :user
 
-  before_create :valid_image
+    has_one_attached :image
 
-  private
+    before_create :valid_image
+
+    private
     def valid_image
         unless image.attached?
             errors.add(:base,:invalid,message:"YOU NEED TO ADD AN IMAGE TO THE POST !!!")
