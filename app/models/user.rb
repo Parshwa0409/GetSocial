@@ -1,5 +1,6 @@
 class User < ApplicationRecord
 
+  # TODO: VALIDATE NAME, EMAIL, PASSWORD
   has_many :posts, dependent: :destroy
   
   has_one_attached :profile_picture

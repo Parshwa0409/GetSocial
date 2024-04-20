@@ -1,0 +1,17 @@
+<% if users.nil? || users.count == 0%>
+    <h4>No Users Found</h4>
+<% else %>
+    <% users.each do |user| %>
+        <div class="result-row">
+            <% if user.profile_picture.attached? %>
+                <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
+            <% else %>
+                <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
+            <% end %>
+            <div>
+                <h4><%= user.email%></h4>
+                <h6><%= user.name%></h6>
+            </div>
+        </div>
+    <% end %>
+<% end %>

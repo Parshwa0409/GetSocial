@@ -1,6 +1,6 @@
 class ProfileController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
-  
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+
   def show
   end
 
@@ -8,16 +8,18 @@ class ProfileController < ApplicationController
   end
 
   def update
-    @user.update(user_params)
-
-    if @user.save
+    if @user.update(user_params)
       redirect_to profile_path(@user)
     else
       render :edit
     end
   end
 
-  # TODO: CREATE OPTION TO DELETE PROFILE
+
+
+  def destroy
+    # Add logic for deleting profile
+  end
 
   private
 
@@ -28,4 +30,5 @@ class ProfileController < ApplicationController
   def set_user
     @user = User.find(current_user.id)
   end
+
 end

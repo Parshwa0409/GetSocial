@@ -1,6 +1,6 @@
 # User.create!(
 #     name: "Parshwa",
-#     email: "parshwapatil9@gmail.com",
+#     email: "parshwapatilnhce@gmail.com",
 #     password: "password",
 #     bio: "Hey, There I'm Using GetSocial",
 #     profile_picture: {
@@ -11,7 +11,7 @@
 
 # User.create!(
 #     name: "Lisha",
-#     email: "l.ranganath@gmail.com",
+#     email: "lisha2002@gmail.com",
 #     password: "password",
 #     bio: "Hey, There I'm Using GetSocial",
 #     profile_picture: {

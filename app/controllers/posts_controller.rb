@@ -15,7 +15,7 @@ class PostsController < ApplicationController
       redirect_to post_path(@post)
     else
       flash[:alert] = @post.errors.full_messages.to_sentence
-      redirect_to root_path
+      redirect_to request.referrer # redirect to same page, see how to just show the flash message
     end
   end
 

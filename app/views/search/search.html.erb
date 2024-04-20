@@ -1,0 +1,48 @@
+<%= stylesheet_link_tag "search_results" %>
+
+<%= form_for :search, url: search_path, method: :post, data: { turbo: false }, id:"query-form"  do |form| %>
+
+<div class="row d-flex align-items-end py-2">
+    <div class="col-5 my-3">
+        <%= form.label :name %>
+        <%= form.text_field :name, class:"form-control", placeholder:"John Doe", id:"name"%>
+    </div>
+
+    <div class="col-5 my-3">
+        <%= form.label :email %>
+        <%= form.text_field :email, class:"form-control", placeholder:"john.doe@hotmail.com", id:"email"%>
+    </div>
+
+    <div class="col-2 my-3 text-center">
+        <%= form.submit "Search   🔎", class:"btn btn-primary", id:"query-btn"%>
+    </div>
+</div>
+<% end %>
+<hr/>
+<div id="query-results">
+    
+</div>
+
+
+<script>
+    $(document).ready(() => {
+        $("#query-btn").on('click', (e) => {
+            e.preventDefault();
+
+            const action = $("#query-form").attr('action');
+            const method = $("#query-form").attr('method');
+            const form_data = $("#query-form").serialize()
+
+            $.ajax({
+                url: action,
+                type: method,
+                data: form_data,
+                dataType: "html",
+                success: function (response) {
+                    $("#query-results").empty();
+                    $("#query-results").append(response);
+                }
+            });
+        });
+    });
+</script>
