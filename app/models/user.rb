@@ -1,11 +1,10 @@
 class User < ApplicationRecord
 
-  # TODO: VALIDATE NAME, EMAIL, PASSWORD
-  has_many :posts, dependent: :destroy
-  
+  # TODO: VALIDATE NAME, EMAIL, PASSWORD & UI ERROR HANDLING
   has_one_attached :profile_picture
   has_one_attached :cover_photo
-
+  
+  has_many :posts, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

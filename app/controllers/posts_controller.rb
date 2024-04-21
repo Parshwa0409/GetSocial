@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     end
   end
 
-  # TODO: CHALLENGES
+  # TODO: CHALLENGES EDIT, UPDATE, DELETE POST
   def edit
   end
 
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = current_user.posts.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def initialize_post

@@ -1,5 +1,4 @@
 class SearchController < ApplicationController
-  # skip_before_action :verify_authenticity_token
 
   def search
     @users = []
@@ -18,9 +17,11 @@ class SearchController < ApplicationController
     else
       @users = []
     end
-    puts (@users)
+
     render partial: "users", locals: { users:@users }
   end
+
+  private
 
   def search_params
     params.require(:search).permit(:name, :email)

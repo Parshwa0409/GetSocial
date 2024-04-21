@@ -24,14 +24,25 @@
             <h5><%=simple_format(@user.bio)%></h5>
         </div>
     </div>
-
     <div id="button-row">
-        <div class="button-container">
-            <%= button_to "Edit Profile", edit_profile_path(@user), method: :get, class: "btn btn-lg btn-primary user-profile-btn w-100" %>
-        </div>
-        <div class="button-container">
-            <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-lg btn-danger user-profile-btn w-100" %>
-        </div>
+        <% if @user.id == current_user.id %>
+        <%# To be shown if @user=current_user %>
+            <div class="button-container">
+                <%= button_to "Edit Profile", edit_profile_path(@user), method: :get, class: "btn btn-lg btn-primary user-profile-btn w-100" %>
+            </div>
+            <div class="button-container">
+                <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-lg btn-danger user-profile-btn w-100" %>
+            </div>
+        <% else %>
+        <%# To be shown if @user!=current_user %>
+            <%# THIS BUTTON MUST VARY DEPENDING ON THE REQUEST-STATUS %>
+            <div class="button-container">
+                <%= button_to "TODO", root_path, method: :get, class: "btn btn-lg btn-primary user-profile-btn w-100" %>
+            </div>
+            <div class="button-container">
+                <%= button_to "TODO", root_path, method: :get, class: "btn btn-lg btn-danger user-profile-btn w-100" %>
+            </div>
+        <% end %>
     </div>
 </div>
 
@@ -40,7 +51,7 @@
 <%# DISPLAYING ALL THE POSTS %>
 <div id="user-posts">
     <% @user.posts.reverse.each do |post|%>
-        <%# MODAL FORMAT ACHIED BUT THEN STYLING REQUIRED %>
+        <%# MODAL FORMAT ACHIEVED BUT THEN STYLING REQUIRED %>
         <%# render partial: "posts/modal",locals:{ post: post}%>
         <%# link_to post_path(post), method: :get, class:"post-item", 'data-bs-toggle' => "modal", 'data-bs-target'=>"#exampleModalCenter" do %>
         <%= link_to post_path(post), method: :get, class:"post-item" do %>

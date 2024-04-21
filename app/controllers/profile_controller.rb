@@ -16,7 +16,7 @@ class ProfileController < ApplicationController
   end
 
 
-
+  # TODO: DELETE USER PROFILE
   def destroy
     # Add logic for deleting profile
   end
@@ -28,7 +28,7 @@ class ProfileController < ApplicationController
   end
 
   def set_user
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
   end
 
 end

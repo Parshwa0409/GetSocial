@@ -23,11 +23,11 @@
     <% if user_signed_in? %>
       <div id="sidebar w-30">
         <%= render partial:"shared/navbar"%>
+        <%= render partial:"posts/post_form_modal", locals:{ post: @new_post, meth: :post } %>
       </div>
     <% end %>
     <div id="content" class="container w-70">
       <%= render partial:"shared/flash"%>
-      <%= render partial:"posts/post_form_modal", locals:{ post: @new_post, meth: :post } %>
       <%= yield %>
     </div>
     </div>

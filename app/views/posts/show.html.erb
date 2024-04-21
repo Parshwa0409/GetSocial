@@ -14,11 +14,17 @@
       <h6><%= user.name%></h6>
     </div>
   </div>
+
+  <%# BUTTON VARIES DEPENDING ON THE OWH+NER OF THE POST %>
+  <%# TODO: LIKE EDIT POST & DELETE POST %>
   <hr />
 
   <div id="post-picture-container">
     <%= image_tag @post.image, class:"post-picture" %>
   </div>
+
+
+
 
   <div id="post-buttons">
     <%# TODO: LIKE BTN %>
@@ -29,5 +35,6 @@
   <div id="post-caption-container">
     <p><span class="user-id"><%=user.email%>:</span> "<%=@post.caption%>"</p>
   </div>
-  <!-- Comments -->
+
+  <!-- TODO: Comments -->
 </div>
