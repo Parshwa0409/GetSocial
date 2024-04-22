@@ -14,8 +14,8 @@
             <h3><%=@user.email%></h3>
             <h4 class="d-flex ">
                 <span><%= pluralize(@user.posts.count, 'post') %></span>
-                <span><%= pluralize(@user.posts.count, 'following') %></span>
-                <span><%= pluralize(@user.posts.count, 'follower') %></span>
+                <span><%= pluralize(@user.following.count, 'following') %></span>
+                <span><%= pluralize(@user.followers.count, 'follower') %></span>
             </h4>
 
             <br/>
@@ -25,24 +25,7 @@
         </div>
     </div>
     <div id="button-row">
-        <% if @user.id == current_user.id %>
-        <%# To be shown if @user=current_user %>
-            <div class="button-container">
-                <%= button_to "Edit Profile", edit_profile_path(@user), method: :get, class: "btn btn-lg btn-primary user-profile-btn w-100" %>
-            </div>
-            <div class="button-container">
-                <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-lg btn-danger user-profile-btn w-100" %>
-            </div>
-        <% else %>
-        <%# To be shown if @user!=current_user %>
-            <%# THIS BUTTON MUST VARY DEPENDING ON THE REQUEST-STATUS %>
-            <div class="button-container">
-                <%= button_to "TODO", root_path, method: :get, class: "btn btn-lg btn-primary user-profile-btn w-100" %>
-            </div>
-            <div class="button-container">
-                <%= button_to "TODO", root_path, method: :get, class: "btn btn-lg btn-danger user-profile-btn w-100" %>
-            </div>
-        <% end %>
+        <%= render partial: "buttons", locals:{user: @user} %>
     </div>
 </div>
 

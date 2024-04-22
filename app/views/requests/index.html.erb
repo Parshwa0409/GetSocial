@@ -1,0 +1,6 @@
+<%= stylesheet_link_tag "follow_requests" %>
+
+<% @follow_requests.each do |follow_request|%>
+        <% user = User.find(follow_request.followerable_id) %>
+        <%= render partial:"follow_request", locals: {user: user} %>
+<% end %>

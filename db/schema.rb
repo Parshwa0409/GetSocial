@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_19_071608) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_083418) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,10 +39,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_071608) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "followability_relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "followerable_type", null: false
+    t.bigint "followerable_id", null: false
+    t.string "followable_type", null: false
+    t.bigint "followable_id", null: false
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followable_type", "followable_id"], name: "index_followability_relationships_on_followable"
+    t.index ["followerable_type", "followerable_id"], name: "index_followability_relationships_on_followerable"
+  end
+
   create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "caption"
     t.string "image"
-    t.string "total_likes", default: "0"
+    t.string "total_likes"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -55,7 +67,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_071608) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "name", null: false
+    t.string "name"
     t.text "bio"
     t.string "profile_picture"
     t.string "cover_photo"

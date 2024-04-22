@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     end
 
     # TODO: REMOVE UNWANTED DEVISE LINKS & PATHS
+    # TODO: CHANGE BTN-PRIMARY -> BTN-OUTLINE-DARK
 
     # TODO: MEMOIZE THE current_user() inherited fro devise
     # def current_user

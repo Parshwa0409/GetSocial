@@ -78,3 +78,6 @@ gem "omniauth-facebook"
 
 # ENV-VARIABLES
 gem "dotenv", groups: [:development, :test]
+
+# FRIEND REQUESTS
+gem 'followability', github: 'nejdetkadir/followability', branch: 'main'
