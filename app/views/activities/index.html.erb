@@ -1,2 +1,11 @@
-<h1>Activities#index</h1>
-<p>Find me in app/views/activities/index.html.erb</p>
+<div class="activity-req-container">
+    <h3><%= pluralize(@follow_requests_count, "Follow Request")%></h3>
+    <% if @follow_requests_count > 0 %>
+    <%= link_to "View", follow_requests_path , method: :get ,class:"btn btn-md btn-outline-dark" %>
+    <% end %>
+</div>
+
+<div class="activity-req-container">
+    <h3><%= pluralize(@pending_requests_count, "Pending Request")%></h3>
+    <%= button_to "View", pending_requests_path, method: :get ,class:"btn btn-md btn-outline-dark" %>
+</div>

@@ -114,28 +114,80 @@
   padding: 1rem 0; /* Adjusted padding */
 }
 
-.post-item {
-  flex: 0 0 calc(33.33% - 20px); /* Adjusted width calculation with margin */
-  margin: 10px; /* Added margin for spacing between items */
-  box-sizing: border-box; /* Include padding and border in width calculation */
-  border: 1px solid #ddd; /* Soften the border */
-  border-radius: 5px; /* Rounded corners for a more modern look */
-  overflow: hidden; /* Ensure images fit within container */
-  aspect-ratio: 1; /* Maintain a 1:1 aspect ratio for each post item */
-  transition: transform 0.2s ease-in-out; /* Smooth scaling effect on hover */
+/* .post-item {
+  flex: 0 0 calc(33.33% - 20px); 
+  margin: 10px; 
+  box-sizing: border-box; 
+  border: 1px solid #ddd; 
+  border-radius: 5px; 
+  overflow: hidden; 
+  aspect-ratio: 1; 
+  transition: transform 0.2s ease-in-out; 
 }
 
 .post-item:hover {
-  transform: scale(1.05); /* Scale up slightly on hover */
+  transform: scale(1.05); 
 }
 
 .post-image {
-  width: 100%; /* Ensure image fills its container */
-  height: 100%; /* Maintain aspect ratio for image */
-  object-fit: cover; /* Scale and crop image to fill container */
-  transition: transform 0.2s ease-in-out; /* Smooth scaling effect on hover */
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  transition: transform 0.2s ease-in-out; 
 }
 
 .post-image:hover {
-  transform: scale(1.1); /* Scale up slightly on hover */
+  transform: scale(1.1); 
+} */
+
+.post-item {
+  position: relative; /* Establish positioning context for absolute elements */
+  flex: 0 0 calc(33.33% - 20px);
+  margin: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out; /* Added opacity transition */
+}
+
+.post-item:hover {
+  transform: scale(1.05);
+  opacity: 0.8; /* Reduce opacity on hover */
+}
+
+.post-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Semi-transparent white background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.2s ease-in-out;
+}
+
+.post-item:hover .post-info {
+  opacity: 1; /* Show on hover */
+}
+
+.post-info-content {
+  color: black;
+  text-align: center;
 }

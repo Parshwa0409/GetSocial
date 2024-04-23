@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   resources :profile, only: [:show, :edit, :update, :destroy]
   
   # Custom Routes for Requests Handling
-  get 'requests/index', to: 'requests#index'
+  get 'follow_requests', to: 'requests#follow_requests'
+  get 'pending_requests', to: 'requests#pending_requests'
   post 'requests/:id/follow', to: "requests#follow", as: "follow"
   post 'requests/:id/unfollow', to: "requests#unfollow", as: "unfollow"
   post 'requests/:id/accept', to: "requests#accept", as: "accept"

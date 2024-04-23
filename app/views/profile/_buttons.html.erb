@@ -1,14 +1,16 @@
 <% if user.id == current_user.id %>
 <%# To be shown if @user=current_user %>
     <div class="button-container">
-        <%= button_to "Edit Profile", edit_profile_path(user), method: :get, class: "btn btn-lg btn-primary user-profile-btn w-100" %>
+        <%= button_to "Edit Profile", edit_profile_path(user), method: :get, class: "btn btn-lg btn-outline-dark user-profile-btn w-100" %>
     </div>
     <div class="button-container">
-        <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-lg btn-danger user-profile-btn w-100" %>
+        <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-lg btn-outline-danger user-profile-btn w-100" %>
     </div>
 <% else %>
     <%= render partial: "requests/request_buttons", locals:{user: user}%>
 
     <%# TODO: THE MESSAGES BUTTON & IMPLEMENTATION %>
-    <div class="button-container"><%= button_to "Send Message", root_path, method: :post, class: "btn btn-lg btn-primary user-profile-btn w-100" %></div>
+    <div class="button-container">
+        <%= button_to "Send Message", root_path, method: :post, class: "btn btn-lg btn-outline-dark user-profile-btn w-100" %>
+    </div>
 <% end %>

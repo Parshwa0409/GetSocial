@@ -1,12 +1,14 @@
 class RequestsController < ApplicationController
     skip_before_action :verify_authenticity_token
     before_action :set_user
-    skip_before_action :set_user, only: [:index]
+    skip_before_action :set_user, only: [:follow_requests, :pending_requests]
 
-    def index
-        # TODO: TACKLE N+1 ISSUE
-        @pending_requests = current_user.pending_requests
+    def follow_requests
         @follow_requests = current_user.follow_requests
+    end
+
+    def pending_requests
+        @pending_requests = current_user.pending_requests
     end
 
     def follow

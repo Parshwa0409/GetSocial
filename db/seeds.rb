@@ -1,4 +1,3 @@
-
 User.create!(
     name: "Parshwa",
     email: "parshwapatil9@gmail.com",
@@ -77,7 +76,7 @@ captions = [
     user.posts.create(
         caption:captions[idx],
         image:{
-                io: File.open("/Users/pbpatil/Desktop/GetSocial/app/assets/images/#{cars[idx]}.png"),
+                io: File.open("/Users/parshwapatil/Desktop/GetSocial/app/assets/images/#{cars[idx]}.png"),
                 filename: "#{cars[idx]}.png"
         }
     )

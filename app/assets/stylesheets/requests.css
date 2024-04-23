@@ -1,3 +1,17 @@
+.activity-req-container {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  border: 1px solid #ddd;
+  border-radius: 0.35rem;
+}
+
 div.request-container {
   display: flex;
   margin-top: 1rem;

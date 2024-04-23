@@ -1,4 +1,8 @@
-<div>
+<%= stylesheet_link_tag "requests" %>
+
+<% @pending_requests.each do |pending_request|%>
+    <% user = User.find(pending_request.followable_id) %>
+    <div>
     <div class="request-container">
         <div class="user-details">
             <% if user.profile_picture.attached? %>
@@ -15,7 +19,8 @@
         <button class="btn btn-lg btn-outline-dark user-profile-btn accept w-25 cancel" data-user-id=<%=user.id%>>Cancel Request</button>
     </div>
     <hr/>
-</div>
+    </div>
+<% end %>
 
 
 <script>

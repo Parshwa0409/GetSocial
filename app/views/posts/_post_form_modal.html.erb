@@ -31,13 +31,12 @@
                 <%= form.file_field :image, class:"form-control"%>
             </div>
             <div class="my-3">
-                <%= form.submit 'Share 📤', class: "btn btn-md btn-block btn-success w-100", id: "create-post-btn", "data-bs-dismiss" => "modal" %>
-
+                <%= form.submit 'Share 📤', class: "btn btn-md btn-block btn-outline-dark w-100", id: "create-post-btn", "data-bs-dismiss" => "modal" %>
             </div>
         <% end %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-md btn-danger w-100" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-md btn-outline-danger w-100" data-bs-dismiss="modal">
           Cancel
         </button>
       </div>

@@ -22,20 +22,13 @@
           <i class="fa fa-search fa-fw me-3"></i><span>Search</span>
         <% end %>
 
-        <!-- REPLACE NOTITFICATION WITH -REQUESTS-ACTIVITY-MESSAGES  -->
-        <%= link_to requests_index_path, class: 'list-group-item list-group-item-action py-2 ripple' do %>
-          <i class="fas fa-bell fa-fw me-3"></i><span>Requests</span>
-        <% end %>
-
-        <%= link_to '#', class: 'list-group-item list-group-item-action py-2 ripple' do %>
+        <%= link_to activities_path, class: 'list-group-item list-group-item-action py-2 ripple' do %>
           <i class="fa-solid fa-heart fa-fw me-3"></i><span>Activity</span>
         <% end %>
 
         <%= link_to '#', class: 'list-group-item list-group-item-action py-2 ripple' do %>
           <i class="fa-solid fa-message fa-fw me-3"></i><span>Messages</span>
         <% end %>
-
-        <!-- WHY MODAL NOT WORKING -->
 
         <%= link_to root_path, class: 'list-group-item list-group-item-action py-2 ripple', "data-bs-toggle"=>"modal" ,"data-bs-target"=>"#exampleModalCenter" do %>
           <i class="fa fa-plus fa-fw me-3"></i><span>Create</span>

@@ -34,11 +34,13 @@
 <%# DISPLAYING ALL THE POSTS %>
 <div id="user-posts">
     <% @user.posts.reverse.each do |post|%>
-        <%# MODAL FORMAT ACHIEVED BUT THEN STYLING REQUIRED %>
-        <%# render partial: "posts/modal",locals:{ post: post}%>
-        <%# link_to post_path(post), method: :get, class:"post-item", 'data-bs-toggle' => "modal", 'data-bs-target'=>"#exampleModalCenter" do %>
-        <%= link_to post_path(post), method: :get, class:"post-item" do %>
+        <%= link_to post_path(post), method: :get, class:"post-item", data:{"post-id"=>post.id} do %>
             <%= image_tag post.image,  class: "post-image", data_user_id:@user.id,  data_post_id:post.id %>
+            <div class="post-info">
+                <div class="post-info-content">
+                    <p>❤️ <%= post.total_likes %></p> <!-- Replace 'likes_count' with actual attribute -->
+                </div>
+            </div>
         <%end%>
     <% end %>
 </div>
