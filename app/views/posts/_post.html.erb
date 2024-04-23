@@ -1,0 +1,34 @@
+<%= stylesheet_link_tag "post" %>
+
+<div id="post-container">
+  <div id="user-details">
+    <% if user.profile_picture.attached? %>
+      <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
+    <% else %>
+      <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
+    <% end %>
+    <div>
+      <h4><%= user.email%></h4>
+      <h6><%= user.name%></h6>
+    </div>
+  </div>
+
+  <%# BUTTON VARIES DEPENDING ON THE OWNER OF THE POST %>
+  <%# TODO: LIKE EDIT POST & DELETE POST %>
+  <hr />
+
+  <div id="post-picture-container">
+    <%= image_tag post.image, class:"post-picture" %>
+  </div>
+
+  <div id="post-buttons">
+    <%=render partial:"posts/interaction_buttons", locals: {post: post}%>
+  </div>
+
+  <div id="post-caption-container">
+    <p><span class="user-id"><%= user.email %>:</span> "<%=post.caption%>"</p>
+  </div>
+
+  <!-- TODO: Comments-MODAL -->
+
+</div>

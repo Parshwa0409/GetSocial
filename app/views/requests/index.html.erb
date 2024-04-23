@@ -4,3 +4,8 @@
         <% user = User.find(follow_request.followerable_id) %>
         <%= render partial:"follow_request", locals: {user: user} %>
 <% end %>
+
+<% @pending_requests.each do |pending_request|%>
+        <% user = User.find(pending_request.followable_id) %>
+        <%= render partial:"pending_request", locals: {user: user} %>
+<% end %>

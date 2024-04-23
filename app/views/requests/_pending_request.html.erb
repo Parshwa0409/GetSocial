@@ -1,0 +1,45 @@
+<div>
+    <div class="request-container">
+        <div class="user-details">
+            <% if user.profile_picture.attached? %>
+            <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
+            <% else %>
+            <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
+            <% end %>
+            <div>
+                <h4><%= user.email%></h4>
+                <h6><%= user.name%></h6>
+            </div>
+        </div>
+
+        <button class="btn btn-lg btn-outline-dark user-profile-btn accept w-25 cancel" data-user-id=<%=user.id%>>Cancel Request</button>
+    </div>
+    <hr/>
+</div>
+
+
+<script>
+
+function AJAX(u_id, request_type){
+    $.ajax({
+        type: "post",
+        url: `http://localhost:3000/requests/${u_id}/${request_type}`,
+        data: "data",
+        success: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+$(document).ready(() => {
+    $(document).on("click", ".accept, .decline", (event) => {
+        event.preventDefault();
+        const button = $(event.target);
+        const u_id = $(event.target).attr('data-user-id');
+        
+        AJAX(u_id, "cancel");
+
+        $(event.target).parent().parent().empty()
+    });
+});
+</script>

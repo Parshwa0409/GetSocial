@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'activities/index'
   root "home#index"
   
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } 
@@ -19,6 +20,11 @@ Rails.application.routes.draw do
   get 'search', to: "search#search"
   post 'search', to: "search#query" 
 
+  # Likes Routes
+  resources :likes, only: [:create, :destroy]
+
+  # Activities Routes
+  resources :activities, only: [:index]
 
   get "up" => "rails/health#show", as: :rails_health_check
 end

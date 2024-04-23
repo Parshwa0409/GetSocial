@@ -4,10 +4,9 @@ class RequestsController < ApplicationController
     skip_before_action :set_user, only: [:index]
 
     def index
+        # TODO: TACKLE N+1 ISSUE
         @pending_requests = current_user.pending_requests
         @follow_requests = current_user.follow_requests
-
-        puts(@pending_requests, @follow_requests)
     end
 
     def follow

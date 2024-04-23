@@ -1,0 +1,71 @@
+<% unless Like.find_by(user_id: current_user.id, post_id: post.id).nil? %> 
+    <% class_like = "liked" %>
+    <% txt="❤️" %>
+<% else %>
+    <% class_like = "not-liked" %>
+    <% txt="♡" %>
+<% end %>
+
+<button class="btn btn-sm btn-outline-dark like-btn <%= class_like %>" data-post-id=<%=post.id%>><%= txt %></button>
+<button class="btn btn-sm btn-outline-dark">💬</button>
+<button class="btn btn-sm btn-outline-dark">➤</button>
+
+
+
+<script>
+function onPostSuccess(element) { 
+    $(element).html("❤️");
+    $(element).removeClass("not-liked").addClass("liked");
+}
+
+function onDeleteSuccess(element, response){
+  $(element).html("♡");
+  $(element).removeClass("liked").addClass("not-liked");
+}
+
+function AJAX(method, action, data, element, callback) { 
+    $.ajax({
+        type: method,
+
+        url: action,
+
+        data: data,
+
+        dataType: "json",
+
+        success: function (response) {
+            callback(element, response)
+            // console.log($(element).next(), response["total_likes"]);
+        }
+    });
+}
+
+$(document).ready(function () {
+    //   $("button.like-btn").each(function (index, element) {
+          $("button.like-btn").on("click", (e) => {
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+              
+            var action, method, data;
+            const button = e.target;
+            var p_id = $(button).attr("data-post-id");
+            
+            
+            if( $(button).hasClass("liked"))
+            {
+            action = `/likes/${$(e.target).attr("data-post-id")}`;
+            method = "delete";
+            data = {id: $(e.target).attr("data-post-id")} ;
+            AJAX(method, action, data, button, onDeleteSuccess);
+            }
+            else
+            {
+            action = "/likes";
+            method = "post";
+            data = { id: $(e.target).attr("data-post-id") } ;
+            AJAX(method, action, data, button, onPostSuccess);
+            }
+      });
+    // });
+});
+</script>

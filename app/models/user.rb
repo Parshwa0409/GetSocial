@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_one_attached :cover_photo
   
   has_many :posts, dependent: :destroy
+  # has_many :likes, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

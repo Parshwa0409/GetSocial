@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :initialize_post, only: [:new]
 
   def show
+    @user = @post.user
   end
 
   def new
