@@ -18,7 +18,7 @@ class ProfileController < ApplicationController
 
   # TODO: DELETE USER PROFILE
   def destroy
-    # Add logic for deleting profile
+    # Add logic for deleting profile, Delete the likes , posts that the user generated
   end
 
   private

@@ -12,7 +12,7 @@
 
         <div id="user-info">
             <h3><%=@user.email%></h3>
-            <h4 class="d-flex ">
+            <h4 class="d-flex">
                 <span><%= pluralize(@user.posts.count, 'post') %></span>
                 <span><%= pluralize(@user.following.count, 'following') %></span>
                 <span><%= pluralize(@user.followers.count, 'follower') %></span>
@@ -31,16 +31,18 @@
 
 <hr/>
 
-<%# DISPLAYING ALL THE POSTS %>
-<div id="user-posts">
-    <% @user.posts.reverse.each do |post|%>
-        <%= link_to post_path(post), method: :get, class:"post-item", data:{"post-id"=>post.id} do %>
-            <%= image_tag post.image,  class: "post-image", data_user_id:@user.id,  data_post_id:post.id %>
-            <div class="post-info">
-                <div class="post-info-content">
-                    <p>❤️ <%= post.total_likes %></p> <!-- Replace 'likes_count' with actual attribute -->
+<%# DISPLAYING ALL THE POSTS TO THE VIEWER IF THEY FOLLOW THER USER OR IF THE USER IS VIEWING HIS PROFILE %>
+<% if current_user.following?(@user) || current_user.myself?(@user)%>
+    <div id="user-posts">
+        <% @user.posts.reverse.each do |post|%>
+            <%= link_to post_path(post), method: :get, class:"post-item", data:{"post-id"=>post.id} do %>
+                <%= image_tag post.image,  class: "post-image", data_user_id:@user.id,  data_post_id:post.id %>
+                <div class="post-info">
+                    <div class="post-info-content">
+                        <p>❤️ <%= post.total_likes %></p>
+                    </div>
                 </div>
-            </div>
-        <%end%>
-    <% end %>
-</div>
+            <%end%>
+        <% end %>
+    </div>
+<% end %>

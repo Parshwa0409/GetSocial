@@ -1,15 +1,13 @@
 <%= stylesheet_link_tag "navbar" %>
 
-<!--Main Navigation-->
 <header>
-  <!-- Sidebar -->
   <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
     <div class="nav-items">
 
       <div class="list-group list-group-flush mx-3 mt-4">
         <!--  -->
         <p
-          class="navbar-brand p-2">
+          class="navbar-brand p-2" id="brand">
           <i class="fa-solid fa-mobile fa-fw me-3"></i><span>GetSocial</span>
         </p>
         <!--  -->
@@ -22,14 +20,17 @@
           <i class="fa fa-search fa-fw me-3"></i><span>Search</span>
         <% end %>
 
+        <!--  -->
         <%= link_to activities_path, class: 'list-group-item list-group-item-action py-2 ripple' do %>
           <i class="fa-solid fa-heart fa-fw me-3"></i><span>Activity</span>
         <% end %>
 
+        <!--  -->
         <%= link_to '#', class: 'list-group-item list-group-item-action py-2 ripple' do %>
           <i class="fa-solid fa-message fa-fw me-3"></i><span>Messages</span>
         <% end %>
 
+        <!--  -->
         <%= link_to root_path, class: 'list-group-item list-group-item-action py-2 ripple', "data-bs-toggle"=>"modal" ,"data-bs-target"=>"#exampleModalCenter" do %>
           <i class="fa fa-plus fa-fw me-3"></i><span>Create</span>
         <% end %>
@@ -42,6 +43,4 @@
       </div>
     </div>
   </nav>
-  <!-- Sidebar -->
 </header>
-<!--Main layout-->

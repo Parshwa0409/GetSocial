@@ -10,7 +10,9 @@
     <%= render partial: "requests/request_buttons", locals:{user: user}%>
 
     <%# TODO: THE MESSAGES BUTTON & IMPLEMENTATION %>
+    <% if current_user.following?(user) || current_user.myself?(@user)%>
     <div class="button-container">
         <%= button_to "Send Message", root_path, method: :post, class: "btn btn-lg btn-outline-dark user-profile-btn w-100" %>
     </div>
+    <% end %>
 <% end %>

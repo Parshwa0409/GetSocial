@@ -35,13 +35,11 @@ function AJAX(method, action, data, element, callback) {
 
         success: function (response) {
             callback(element, response)
-            // console.log($(element).next(), response["total_likes"]);
         }
     });
 }
 
 $(document).ready(function () {
-    //   $("button.like-btn").each(function (index, element) {
           $("button.like-btn").on("click", (e) => {
             e.stopPropagation();
             e.stopImmediatePropagation();
@@ -66,6 +64,5 @@ $(document).ready(function () {
             AJAX(method, action, data, button, onPostSuccess);
             }
       });
-    // });
 });
 </script>

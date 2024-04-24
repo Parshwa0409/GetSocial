@@ -28,6 +28,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    # destroy all the likes assosoicted with the post
   end
 
   private
