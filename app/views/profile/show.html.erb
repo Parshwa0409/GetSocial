@@ -3,7 +3,6 @@
 <div id="user-profile">
 
     <div class="d-flex align-items-start my-3">
-
         <% if @user.profile_picture.attached? %>
             <%= image_tag @user.profile_picture,  class: "user-avatar"%>
         <% else %>
@@ -23,8 +22,21 @@
             <%# simple-format to maintain the line breaks, bolds, italics & paragraphs %>
             <h5><%=simple_format(@user.bio)%></h5>
         </div>
+
+        <div class="dropdown">
+        <button class="btn btn-outline-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+        </div>
+
     </div>
-    <div id="button-row">
+
+    <div class="button-row">
         <%= render partial: "buttons", locals:{user: @user} %>
     </div>
 </div>

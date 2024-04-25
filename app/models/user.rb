@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
   # TODO: VALIDATE NAME, EMAIL, PASSWORD & UI ERROR HANDLING
+  validates :name, presence: { message: "Please enter your name" }
   has_one_attached :profile_picture
   has_one_attached :cover_photo
   

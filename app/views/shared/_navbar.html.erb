@@ -1,46 +1,58 @@
 <%= stylesheet_link_tag "navbar" %>
 
-<header>
-  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
-    <div class="nav-items">
-
-      <div class="list-group list-group-flush mx-3 mt-4">
-        <!--  -->
-        <p
-          class="navbar-brand p-2" id="brand">
-          <i class="fa-solid fa-mobile fa-fw me-3"></i><span>GetSocial</span>
-        </p>
-        <!--  -->
-        <%= link_to root_path, class: 'list-group-item list-group-item-action py-2 ripple' do %>
-          <i class="fa fa-home fa-fw me-3"></i><span>Home</span>
-        <% end %>
-
-        <!--  -->
-        <%= link_to search_path, method: :get ,class: 'list-group-item list-group-item-action py-2 ripple' do %>
-          <i class="fa fa-search fa-fw me-3"></i><span>Search</span>
-        <% end %>
-
-        <!--  -->
-        <%= link_to activities_path, class: 'list-group-item list-group-item-action py-2 ripple' do %>
-          <i class="fa-solid fa-heart fa-fw me-3"></i><span>Activity</span>
-        <% end %>
-
-        <!--  -->
-        <%= link_to '#', class: 'list-group-item list-group-item-action py-2 ripple' do %>
-          <i class="fa-solid fa-message fa-fw me-3"></i><span>Messages</span>
-        <% end %>
-
-        <!--  -->
-        <%= link_to root_path, class: 'list-group-item list-group-item-action py-2 ripple', "data-bs-toggle"=>"modal" ,"data-bs-target"=>"#exampleModalCenter" do %>
-          <i class="fa fa-plus fa-fw me-3"></i><span>Create</span>
-        <% end %>
-
-        <!--  -->
-        <%= link_to profile_path(current_user), method: :get ,class: 'list-group-item list-group-item-action py-2 ripple' do %>
-          <i class="fa fa-user fa-fw me-3"></i>
-          <span>Profile</span>
-        <% end %>
-      </div>
+<nav id="sidebarMenu">
+    <!-- Branding section -->
+    <div class="brand">
+      <i class="fa-solid fa-mobile fa-fw"></i>
+      <span class="fw-bold">GetSocial</span>
     </div>
+
+    <!-- Navigation links -->
+    <div class="list-group">
+      <%= link_to root_path, class: 'list-group-item list-group-item-action' do %>
+        <i class="fa fa-home fa-fw"></i>
+        <span>Home</span>
+      <% end %>
+
+      <%= link_to search_path, method: :get, class: 'list-group-item list-group-item-action' do %>
+        <i class="fa fa-search fa-fw"></i>
+        <span>Search</span>
+      <% end %>
+
+      <%= link_to activities_path, class: 'list-group-item list-group-item-action' do %>
+        <i class="fa-solid fa-heart fa-fw"></i>
+        <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">
+          <!-- Badge content (e.g., notification count) goes here -->
+          <!-- Example: 3 -->
+          3
+        </span>
+        <span>Activity</span>
+      <% end %>
+
+      <%= link_to '#', class: 'list-group-item list-group-item-action' do %>
+        <i class="fa-solid fa-message fa-fw"></i>
+        <span>Messages</span>
+      <% end %>
+
+      <%= link_to root_path, class: 'list-group-item list-group-item-action', "data-bs-toggle"=>"modal", "data-bs-target"=>"#exampleModalCenter" do %>
+        <i class="fa fa-plus fa-fw"></i>
+        <span>Create</span>
+      <% end %>
+
+      <%= link_to profile_path(current_user), method: :get, class: 'list-group-item list-group-item-action' do %>
+        <i class="fa fa-user fa-fw"></i>
+        <span>Profile</span>
+      <% end %>
+    </div>
+
+    <div class="dropup-center dropup settings-dropup">
+      <button class="w-100 btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa fa-cog fa-fw me-3"></i><span>Settings</span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><%= button_to "Blocked Users", root_path, class: "dropdown-item" %></li>
+        <li><%= button_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+      </ul>
+    </div>
+
   </nav>
-</header>

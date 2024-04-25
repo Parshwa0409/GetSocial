@@ -1,56 +1,57 @@
+/* Container for each activity request section */
 .activity-req-container {
   width: 100%;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 1rem;
   margin-bottom: 1rem;
-
   border: 1px solid #ddd;
   border-radius: 0.35rem;
 }
 
-div.request-container {
+/* Container for user details within each request */
+.request-container {
   display: flex;
   margin-top: 1rem;
 }
 
-div.user-details {
-  width: 85%;
+/* User details section */
+.user-details {
+  flex: 1; /* Take up remaining space */
   display: flex;
-  justify-content: start;
   align-items: center;
 }
 
+/* Avatar styling */
 .posts-user-avatar {
   aspect-ratio: 1;
-
   border: 1px solid black;
-  border-radius: 100%;
-
+  border-radius: 50%; /* Make the border radius half for circular avatar */
   height: 4rem;
   width: 4rem;
-
   margin-right: 1rem;
   padding: 0.25rem;
+  overflow: hidden; /* Hide any overflow within the avatar container */
 }
 
+/* Avatar image inside the avatar container */
 .posts-user-avatar img {
-  width: 100%; /* Ensure image fills the avatar container */
-  height: 100%; /* Maintain aspect ratio */
-  object-fit: cover; /* Scale and crop image to cover the container */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-div.approval-button-column {
-  width: 15%;
+/* Approval button column */
+.approval-button-column {
+  flex: 0 0 15%; /* Fixed width for button column */
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: flex-end;
 }
 
-div.approval-button-column > button {
-  padding: 0 2rem;
+/* Styling for approval buttons */
+.approval-button-column > button {
+  padding: 0.5rem 1rem; /* Increase button padding for better touch area */
   margin: 0.25rem 0;
 }

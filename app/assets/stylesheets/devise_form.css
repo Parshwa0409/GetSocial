@@ -1,0 +1,21 @@
+body {
+  background-color: #fafafa;
+  font-family: Arial, sans-serif;
+}
+
+.devise-container {
+  width: 35%;
+  margin: 0 auto;
+  padding: 2%;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+}
+
+/* Form Field Styles */
+.form-label {
+  font-weight: bold;
+}
+
+.form-control {
+  border-radius: 8px;
+}

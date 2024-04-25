@@ -2,8 +2,14 @@ body {
   font-family: Verdana, Geneva, sans-serif;
 }
 
+div#root {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 div#content {
-  padding: 1rem 5rem;
+  width: 75%;
+  padding: 2.5rem 0;
 }
 
 /* bootstrap - extra styles*/

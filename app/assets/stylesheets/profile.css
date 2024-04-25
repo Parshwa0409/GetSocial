@@ -18,7 +18,7 @@
   object-fit: cover;
 }
 
-#button-row {
+.button-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,7 +38,6 @@
   margin-right: 0;
 }
 
-/* COMBINED */
 #user-info {
   height: 100%;
   width: 100%;

@@ -1,12 +1,18 @@
-#post-container {
-  width: 75%;
+.post-container {
+  width: 65%;
   margin: 0.25rem auto 2rem;
   padding: 1rem 3rem;
   border: 1px solid #ddd;
   border-radius: 0.25rem;
 }
 
-div#user-details {
+div.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div.user-details {
   display: flex;
   justify-content: start;
   align-items: start;
@@ -31,7 +37,7 @@ div#user-details {
   object-fit: cover; /* Scale and crop image to cover the container */
 }
 
-div#post-picture-container {
+div.post-picture-container {
   margin: 0.5rem auto;
   width: 100%;
 }
@@ -45,7 +51,7 @@ div#post-picture-container {
   width: 100%;
 }
 
-div#post-caption-container > p > .user-id {
+div.post-caption-container > p > .user-id {
   font-size: 1.25rem;
   font-weight: bold;
 }

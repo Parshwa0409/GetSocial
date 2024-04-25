@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "devise_form"%>
+<div class="devise-container mt-5">
 <br/>
 <h2 class="text-center" >GetSocial 📲</h2>
 
@@ -15,8 +17,10 @@
 
 
   <div class="actions field my-3 py-2 text-capitalize">
-    <%= f.submit "Log in", class: "btn btn-lg btn-success w-100"%>
+    <%= f.submit "Log in", class: "btn btn-lg btn-outline-dark w-100"%>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+</div>

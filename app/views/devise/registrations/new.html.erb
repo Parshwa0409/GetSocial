@@ -1,35 +1,36 @@
-<br/>
-<h2 class="text-center">Sign-Up to socialize with your friends 🪩💃</h2>
+<%= stylesheet_link_tag "devise_form"%>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="devise-container mt-5">
+  <h2 class="text-center mb-4">Sign Up to Socialize with Your Friends 🪩💃</h2>
 
-  <div class="field my-3 py-2 text-capitalize">
-        <%= f.label :name %>
-        <%= f.text_field :name, class:"form-control", placeholder:"John"%>
-  </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field my-3 py-2 text-capitalize">
-        <%= f.label :email %>
-        <%= f.text_field :email, class:"form-control", placeholder:"john_doe@gmail.com"%>
-  </div>
+    <div class="mb-3">
+      <%= f.label :name, class: "form-label text-capitalize" %>
+      <%= f.text_field :name, class: "form-control", placeholder: "John" %>
+    </div>
 
-  <div class="field my-3 py-2 text-capitalize">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password,class:"form-control", autocomplete: "new-password", placeholder: "******" %>
-  </div>
+    <div class="mb-3">
+      <%= f.label :email, class: "form-label text-capitalize" %>
+      <%= f.text_field :email, class: "form-control", placeholder: "john_doe@gmail.com" %>
+    </div>
 
-  <div class="field  field my-3 py-2 text-capitalize">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation,class:"form-control", autocomplete: "new-password", placeholder: "******" %>
-  </div>
+    <div class="mb-3">
+      <%= f.label :password, class: "form-label text-capitalize" %>
+      <% if @minimum_password_length %>
+        <small class="text-muted">(Minimum <%= @minimum_password_length %> characters)</small>
+      <% end %>
+      <%= f.password_field :password, class: "form-control", autocomplete: "new-password", placeholder: "******" %>
+    </div>
 
-  <div class="actions  field my-3 py-2 text-capitalize">
-    <%= f.submit "Sign up",  class: "btn btn-lg btn-success w-100"%>
-  </div>
-<% end %>
+    <div class="mb-3">
+      <%= f.label :password_confirmation, class: "form-label text-capitalize" %>
+      <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", placeholder: "******" %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <%= f.submit "Sign up", class: "btn btn-md btn-outline-dark w-100" %>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

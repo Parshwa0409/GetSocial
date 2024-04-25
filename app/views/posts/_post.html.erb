@@ -1,31 +1,48 @@
 <%= stylesheet_link_tag "post" %>
 
-<div id="post-container">
-  <div id="user-details">
-    <% if user.profile_picture.attached? %>
-      <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
-    <% else %>
-      <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
-    <% end %>
-    <div>
-      <h4><%= user.email%></h4>
-      <h6><%= user.name%></h6>
+<div class="post-container">
+  <div class="top-row">
+    <div class="user-details">
+      <% if user.profile_picture.attached? %>
+        <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
+      <% else %>
+        <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
+      <% end %>
+      <div>
+        <h4><%= user.email%></h4>
+        <h6><%= user.name%></h6>
+      </div>
+    </div>
+
+    <div class="dropright">
+      <button class="btn btn-outline-bark " type="button" id="postOptionsDropDown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="postOptionsDropDown">
+      <% if current_user==user %>
+        <a class="dropdown-item" href="#"><i class="fas fa-edit"></i>  Edit</a>
+        <a class="dropdown-item" href="#"><i class="fa fa-trash" aria-hidden="true"></i>  Delete</a>
+      <% else %>
+        <a class="dropdown-item" href="profile/<%=user.id%>">View Profile</a>
+      <% end %>
+      </div>
     </div>
   </div>
+
 
   <%# TODO: LIKE EDIT POST & DELETE POST %>
   <%# BUTTON VARIES DEPENDING ON THE CONDITION IF THE USEWR IS OWNER OF THE POST %>
   <hr />
 
-  <div id="post-picture-container">
+  <div class="post-picture-container">
     <%= image_tag post.image, class:"post-picture" %>
   </div>
 
-  <div id="post-buttons">
+  <div class="post-buttons">
     <%=render partial:"posts/interaction_buttons", locals: {post: post}%>
   </div>
 
-  <div id="post-caption-container">
+  <div class="post-caption-container">
     <p><span class="user-id"><%= user.email %>:</span> "<%=post.caption%>"</p>
   </div>
 

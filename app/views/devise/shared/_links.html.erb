@@ -1,11 +1,13 @@
 <%- if controller_name != 'sessions' %>
-  Already an User? <%= link_to "Log in", new_session_path(resource_name)%><br />
+<br />
+  <span>Already an User?  </span><%= link_to "Log in", new_session_path(resource_name)%>
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  Not a registered User? <%=link_to "Sign up", new_registration_path(resource_name) %><br />
+  Not a registered User? <%=link_to "Sign up", new_registration_path(resource_name) %>
 <% end %>
 
+<!--
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
   Unable to remember your GetSocial Password? <%= link_to "Reset Password", new_password_path(resource_name) %><br />
 <% end %>
@@ -17,11 +19,13 @@
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end %>
+-->
 
 <%- if devise_mapping.omniauthable? %>
-  <br /><hr /><br />
-  <h4>Login Using Other Services: </h4>
+  <br /><hr />
+  <h6>Login Using Other Services: </h6>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false },  class:"btn btn-lg btn-success w-100"%><br />
+    <br />
+    <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false },  class:"btn btn-md btn-dark w-100"%>
   <% end %>
 <% end %>

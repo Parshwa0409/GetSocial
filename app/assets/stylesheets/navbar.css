@@ -1,38 +1,71 @@
-nav#sidebarMenu {
-  height: 100vh;
+/* Sidebar container */
+#sidebarMenu {
   position: fixed;
   top: 0;
   left: 0;
+
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: #ffffff; /* White background */
+  padding: 0 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-nav#sidebarMenu > div.nav-items {
-  height: 100%;
+/* Branding section */
+.brand {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+}
+
+.brand i {
+  font-size: 2rem;
+  color: #333; /* Dark gray for icon */
+}
+
+.brand span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333; /* Dark gray for text */
+  margin-left: 10px; /* Spacing between icon and text */
+}
+
+/* Navigation links */
+.list-group {
+  flex: 4;
   display: flex;
   flex-direction: column;
   justify-content: start;
+  gap: 1.5rem; /* Spacing between links */
 }
 
-nav#sidebarMenu > div.nav-items > div > a {
-  margin: 1.5rem 0 0 0;
-  border: none;
-  border-radius: 1rem;
+.list-group-item {
+  display: flex;
+  align-items: center;
+
+  padding: 1rem;
+  color: #333; /* Dark gray text */
+
+  border-radius: 0.5rem;
+
+  font-size: 1.25rem;
+
+  transition: background-color 0.3s ease; /* Smooth background transition */
 }
 
-.nav_item {
-  margin: 1.5rem 0 0 0;
-  border: none;
-  border-radius: 1rem;
-  display: inline;
+.list-group-item i {
+  font-size: 1.25rem;
+  margin-right: 10px; /* Spacing between icon and text */
 }
 
-p#brand {
-  border: 1px solid black;
-  border-radius: 1rem;
+.settings-dropup {
+  flex: 1;
 
-  font-size: 1.75rem;
-  font-family: cursive;
-}
-
-a.list-group-item {
-  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
