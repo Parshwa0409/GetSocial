@@ -1,10 +1,9 @@
 <% if user.id == current_user.id %>
-<%# To be shown if @user=current_user %>
     <div class="button-container">
         <%= button_to "Edit Profile", edit_profile_path(user), method: :get, class: "btn btn-lg btn-outline-dark user-profile-btn w-100" %>
     </div>
     <div class="button-container">
-        <%# TODO: SHARE PROFILE %>
+        <%# TODO: SHARE PROFILE IMPLEMENTATION %>
         <%= button_to "Share Profile", root_path, method: :get, class: "btn btn-lg btn-outline-dark user-profile-btn w-100" %>
     </div>
 <% else %>

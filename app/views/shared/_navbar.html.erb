@@ -22,8 +22,7 @@
       <%= link_to activities_path, class: 'list-group-item list-group-item-action' do %>
         <i class="fa-solid fa-heart fa-fw"></i>
         <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">
-          <!-- Badge content (e.g., notification count) goes here -->
-          <!-- Example: 3 -->
+          <%# TODO: BADGE IMPLEMENTATION %>
           3
         </span>
         <span>Activity</span>
@@ -34,7 +33,7 @@
         <span>Messages</span>
       <% end %>
 
-      <%= link_to root_path, class: 'list-group-item list-group-item-action', "data-bs-toggle"=>"modal", "data-bs-target"=>"#exampleModalCenter" do %>
+      <%= link_to root_path, class: 'list-group-item list-group-item-action', "data-bs-toggle"=>"modal", "data-bs-target"=>"#createPostModal" do %>
         <i class="fa fa-plus fa-fw"></i>
         <span>Create</span>
       <% end %>

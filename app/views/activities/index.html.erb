@@ -1,6 +1,5 @@
 <%= stylesheet_link_tag "requests" %>
 
-<!-- Activity request container for follow requests -->
 <div class="activity-req-container">
   <h3><%= pluralize(@follow_requests_count, "Follow Request") %></h3>
   <% if @follow_requests_count > 0 %>
@@ -8,7 +7,6 @@
   <% end %>
 </div>
 
-<!-- Activity request container for pending requests -->
 <div class="activity-req-container">
   <h3><%= pluralize(@pending_requests_count, "Pending Request") %></h3>
   <% if @pending_requests_count > 0 %>

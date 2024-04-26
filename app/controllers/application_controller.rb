@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
     end
 
     # TODO: REMOVE UNWANTED DEVISE LINKS & PATHS
-    # TODO: REMOVE LOGOUT BTN FROM PROFILE ADD SHARE PROFILE
 
     # TODO: MEMOIZE THE current_user() inherited from devise
     # def current_user

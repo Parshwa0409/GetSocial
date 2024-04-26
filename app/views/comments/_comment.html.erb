@@ -1,0 +1,21 @@
+<hr/>
+<div class="comment-container">
+    <div class="user-details mb-1">
+        <div>
+            <% if comment.user.profile_picture.attached? %>
+            <%= image_tag comment.user.profile_picture, class: "comments-user-avatar" %>
+            <% else %>
+            <%= image_tag 'user_avatar.png', class: "comments-user-avatar" %>
+            <% end %>
+            <div>
+                <span><strong><%= comment.user.email%></strong></span>
+            </div>
+        </div>
+
+        <%# TODO: LIKE COMMENTS IMPLEMENTATION %>
+        <button class="btn btn-sm btn-outline-dark">❤️</button>
+    </div>
+    <div class="comment-text">
+        <p><%=comment.content%></p>
+    </div>
+</div>

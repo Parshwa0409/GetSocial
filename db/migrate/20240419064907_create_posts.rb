@@ -4,6 +4,7 @@ class CreatePosts < ActiveRecord::Migration[7.1]
       t.string :caption
       t.string :image
       t.integer :total_likes, default: 0
+      t.integer :total_comments, default: 0
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

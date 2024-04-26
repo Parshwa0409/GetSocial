@@ -1,0 +1,32 @@
+<%= stylesheet_link_tag "post" %>
+
+<div id="edit-post-container">
+    <div class="post-picture-container mb-3">
+        <%= image_tag @post.image, class:"post-picture" %>
+    </div>
+
+    <%= form_for @post, url: post_path, method: :patch, data: { turbo: false } do |form| %>
+        <% if @post.errors.any? %>
+            <div class="alert alert-danger">
+            <h5><%= pluralize(@post.errors.count, "error") %> prohibited this profile from being saved:</h5>
+            <ul>
+                <% @post.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+            </div>
+        <% end %>
+
+        <div class="mb-3">
+            <%= form.label :caption, class: "form-label text-capitalize" %>
+            <%= form.text_area :caption, class: "form-control", placeholder: "I'm excited to share a post on GetSocial App 🥳" %>
+        </div>
+        <div class="mb-3">
+            <%= form.label :image, class: "form-label text-capitalize" %>
+            <%= form.file_field :image, class: "form-control" %>
+        </div>
+        <div class="text-center mt-4">
+            <%= form.submit 'Update Post ✏️', class: "btn btn-outline-dark w-100" %>
+        </div>
+    <% end %>
+</div>

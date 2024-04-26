@@ -7,8 +7,8 @@
 <% end %>
 
 <button class="btn btn-sm btn-outline-dark like-btn <%= class_like %>" data-post-id=<%=post.id%>><%= txt %></button>
-<button class="btn btn-sm btn-outline-dark">💬</button>
-<button class="btn btn-sm btn-outline-dark">➤</button>
+<button class="btn btn-sm btn-outline-dark comment-btn" data-bs-toggle="modal" data-bs-target="#commentsModal"  data-post-id=<%=post.id%> >💬</button>
+<button class="btn btn-sm btn-outline-dark" data-post-id=<%=post.id%>>➤</button>
 
 
 
@@ -19,8 +19,8 @@ function onPostSuccess(element) {
 }
 
 function onDeleteSuccess(element, response){
-  $(element).html("♡");
-  $(element).removeClass("liked").addClass("not-liked");
+    $(element).html("♡");
+    $(element).removeClass("liked").addClass("not-liked");
 }
 
 function AJAX(method, action, data, element, callback) { 
@@ -40,10 +40,10 @@ function AJAX(method, action, data, element, callback) {
 }
 
 $(document).ready(function () {
-          $("button.like-btn").on("click", (e) => {
+        $("button.like-btn").on("click", (e) => {
             e.stopPropagation();
             e.stopImmediatePropagation();
-              
+            
             var action, method, data;
             const button = e.target;
             var p_id = $(button).attr("data-post-id");
@@ -63,6 +63,6 @@ $(document).ready(function () {
             data = { id: $(e.target).attr("data-post-id") } ;
             AJAX(method, action, data, button, onPostSuccess);
             }
-      });
+    });
 });
 </script>

@@ -14,23 +14,32 @@
       </div>
     </div>
 
-    <div class="dropright">
+    <%# TODO: IMPLEMENT LIKE EDIT POST & DELETE POST %>
+    <div class="dropdown">
       <button class="btn btn-outline-bark " type="button" id="postOptionsDropDown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
       </button>
       <div class="dropdown-menu" aria-labelledby="postOptionsDropDown">
       <% if current_user==user %>
-        <a class="dropdown-item" href="#"><i class="fas fa-edit"></i>  Edit</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-trash" aria-hidden="true"></i>  Delete</a>
+        <%= button_to edit_post_path, method: :get, class: 'dropdown-item', id:"edit-post-btn", "data-bs-togfgle": "editPostModal" do %>
+          <i class="fas fa-edit"></i>
+          <span>  Edit</span>
+        <% end %>
+        <%= button_to post_path(post), method: :delete, class: 'dropdown-item' do %>
+          <i class="fas fa-trash"></i>
+          <span>  Delete</span>
+        <% end %>
       <% else %>
-        <a class="dropdown-item" href="profile/<%=user.id%>">View Profile</a>
+        <%= link_to profile_path(user), method: :get, class: 'dropdown-item' do %>
+          <span>View Profile</span>
+        <% end %>
       <% end %>
       </div>
     </div>
   </div>
 
 
-  <%# TODO: LIKE EDIT POST & DELETE POST %>
+  
   <%# BUTTON VARIES DEPENDING ON THE CONDITION IF THE USEWR IS OWNER OF THE POST %>
   <hr />
 
@@ -45,7 +54,4 @@
   <div class="post-caption-container">
     <p><span class="user-id"><%= user.email %>:</span> "<%=post.caption%>"</p>
   </div>
-
-  <!-- TODO: Comments-MODAL -->
-
 </div>

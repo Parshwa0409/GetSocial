@@ -55,3 +55,29 @@ div.post-caption-container > p > .user-id {
   font-size: 1.25rem;
   font-weight: bold;
 }
+
+/* EDIT POST */
+
+div#edit-post-container {
+  width: 50%;
+
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+
+  padding: 2rem;
+  margin: auto;
+}
+
+div#edit-post-container > div.post-picture-container {
+  margin: 0.5rem auto;
+  width: 100%;
+}
+
+div#edit-post-container > div.post-picture-container > .post-picture {
+  object-fit: contain;
+
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+
+  width: 100%;
+}

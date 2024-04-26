@@ -1,0 +1,78 @@
+<%= stylesheet_link_tag "comments_section" %>
+
+<div class="modal fade" id="commentsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Comments Section</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="comment-modal-body">
+
+        <form method="post" id="post-comment-form" class="my-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="form-group">
+                <label for="post-comment-input">New Comment:</label>
+                <input type="text" class="form-control" id="post-comment-input" name="comment[content]" placeholder="Type your comment here">
+              </div>
+            </div>
+
+            <div class="col-4">
+              <button type="submit" class="btn btn-md btn-outline-dark w-100" id="post-comment-btn">Post Comment</button>
+            </div>
+
+            <input type="hidden" name="authenticity_token" id="authenticity_token">
+          </div>
+        </form>
+
+        <div id="comments-content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(() => {
+      $("button.comment-btn").on("click", (event) => {
+          const postID = $(event.target).attr("data-post-id");
+          $.ajax({
+              type: "get",
+              url: `http://localhost:3000/posts/${postID}/comments`,
+              dataType: "html",
+              success: function (response) {
+                  $(document).find("#comment-modal-body > div#comments-content").empty();
+                  $(document).find("#comment-modal-body > div#comments-content").append(response);
+                  $(document).find("button#post-comment-btn").attr('data-post-id', postID);
+              }
+          });
+      });
+    });
+
+
+
+    $(document).ready(function() {
+    $('#post-comment-form').submit(function(event) {
+      event.preventDefault();
+      
+      const method = $(this).attr('method');
+      const formData = $(this).serialize();
+      const postID = $(event.target).find("button").attr("data-post-id");
+
+      $.ajax({
+        url:  `http://localhost:3000/posts/${postID}/comments`,
+        method: method,
+        data: formData, 
+        success: function(response) {
+          $(event.target).find("#post-comment-input").val("");
+          $(document).find("#comment-modal-body > div#comments-content").prepend(response);
+        },
+        error: function(xhr, status, error) {
+          console.error('Error posting comment:', error);
+        }
+      });
+    });
+  });
+</script>

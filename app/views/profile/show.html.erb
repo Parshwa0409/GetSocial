@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag "profile" %>
 
+
 <div id="user-profile">
 
     <div class="d-flex align-items-start my-3">
@@ -23,6 +24,7 @@
             <h5><%=simple_format(@user.bio)%></h5>
         </div>
 
+        <%# TODO: REFACTOR & ADD FUNCTIONALITY %>
         <div class="dropdown">
         <button class="btn btn-outline-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
@@ -51,7 +53,7 @@
                 <%= image_tag post.image,  class: "post-image", data_user_id:@user.id,  data_post_id:post.id %>
                 <div class="post-info">
                     <div class="post-info-content">
-                        <p>❤️ <%= post.total_likes %></p>
+                        <p>❤️ <%= post.total_likes %>  💬 <%= post.total_comments %> </p>
                     </div>
                 </div>
             <%end%>

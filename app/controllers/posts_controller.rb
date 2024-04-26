@@ -1,9 +1,10 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :initialize_post, only: [:new]
 
   def show
     @user = @post.user
+    @comments = @post.comments.includes(:user).order("created_at DESC")
   end
 
   def new
@@ -20,15 +21,22 @@ class PostsController < ApplicationController
     end
   end
 
-  # TODO: CHALLENGES EDIT, UPDATE, DELETE POST
+  def destroy
+    user = @post.user()
+    @post.destroy()
+    redirect_to profile_path(user)
+  end
+
   def edit
   end
 
   def update
-  end
-
-  def destroy
-    # destroy all the likes assosoicted with the post
+    @post.update(post_params)
+    if @post.save()
+      redirect_to post_path(@post)
+    else
+      render :edit
+    end
   end
 
   private

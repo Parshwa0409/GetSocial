@@ -1,0 +1,51 @@
+#post-comment-form > .row {
+  align-items: end;
+}
+
+#commentsModal > .modal-dialog {
+  max-width: 33%;
+  margin: 1.75rem auto;
+}
+
+#commentsModal > div.modal-dialog > div.modal-content {
+  width: 100%;
+  padding: 1rem;
+}
+
+.comment-container {
+  padding: 0 0.5rem;
+}
+.comment-container > .user-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.comment-container > .user-details > div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+}
+
+.comment-container > .user-details > button {
+  border: 1px solid #ddd;
+  font-size: 8px;
+}
+
+.comments-user-avatar {
+  aspect-ratio: 1;
+
+  border: 1px solid black;
+  border-radius: 100%;
+
+  height: 1.65rem;
+  width: 1.65rem;
+
+  margin-right: 0.25rem;
+  padding: 0.05rem;
+}
+
+.comment-container > .comment-text {
+  text-align: justify;
+  word-wrap: break-word;
+}
