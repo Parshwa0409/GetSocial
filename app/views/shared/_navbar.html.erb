@@ -21,10 +21,13 @@
 
       <%= link_to activities_path, class: 'list-group-item list-group-item-action' do %>
         <i class="fa-solid fa-heart fa-fw"></i>
-        <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">
-          <%# TODO: BADGE IMPLEMENTATION %>
-          3
-        </span>
+        <%# TODO: OPTIMIZE THIS %>
+        <% pan_count = current_user.notifications.where(type: "PostActivityNotifier::Notification").unread.count %>
+        <% if pan_count > 0%>
+          <span  id="unread-notification-count"  class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">
+            <%=pan_count%>
+          </span>
+        <% end %>
         <span>Activity</span>
       <% end %>
 
@@ -49,7 +52,7 @@
         <i class="fa fa-cog fa-fw me-3"></i><span>Settings</span>
       </button>
       <ul class="dropdown-menu">
-        <li><%= button_to "Blocked Users", root_path, class: "dropdown-item" %></li>
+        <li><%= button_to "Blocked Users", blocked_users_path, method: :get, class: "dropdown-item" %></li>
         <li><%= button_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
       </ul>
     </div>

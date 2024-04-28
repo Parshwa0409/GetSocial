@@ -1,15 +1,74 @@
 <%= stylesheet_link_tag "requests" %>
+<%= stylesheet_link_tag "notifications" %>
 
 <div class="activity-req-container">
-  <h3><%= pluralize(@follow_requests_count, "Follow Request") %></h3>
-  <% if @follow_requests_count > 0 %>
-    <%= link_to "View", follow_requests_path, method: :get, class: "btn btn-md btn-outline-dark" %>
-  <% end %>
+    <h3><%= pluralize(@follow_requests_count, "Follow Request") %></h3>
+    <% if @follow_requests_count > 0 %>
+        <%= link_to "View", follow_requests_path, method: :get, class: "btn btn-md btn-outline-dark" %>
+    <% end %>
 </div>
 
 <div class="activity-req-container">
-  <h3><%= pluralize(@pending_requests_count, "Pending Request") %></h3>
-  <% if @pending_requests_count > 0 %>
-    <%= link_to "View", pending_requests_path, method: :get, class: "btn btn-md btn-outline-dark" %>
-  <% end %>
+    <h3><%= pluralize(@pending_requests_count, "Pending Request") %></h3>
+    <% if @pending_requests_count > 0 %>
+        <%= link_to "View", pending_requests_path, method: :get, class: "btn btn-md btn-outline-dark" %>
+    <% end %>
+    </div>
+
+<hr/>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Post Activity Notifications</h3>
+    <button id="mark-all-as-read" class="btn btn-md btn-outline-dark">Mark As Read</button>
 </div>
+
+<hr/>
+
+<div id="post-activity-notificaions-container">
+    <% @post_activity_notifications.each do |notification| %>
+        <% if notification.unread?%>
+            <%= render partial: "notification", locals: {notification: notification} %>
+        <% end %>
+    <% end %>
+</div>
+
+
+<script>
+    $(() => {
+        $("a.view-post-btn").on("click", function (event) {
+            const notificationID = $(event.target).attr("data-notification-id");
+
+            $.ajax({
+                type: "post",
+                url: `http://localhost:3000/notifications/${notificationID}/mark_pan_as_read`,
+                success: function (response) {
+                    console.log("Done");
+                    $(event.target).parent().remove();
+
+                    var notificationCounts = parseInt($("#unread-notification-count").html());
+                    $("#unread-notification-count").html(notificationCounts - 1);
+                }
+            });
+
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+        });
+
+        $("#mark-all-as-read").on("click", (event)=>{
+            event.preventDefault();
+
+            $.ajax({
+                type: "post",
+                url: `http://localhost:3000/notifications/mark_all_pan_as_read`,
+                success: function (response) {
+                    console.log("Done");
+                    $("#post-activity-notificaions-container").remove();
+                    $("#unread-notification-count").remove();
+                }
+            });
+
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+        });
+    });
+</script>

@@ -1,0 +1,23 @@
+<%= stylesheet_link_tag "blocks"%>
+
+<% @blocked_users.each do |user|%>
+    <%= render partial:"blocked_user", locals: {user: user} %>
+<% end %>
+
+<script>
+    $(function () {
+        $("button.unblock-btn").on("click", function (event) {
+            const userID = $(event.target).attr("data-user-id");
+
+            $.ajax({
+                type: "post",
+                url: `http://localhost:3000/requests/${userID}/unblock`,
+                success: function (response) {
+                    $(event.target).closest("div.grand-parent").remove();
+                }
+            });
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+        });
+    });
+</script>

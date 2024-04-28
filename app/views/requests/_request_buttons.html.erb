@@ -1,20 +1,24 @@
-<% if current_user.following?(user)%>
-    <div class="button-container">
-        <%# button_to "Unfollow", unfollow_path(user), method: :post, class: "btn btn-lg btn-outline-dark user-profile-btn w-100 unfollow", 'data-user-id':user.id %>
-        <button class="btn btn-lg btn-outline-dark user-profile-btn w-100 unfollow" data-user-id=<%=user.id%> >Unfollow</button>
-    </div>
-<% elsif current_user.sent_follow_request_to?(user)%>
-    <div class="button-container">
-        <%# button_to "Cancel Request", cancel_path(user), method: :post, class: "btn btn-lg btn-outline-dark user-profile-btn w-100 cancel", 'data-user-id':user.id%>
-        <button class="btn btn-lg btn-outline-dark user-profile-btn w-100 cancel" data-user-id=<%=user.id%> >Cancel Request</button>
-    </div>
+<% if current_user.blocked?(user) %>
+    <%# TODO: WHAT TO DO????? %>
 <% else %>
-    <div class="button-container">
-        <%# button_to "Follow", follow_path(user), method: :post, class: "btn btn-lg btn-outline-dark user-profile-btn w-100 follow", 'data-user-id':user.id %>
-        <button class="btn btn-lg btn-outline-dark user-profile-btn w-100 follow" data-user-id=<%=user.id%> >Follow</button>
-    </div>
-<%end%>
+    <% if current_user.following?(user)%>
+        <div class="button-container">
+            <%# button_to "Unfollow", unfollow_path(user), method: :post, class: "btn btn-lg btn-outline-dark user-profile-btn w-100 unfollow", 'data-user-id':user.id %>
+            <button class="btn btn-lg btn-outline-dark user-profile-btn w-100 unfollow" data-user-id=<%=user.id%> >Unfollow</button>
+        </div>
+    <% elsif current_user.sent_follow_request_to?(user)%>
+        <div class="button-container">
+            <%# button_to "Cancel Request", cancel_path(user), method: :post, class: "btn btn-lg btn-outline-dark user-profile-btn w-100 cancel", 'data-user-id':user.id%>
+            <button class="btn btn-lg btn-outline-dark user-profile-btn w-100 cancel" data-user-id=<%=user.id%> >Cancel Request</button>
+        </div>
+    <% else %>
+        <div class="button-container">
+            <%# button_to "Follow", follow_path(user), method: :post, class: "btn btn-lg btn-outline-dark user-profile-btn w-100 follow", 'data-user-id':user.id %>
+            <button class="btn btn-lg btn-outline-dark user-profile-btn w-100 follow" data-user-id=<%=user.id%> >Follow</button>
+        </div>
+    <%end%>
 
+<% end %>
 
 
 <%# AJAX IMPLEMENTATION TO CHANGE THE BUTTON ON REQUEST STATUS %>

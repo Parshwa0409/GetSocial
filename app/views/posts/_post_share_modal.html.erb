@@ -1,0 +1,101 @@
+<style>
+    #sharePostModal > .modal-dialog {
+    max-width: 33%;
+    margin: 1.75rem auto;
+    }
+
+    #sharePostModal > div.modal-dialog > div.modal-content {
+    width: 100%;
+    padding: 1rem;
+    }
+
+    div.share-to-container{
+        width: 100%;
+        padding: 1rem;
+        display:flex;
+        justify-content: space-between;
+        align-items: center:
+    }
+    
+    div.share-to-container > div.user-details {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+
+    div.share-to-container > div.user-details > div > p{
+        margin:0;
+        font-size:0.85rem;
+    }
+
+    div.share-to-container > div.user-details > .posts-user-avatar {
+        aspect-ratio: 1;
+
+        border: 1px solid black;
+        border-radius: 100%;
+
+        height: 2.5rem;
+        width: 2.5rem;
+
+        margin-right: 0.5rem;
+        padding: 0.25rem;
+    }
+
+    div.share-to-container > div.user-details > .posts-user-avatar img {
+        width: 100%;
+        height: 100%; 
+        object-fit: cover; 
+    }
+</style>
+
+<div class="modal fade" id="sharePostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="sharePostModalLabel">Share Post</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <% current_user.following.each do |user| %>
+                <div class="share-to-container">
+                    <div class="user-details">
+                        <% if user.profile_picture.attached? %>
+                        <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
+                        <% else %>
+                        <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
+                        <% end %>
+                        <div>
+                            <p><strong><%= user.email%></strong></p>
+                            <p><%= user.name%></p>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-dark share-post-btn" data-user-id=<%=user.id%>>➤</button>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(() => {
+        $("button.share-post-btn").on("click", (event) => {
+            const postID = $(event.target).attr("data-post-id");
+            const recipientID = $(event.target).attr("data-user-id");
+
+            $.ajax({
+                type: "post",
+                url: `http://localhost:3000/posts/${postID}/share/${recipientID}`,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                },
+                success: function (response) {
+                    console.log("EWW EWW");
+                }
+            });
+
+
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+        });
+    });
+</script>
+

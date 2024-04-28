@@ -2,19 +2,21 @@
     <h4>No Users Found</h4>
 <% else %>
     <% users.each do |user| %>
-    <div class="d-flex justify-content-between align-items-center">
-        <div class="result-row">
-            <% if user.profile_picture.attached? %>
-                <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
-            <% else %>
-                <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
-            <% end %>
-            <div>
-                <h4><%= user.email%></h4>
-                <h6><%= user.name%></h6>
+        <% unless  current_user.blocked?(user) %>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="result-row">
+                    <% if user.profile_picture.attached? %>
+                        <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
+                    <% else %>
+                        <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
+                    <% end %>
+                    <div>
+                        <h4><%= user.email%></h4>
+                        <h6><%= user.name%></h6>
+                    </div>
+                </div>
+                <%= button_to "View Profile", profile_path(user),method: :get ,class:"btn btn-outline-dark"%>
             </div>
-        </div>
-        <%= button_to "View Profile", profile_path(user),method: :get ,class:"btn btn-outline-dark"%>
-    </div>
+        <% end %>
     <% end %>
 <% end %>

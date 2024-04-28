@@ -35,24 +35,6 @@
 </div>
 
 <script>
-  $(() => {
-      $("button.comment-btn").on("click", (event) => {
-          const postID = $(event.target).attr("data-post-id");
-          $.ajax({
-              type: "get",
-              url: `http://localhost:3000/posts/${postID}/comments`,
-              dataType: "html",
-              success: function (response) {
-                  $(document).find("#comment-modal-body > div#comments-content").empty();
-                  $(document).find("#comment-modal-body > div#comments-content").append(response);
-                  $(document).find("button#post-comment-btn").attr('data-post-id', postID);
-              }
-          });
-      });
-    });
-
-
-
     $(document).ready(function() {
     $('#post-comment-form').submit(function(event) {
       event.preventDefault();

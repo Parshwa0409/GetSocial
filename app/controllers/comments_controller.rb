@@ -10,7 +10,9 @@ class CommentsController < ApplicationController
     def create
         comment = @post.comments.create(comment_params)
         if comment.save()
+            recipient = @post.user
             @post.update(total_comments: (@post.total_comments + 1))
+            PostActivityNotifier.with(record: @post, message: " commented on your post: '#{comment.content}'", user_email: current_user.email).deliver(recipient) unless recipient==current_user
             render partial:"comments/comment", locals:{comment: comment}
         else
             render partial:"comments/error", locals:{comment: comment}

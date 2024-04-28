@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :initialize_post, only: [:new]
+  # skip_before_action :verify_authenticity_token, only: [:share]
 
   def show
     @user = @post.user
@@ -37,6 +38,12 @@ class PostsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def share
+    post = Post.find(params[:post_id])
+    recipient = User.find(params[:user_id])
+    PostActivityNotifier.with(record: post, message: " shared a post by #{post.user}.", user_email: current_user.email).deliver(recipient) 
   end
 
   private

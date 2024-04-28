@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
     #     return @current_user
     # end
 
+    # def get_pan_count
+    #     @pan_count ||= current_user.notifications.where(type: "PostActivityNotifier::Notification").unread.count
+    # end
+
     protected
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :bio, :profile_picture, :cover_photo])

@@ -5,13 +5,13 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
   
   validates :name, presence: { message: "Please enter your name" }
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:github, :google_oauth2]
 
   followability
-
 
   def self.from_omniauth(access_token)
     data = access_token.info

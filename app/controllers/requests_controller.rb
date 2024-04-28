@@ -1,7 +1,9 @@
 class RequestsController < ApplicationController
     skip_before_action :verify_authenticity_token
     before_action :set_user
-    skip_before_action :set_user, only: [:follow_requests, :pending_requests]
+    skip_before_action :set_user, only: [:follow_requests, :pending_requests, :blocked_users]
+
+    # TODO: How to Redirect !!!!!!
 
     def follow_requests
         @follow_requests = current_user.follow_requests
@@ -17,6 +19,7 @@ class RequestsController < ApplicationController
 
     def unfollow
         current_user.unfollow(@user)
+        redirect_to root_path
     end
     
     def cancel
@@ -31,7 +34,30 @@ class RequestsController < ApplicationController
         current_user.decline_follow_request_of(@user)
     end
 
-    # TODO: BLOCK & UNBLOCK USERS
+    def block
+        current_user.block(@user)
+        remove_connections()
+        redirect_to root_path
+    end
+
+    def unblock
+        current_user.unblock(@user)
+    end
+
+    def blocked_users
+        @blocked_users = current_user.blocks
+    end
+
+    def remove_connections
+        if current_user.mutual_following_with?(@user)
+            current_user.unfollow(@user)
+            @user.unfollow(current_user)
+        elsif current_user.following?(@user)
+            current_user.unfollow(@user)
+        elsif @user.following?(current_user)
+            @user.unfollow(current_user)
+        end
+    end
 
     private
 

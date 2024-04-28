@@ -24,18 +24,17 @@
             <h5><%=simple_format(@user.bio)%></h5>
         </div>
 
-        <%# TODO: REFACTOR & ADD FUNCTIONALITY %>
-        <div class="dropdown">
-        <button class="btn btn-outline-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-        </div>
-
+        <% unless @user==current_user%>
+            <%# TODO: REFACTOR & ADD FUNCTIONALITY %>
+            <div class="dropdown">
+            <button class="btn btn-outline-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            </button>
+                <ul class="dropdown-menu p-1">
+                    <li ><%= button_to "Block User", block_path(@user), method: :post, class:"dropdown-item btn btn-sm btn-outline-dark w-100 h-100 text-center"%></li>
+                </ul>
+            </div>
+        <% end %>
     </div>
 
     <div class="button-row">
