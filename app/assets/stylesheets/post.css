@@ -59,7 +59,7 @@ div.post-caption-container > p > .user-id {
 /* EDIT POST */
 
 div#edit-post-container {
-  width: 50%;
+  width: 75%;
 
   border: 1px solid #ddd;
   border-radius: 0.25rem;

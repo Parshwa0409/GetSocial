@@ -43,7 +43,7 @@ class PostsController < ApplicationController
   def share
     post = Post.find(params[:post_id])
     recipient = User.find(params[:user_id])
-    PostActivityNotifier.with(record: post, message: " shared a post by #{post.user}.", user_email: current_user.email).deliver(recipient) 
+    PostActivityNotifier.with(record: post, message: " shared a post by #{post.user.email}.", user_email: current_user.email).deliver(recipient) 
   end
 
   private

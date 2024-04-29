@@ -1,7 +1,11 @@
 <%= stylesheet_link_tag "blocks"%>
 
-<% @blocked_users.each do |user|%>
-    <%= render partial:"blocked_user", locals: {user: user} %>
+<% if @blocked_users.count == 0 %>
+    <h1><em><strong>You have not blocked any uers, Go ahead and block the haters 😉</strong></em></h1>
+<%else%>
+    <% @blocked_users.each do |user|%>
+        <%= render partial:"blocked_user", locals: {user: user} %>
+    <% end %>
 <% end %>
 
 <script>

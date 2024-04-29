@@ -34,6 +34,9 @@ Rails.application.routes.draw do
   # Activities Routes
   resources :activities, only: [:index]
 
+  # Messsages Routes
+  resources :messages
+
   # Notification Management
   post "notifications/mark_all_pan_as_read", to: "notifications#mark_all_pan_as_read"
   post "notifications/:id/mark_pan_as_read", to: "notifications#mark_pan_as_read"

@@ -76,7 +76,7 @@ captions = [
     user.posts.create(
         caption:captions[idx],
         image:{
-                io: File.open("/Users/parshwapatil/Desktop/GetSocial/app/assets/images/#{cars[idx]}.png"),
+                io: File.open("app/assets/images/#{cars[idx]}.png"),
                 filename: "#{cars[idx]}.png"
         }
     )
