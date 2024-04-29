@@ -31,5 +31,9 @@ module GetSocial
     if Rails.env.development? || Rails.env.test?
       Dotenv::Rails.load
     end
+
+    require "action_cable/engine"
+    config.autoload_paths += %W(#{config.root}/app/channels)
+
   end
 end

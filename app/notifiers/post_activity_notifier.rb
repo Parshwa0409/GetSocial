@@ -17,6 +17,12 @@ class PostActivityNotifier < ApplicationNotifier
   # deliver_by :custom do |config|
   #   config.class = "MyDeliveryMethod"
   # end
+  
+  deliver_by :action_cable do |config|
+    config.channel = "Noticed::PanChannel"
+    config.stream = ->{ recipient }
+    config.message = ->{ params.merge( user_id: recipient.id) }
+  end
 
   # Add required params
   required_param :message

@@ -1,5 +1,5 @@
 <div class="notification-container">
     <p><span><%= notification.sender %></span> <%= notification.message %></p>
-    <%= link_to "View Post", notification.record, class: "view-post-btn link-dark", id:"notification-#{notification.id}", data: {"notification-id": notification.id} %>
+    <%= link_to "View Post", notification.record, class: "view-post-btn link-dark", data: {"notification-event-id": notification.event.id} %>
 </div>
 

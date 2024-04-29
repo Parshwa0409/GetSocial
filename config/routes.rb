@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'activities/index'
   root "home#index"
+
+  # mount ActionCable.server => "/"
   
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' } 
   
