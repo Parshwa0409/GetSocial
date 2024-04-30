@@ -33,7 +33,7 @@ class PostActivityNotifier < ApplicationNotifier
     end
 
     def sender
-      params[:user_email]
+      params[:sender_email]
     end
   end
 end
