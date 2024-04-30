@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag "profile" %>
 
-
+<%= render partial: "messages/new_message_modal", locals:{recipient_id: @user.id, sender_id: current_user.id, } %>
 
 <div id="user-profile">
 
@@ -45,7 +45,6 @@
 
 <hr/>
 
-<%# DISPLAYING ALL THE POSTS TO THE VIEWER IF THEY FOLLOW THER USER OR IF THE USER IS VIEWING HIS PROFILE %>
 <% if current_user.following?(@user) || current_user.myself?(@user)%>
     <div id="user-posts">
         <% @user.posts.reverse.each do |post|%>

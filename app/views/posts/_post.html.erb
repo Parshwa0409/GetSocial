@@ -14,7 +14,6 @@
       </div>
     </div>
 
-    <%# TODO: IMPLEMENT LIKE EDIT POST & DELETE POST %>
     <div class="dropdown">
       <button class="btn btn-outline-bark " type="button" id="postOptionsDropDown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
@@ -48,10 +47,10 @@
   </div>
 
   <div class="post-buttons">
-    <%=render partial:"posts/interaction_buttons", locals: {post: post, show_comment_btn: show_comment_btn}%>
+    <%=render partial:"posts/interaction_buttons", locals: {post: post}%>
   </div>
 
-  <div class="post-caption-container">
+  <div class="post-caption-container mb-3">
     <p><span class="user-id"><%= user.email %>:</span> "<%=post.caption%>"</p>
   </div>
 </div>

@@ -7,9 +7,7 @@
 <% end %>
 
 <button class="btn btn-sm btn-outline-dark like-btn <%= class_like %>" data-post-id=<%=post.id%>><%= txt %></button>
-<% if show_comment_btn %>
-    <button class="btn btn-sm btn-outline-dark comment-btn" data-bs-toggle="modal" data-bs-target="#commentsModal"  data-post-id=<%=post.id%> >💬</button>
-<% end %>
+<button class="btn btn-sm btn-outline-dark comment-btn" data-bs-toggle="modal" data-bs-target="#commentsModal"  data-post-id=<%=post.id%> >💬</button>
 <button class="btn btn-sm btn-outline-dark share-btn" data-post-id=<%=post.id%> data-bs-toggle="modal" data-bs-target="#sharePostModal">➤</button>
 
 

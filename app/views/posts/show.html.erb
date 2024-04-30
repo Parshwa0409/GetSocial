@@ -1,11 +1,10 @@
-<% if current_user.following.count > 0 %>
-    <%= render partial:"posts/post_share_modal" %>
-<% end %>
+<%= render partial:"comments/comments_modal" %>
+<%= render partial:"posts/post_share_modal" %>
 
 <% if current_user.following?(@user) || current_user.myself?(@user)%>
-    <%= render partial:"post", locals:{post: @post, user: @user, show_comment_btn: false} %>
+    <%= render partial:"post", locals:{post: @post, user: @user} %>
+    
 <% else %>
-<%# TODO: ADD A IMAGE SHOWING SMTG %>
+    <%# TODO: ADD A IMAGE SHOWING SMTG %>
     <h1 class="text-center">You need to follow <u><em><a href=<%=profile_path(@user)%>><%= @user.email%></a></em></u> to view this post.</h1>
 <% end %>
-<%# TODO COMMENTS SHOW THEM %>

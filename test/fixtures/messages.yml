@@ -1,9 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  msg: MyText
+  sender: one
+  recipient: one
+  msg: MyString
   attachment: MyString
 
 two:
-  msg: MyText
+  sender: two
+  recipient: two
+  msg: MyString
   attachment: MyString

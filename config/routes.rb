@@ -37,11 +37,11 @@ Rails.application.routes.draw do
   resources :activities, only: [:index]
 
   # Messsages Routes
-  resources :messages
+  resources :messages, only: [:index, :create, :show]
 
   # Notification Management
   post "notifications/mark_all_pan_as_read", to: "notifications#mark_all_pan_as_read"
-  post "notifications/:id/mark_pan_as_read", to: "notifications#mark_pan_as_read"
+  post "notifications/mark_all_dm_as_read", to: "notifications#mark_all_dm_as_read"
 
   get "up" => "rails/health#show", as: :rails_health_check
 end

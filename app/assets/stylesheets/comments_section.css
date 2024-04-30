@@ -15,6 +15,7 @@
 .comment-container {
   padding: 0 0.5rem;
 }
+
 .comment-container > .user-details {
   display: flex;
   justify-content: space-between;

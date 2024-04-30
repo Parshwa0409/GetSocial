@@ -1,13 +1,11 @@
 <%= stylesheet_link_tag "navbar" %>
 
 <nav id="sidebarMenu">
-    <!-- Branding section -->
     <div class="brand">
       <i class="fa-solid fa-mobile fa-fw"></i>
       <span class="fw-bold">GetSocial</span>
     </div>
 
-    <!-- Navigation links -->
     <div class="list-group">
       <%= link_to root_path, class: 'list-group-item list-group-item-action' do %>
         <i class="fa fa-home fa-fw"></i>
@@ -23,16 +21,28 @@
         <i class="fa-solid fa-heart fa-fw"></i>
         <%# TODO: OPTIMIZE THIS %>
         <% pan_count = current_user.notifications.where(type: "PostActivityNotifier::Notification").unread.count %>
-        <% if pan_count > 0%>
-          <span  id="unread-notification-count"  class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">
-            <%=pan_count%>
-          </span>
+        <% if pan_count > 0 %>
+          <% visibility = "visible"%>
+        <% else %>
+          <% visibility = "invisible"%>
         <% end %>
+        <span  id="unread-notification-count"  class="<%=visibility%> badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" data-user-id=<%= current_user.id %>>
+          <%= pan_count %>
+        </span>
         <span>Activity</span>
       <% end %>
 
-      <%= link_to '#', class: 'list-group-item list-group-item-action' do %>
+      <%= link_to messages_path, class: 'list-group-item list-group-item-action' do %>
         <i class="fa-solid fa-message fa-fw"></i>
+        <% msg_count = current_user.notifications.where(type: "MessageNotifier::Notification").unread.count %>
+        <% if msg_count > 0 %>
+          <% msg_count_visibility = "visible"%>
+        <% else %>
+          <% msg_count_visibility = "invisible"%>
+        <% end %>
+        <span  id="unread-messages-count"  class="<%=msg_count_visibility%> badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" data-user-id=<%= current_user.id %>>
+          <%= msg_count %>
+        </span>
         <span>Messages</span>
       <% end %>
 

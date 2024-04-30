@@ -19,7 +19,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h3>Post Activity Notifications</h3>
-    <button id="mark-all-as-read" class="btn btn-md btn-outline-dark">Mark As Read</button>
+    <button id="mark-all-pan-as-read" class="btn btn-md btn-outline-dark">Mark As Read</button>
 </div>
 
 <hr/>
@@ -27,7 +27,7 @@
 <div id="post-activity-notificaions-container">
     <% @post_activity_notifications.each do |notification| %>
         <% if notification.unread?%>
-            <%= render partial: "notification", locals: {notification: notification} %>
+            <%= render partial: "post_activity_notification", locals: {notification: notification} %>
         <% end %>
     <% end %>
 </div>
@@ -35,34 +35,15 @@
 
 <script>
     $(() => {
-        $("a.view-post-btn").on("click", function (event) {
-            const notificationEventID = $(event.target).attr("data-notification-event-id");
-
-            $.ajax({
-                type: "post",
-                url: `http://localhost:3000/notifications/${notificationEventID}/mark_pan_as_read`,
-                success: function (response) {
-                    $(event.target).parent().remove();
-
-                    var notificationCounts = parseInt($("#unread-notification-count").html());
-                    $("#unread-notification-count").html(notificationCounts - 1);
-                }
-            });
-
-            event.stopPropagation();
-            event.stopImmediatePropagation();
-        });
-
-        $("#mark-all-as-read").on("click", (event)=>{
+        $("#mark-all-pan-as-read").on("click", (event)=>{
             event.preventDefault();
 
             $.ajax({
                 type: "post",
                 url: `http://localhost:3000/notifications/mark_all_pan_as_read`,
                 success: function (response) {
-                    console.log("Done");
-                    $("#post-activity-notificaions-container").remove();
-                    $("#unread-notification-count").remove();
+                    $("#unread-notification-count").removeClass("visible").addClass("invisible");
+                    $("#post-activity-notificaions-container").empty();
                 }
             });
 

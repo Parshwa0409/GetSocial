@@ -6,7 +6,7 @@ consumer.subscriptions.create("Noticed::PanChannel", {
   },
 
   disconnected() {
-    // Called when the subscription has been terminated by the server
+    console.log("DISCONNECTED FROM PAN CHANNEL");
   },
 
   received(data) {
@@ -16,6 +16,17 @@ consumer.subscriptions.create("Noticed::PanChannel", {
         <p><span>${data["params"]["sender_email"]}</span> ${data["params"]["message"]}</p>
         <a href="http://localhost:3000/posts/${data["record_id"]}" class="view-post-btn link-dark" data-notification-event-id="${data["id"]}">View Post</a>
     </div>`;
+
+    var unc = $("#unread-notification-count");
+
+    if (unc.attr("data-user-id") == data["params"]["recipient_id"]) {
+      if (unc.hasClass("invisible")) {
+        unc.removeClass("invisible").addClass("visible");
+        unc.html(1);
+      } else {
+        unc.html(parseInt(unc.html()) + 1);
+      }
+    }
 
     $("div#post-activity-notificaions-container").prepend(html);
   },

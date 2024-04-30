@@ -2,5 +2,5 @@
 <%= render partial:"posts/post_share_modal" %>
 
 <% @feed.each do |post| %>
-    <%= render partial:"posts/post", locals:{post: post, user: post.user, show_comment_btn: true} %>
+    <%= render partial:"posts/post", locals:{post: post, user: post.user} %>
 <% end %>

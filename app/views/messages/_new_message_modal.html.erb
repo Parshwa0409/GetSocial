@@ -1,0 +1,49 @@
+<style>
+  #messagesModal > .modal-dialog {
+  max-width: 33%;
+    margin: 1.75rem auto;
+  }
+
+  #messagesModal > div.modal-dialog > div.modal-content {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  #message-modal-body{
+    padding:1rem;
+  }
+
+</style>
+
+<div class="modal fade" id="messagesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="messagesModalTitle">Direct Message</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="message-modal-body">
+        <%= form_for Message.new(), url: messages_path, method: :post, id: "create-message-form", data: { turbo: false } do |form| %>
+          <div class="mb-3">
+              <%= form.label :msg, class: "form-label text-capitalize" %>
+              <%= form.text_area :msg, class: "form-control", placeholder: "Hey There 👋" %>
+          </div>
+          <div class="mb-3">
+              <%= form.label :attachment, class: "form-label text-capitalize" %>
+              <%= form.file_field :attachment, class: "form-control" %>
+          </div>
+
+          <%= form.hidden_field :recipient_id, id: "r-id", value: recipient_id %>
+          <%= form.hidden_field :sender_id, id: "s-id", value: sender_id %>
+
+          <div class="text-center mt-4">
+              <%= form.submit 'Send ✉️', class: "btn btn-outline-dark w-100", id: "create-msg-btn" %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

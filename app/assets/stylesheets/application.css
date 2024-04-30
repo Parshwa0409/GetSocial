@@ -1,8 +1,5 @@
-body {
-  font-family: Verdana, Geneva, sans-serif;
-}
-
 div#root {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: flex;
   justify-content: space-evenly;
 }
