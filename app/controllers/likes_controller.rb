@@ -1,6 +1,5 @@
 class LikesController < ApplicationController
-    before_action :authenticate_user!
-    skip_before_action :verify_authenticity_token
+    # skip_before_action :verify_authenticity_token
 
     def create
         post = Post.find(params[:id])

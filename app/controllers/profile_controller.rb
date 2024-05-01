@@ -1,5 +1,5 @@
 class ProfileController < ApplicationController
-  before_action :authenticate_user!
+  include NotificationPreferencesHelper
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def show

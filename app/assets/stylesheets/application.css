@@ -2,6 +2,8 @@ div#root {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: flex;
   justify-content: space-evenly;
+
+  /* background-color: #f6f5f2; */
 }
 
 div#content {

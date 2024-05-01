@@ -2,9 +2,11 @@
 <%= stylesheet_link_tag "messages" %>
 
 <%= javascript_include_tag "ajax_scripts/request_handler"%>
+<%= javascript_include_tag "ajax_scripts/subscription_handler"%>
 
 <%= render partial: "messages/new_message_modal", locals:{recipient_id: @user.id, sender_id: current_user.id, } %>
 
+<div id="subscription-notification"></div>
 <div id="user-profile">
     <div class="d-flex align-items-start my-3">
         <% render_profile_pic_if_attached(@user) do%>
@@ -36,7 +38,13 @@
             </button>
                 <ul class="dropdown-menu p-1">
                     <li ><%= button_to "Block User", block_path(@user), method: :post, class:"dropdown-item btn btn-sm btn-outline-dark w-100 h-100 text-center"%></li>
-                    <%# TODO: ADD NOTIFICATION PREFERENCES %>
+                    <% render_subscribe_btn(@user) do %>
+                        <li><button class="dropdown-item btn btn-sm btn-outline-dark w-100 h-100 text-center" id="notify-me" data-user-id="<%= @user.id %>">Subscribe</button></li>
+                    <% end %>
+
+                    <% render_unsubscribe_btn(@user) do %>
+                        <li><button class="dropdown-item btn btn-sm btn-outline-dark w-100 h-100 text-center" id="delete-notify-me" data-user-id="<%= @user.id %>">Unsubscribe</button></li>
+                    <%end%>
                 </ul>
             </div>
         <% end %>

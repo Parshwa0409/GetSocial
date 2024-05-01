@@ -43,5 +43,9 @@ Rails.application.routes.draw do
   post "notifications/mark_all_pan_as_read", to: "notifications#mark_all_pan_as_read"
   post "notifications/mark_all_dm_as_read", to: "notifications#mark_all_dm_as_read"
 
+  # Notification Preferences
+  resources :notification_preferences, only: [:create, :destroy]
+
+
   get "up" => "rails/health#show", as: :rails_health_check
 end
