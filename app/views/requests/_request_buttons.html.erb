@@ -1,69 +1,22 @@
-<% if current_user.blocked?(user) %>
-    <%# TODO: WHAT TO DO????? %>
-<% else %>
-    <% if current_user.following?(user)%>
+<% render_request_button_if_user_not_blocked(user) do %>
+    <% render_unfollow_button(user) do %>
         <div class="button-container">
             <%# button_to "Unfollow", unfollow_path(user), method: :post, class: "btn btn-lg btn-outline-dark user-profile-btn w-100 unfollow", 'data-user-id':user.id %>
             <button class="btn btn-lg btn-outline-dark user-profile-btn w-100 unfollow" data-user-id=<%=user.id%> >Unfollow</button>
         </div>
-    <% elsif current_user.sent_follow_request_to?(user)%>
+    <%end%>
+
+    <% render_cancel_request_button(user) do %>
         <div class="button-container">
             <%# button_to "Cancel Request", cancel_path(user), method: :post, class: "btn btn-lg btn-outline-dark user-profile-btn w-100 cancel", 'data-user-id':user.id%>
             <button class="btn btn-lg btn-outline-dark user-profile-btn w-100 cancel" data-user-id=<%=user.id%> >Cancel Request</button>
         </div>
-    <% else %>
+    <%end%>
+
+    <% render_follow_button(user) do %>
         <div class="button-container">
             <%# button_to "Follow", follow_path(user), method: :post, class: "btn btn-lg btn-outline-dark user-profile-btn w-100 follow", 'data-user-id':user.id %>
             <button class="btn btn-lg btn-outline-dark user-profile-btn w-100 follow" data-user-id=<%=user.id%> >Follow</button>
         </div>
     <%end%>
-
 <% end %>
-
-
-<%# AJAX IMPLEMENTATION TO CHANGE THE BUTTON ON REQUEST STATUS %>
-<script>
-function change_button_text(e, text, u_id) {
-    const el = $(document).find(`[data-user-id='${u_id}']`);
-    $(el).text(text);
-}
-
-function AJAX(u_id, request_type){
-    $.ajax({
-        type: "post",
-        url: `http://localhost:3000/requests/${u_id}/${request_type}`,
-        data: "data",
-        success: function (response) {
-            console.log(response);
-        }
-    });
-}
-
-$(document).ready(() => {
-    $(document).on("click", ".follow, .unfollow, .cancel", (event) => {
-        event.preventDefault();
-        const button = $(event.target);
-        const u_id = $(event.target).attr('data-user-id');
-        const isFollowing = button.hasClass("follow");
-        
-        if (isFollowing) {
-            button.removeClass("follow").addClass("cancel");
-            change_button_text(event, "Cancel Request", u_id);
-
-            AJAX(u_id, "follow")
-
-        } else {
-            if(button.hasClass("cancel")){    
-                button.removeClass("cancel").addClass("follow");
-                AJAX(u_id, "cancel")
-            }
-            else if(button.hasClass("unfollow")){
-                button.removeClass("unfollow").addClass("follow");
-                AJAX(u_id, "unfollow")
-            }
-            
-            change_button_text(event, "Follow", u_id);
-        }
-    });
-});
-</script>

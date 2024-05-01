@@ -1,5 +1,3 @@
-<%# This is present in the home#index, therefore to create you got to do it from the home /index routes %>
-<!-- Bootstrap Modal -->
 <div class="modal fade" id="createPostModal" tabindex="-1" role="dialog" aria-labelledby="createPostModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -10,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= form_for post, url: posts_path, method: meth, data: { turbo: false } do |form| %>
+        <%= form_for build_new_post(), url: posts_path, method: :post, data: { turbo: false } do |form| %>
           <div class="mb-3">
             <%= form.label :caption, class: "form-label text-capitalize" %>
             <%= form.text_area :caption, class: "form-control", placeholder: "I'm excited to share a post on GetSocial App 🥳" %>

@@ -1,5 +1,7 @@
 <%= stylesheet_link_tag "blocks"%>
 
+<%= javascript_include_tag "ajax_scripts/request_handler"%>
+
 <% if @blocked_users.count == 0 %>
     <h1><em><strong>You have not blocked any uers, Go ahead and block the haters 😉</strong></em></h1>
 <%else%>
@@ -7,21 +9,3 @@
         <%= render partial:"blocked_user", locals: {user: user} %>
     <% end %>
 <% end %>
-
-<script>
-    $(function () {
-        $("button.unblock-btn").on("click", function (event) {
-            const userID = $(event.target).attr("data-user-id");
-
-            $.ajax({
-                type: "post",
-                url: `http://localhost:3000/requests/${userID}/unblock`,
-                success: function (response) {
-                    $(event.target).closest("div.grand-parent").remove();
-                }
-            });
-            event.stopPropagation();
-            event.stopImmediatePropagation();
-        });
-    });
-</script>

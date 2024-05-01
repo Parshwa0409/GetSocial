@@ -1,13 +1,15 @@
-<%= stylesheet_link_tag "post" %>
-
 <div class="post-container">
   <div class="top-row">
     <div class="user-details">
-      <% if user.profile_picture.attached? %>
-        <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
-      <% else %>
-        <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
+
+      <% render_profile_pic_if_attached(user) do%>
+          <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
       <% end %>
+
+      <% render_default_pic_if_profile_pic_not_attached(user) do%>
+          <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
+      <% end %>
+
       <div>
         <h4><%= user.email%></h4>
         <h6><%= user.name%></h6>
@@ -37,17 +39,16 @@
     </div>
   </div>
 
-
-  
-  <%# BUTTON VARIES DEPENDING ON THE CONDITION IF THE USEWR IS OWNER OF THE POST %>
   <hr />
 
   <div class="post-picture-container">
     <%= image_tag post.image, class:"post-picture" %>
   </div>
 
-  <div class="post-buttons">
-    <%=render partial:"posts/interaction_buttons", locals: {post: post}%>
+  <div class="post-interaction-buttons">
+    <%= like_button(post, current_user) %>
+    <button class="btn btn-sm btn-outline-dark comment-btn" data-bs-toggle="modal" data-bs-target="#commentsModal"  data-post-id=<%=post.id%> >💬</button>
+    <button class="btn btn-sm btn-outline-dark share-btn" data-post-id=<%=post.id%> data-bs-toggle="modal" data-bs-target="#sharePostModal">➤</button>
   </div>
 
   <div class="post-caption-container mb-3">

@@ -19,14 +19,7 @@
 
       <%= link_to activities_path, class: 'list-group-item list-group-item-action' do %>
         <i class="fa-solid fa-heart fa-fw"></i>
-        <%# TODO: OPTIMIZE THIS %>
-        <% pan_count = current_user.notifications.where(type: "PostActivityNotifier::Notification").unread.count %>
-        <% if pan_count > 0 %>
-          <% visibility = "visible"%>
-        <% else %>
-          <% visibility = "invisible"%>
-        <% end %>
-        <span  id="unread-notification-count"  class="<%=visibility%> badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" data-user-id=<%= current_user.id %>>
+        <span  id="unread-notification-count"  class="<%=pan_badge_visibility%> badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" data-user-id=<%= active_user.id %>>
           <%= pan_count %>
         </span>
         <span>Activity</span>
@@ -34,13 +27,7 @@
 
       <%= link_to messages_path, class: 'list-group-item list-group-item-action' do %>
         <i class="fa-solid fa-message fa-fw"></i>
-        <% msg_count = current_user.notifications.where(type: "MessageNotifier::Notification").unread.count %>
-        <% if msg_count > 0 %>
-          <% msg_count_visibility = "visible"%>
-        <% else %>
-          <% msg_count_visibility = "invisible"%>
-        <% end %>
-        <span  id="unread-messages-count"  class="<%=msg_count_visibility%> badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" data-user-id=<%= current_user.id %>>
+        <span  id="unread-messages-count"  class="<%=msg_badge_visibility%> badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" data-user-id=<%= active_user.id %>>
           <%= msg_count %>
         </span>
         <span>Messages</span>

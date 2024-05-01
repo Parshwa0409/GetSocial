@@ -1,4 +1,4 @@
-<% if user.id == current_user.id %>
+<% render_profile_buttons_if_my_profile(user) do%>
     <div class="button-container">
         <%= button_to "Edit Profile", edit_profile_path(user), method: :get, class: "btn btn-lg btn-outline-dark user-profile-btn w-100" %>
     </div>
@@ -6,13 +6,13 @@
         <%# TODO: SHARE PROFILE IMPLEMENTATION %>
         <%= button_to "Share Profile", root_path, method: :get, class: "btn btn-lg btn-outline-dark user-profile-btn w-100" %>
     </div>
-<% else %>
-    <%= render partial: "requests/request_buttons", locals:{user: user}%>
+<% end %>
 
-    <%# TODO: THE MESSAGES BUTTON & IMPLEMENTATION %>
-    <% if current_user.following?(user) || current_user.myself?(@user)%>
-    <div class="button-container">
-         <button class="btn btn-lg btn-outline-dark user-profile-btn w-100" data-bs-toggle="modal" data-bs-target="#messagesModal">Send Message</button>
-    </div>
+<% render_request_buttons_if_not_my_profile(user) do %>
+    <%= render partial: "requests/request_buttons", locals:{user: user}%>
+    <% render_share_profile_button_if_following(user) do %>
+        <div class="button-container send-msg-btn">
+            <button class="btn btn-lg btn-outline-dark user-profile-btn w-100 " data-bs-toggle="modal" data-bs-target="#messagesModal">Send Message</button>
+        </div>
     <% end %>
 <% end %>

@@ -1,28 +1,4 @@
-<style>
-div.show-msg-container {
-    width: 60%;
-    margin: 1rem auto;
-    padding: 1rem;
-
-    border: 1px solid #ddd;
-    border-radius: 0.25rem;
-}
-
-
-div.show-msg-container > .attachment-contianer{
-    width: 100%;
-    border: 1px solid black;
-    border-radius: 0.25rem;
-}
-
-div.show-msg-container > .attachment-contianer > img{
-    width: 100%;
-    border-radius: 0.25rem;
-    object-fit: contain;
-}
-
-
-</style>
+<%= stylesheet_link_tag "messages" %>
 
 <div class="show-msg-container">
     <h4><strong>From:</strong> <%= @message.recipient.email %></h4>

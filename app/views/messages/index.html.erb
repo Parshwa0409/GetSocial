@@ -1,3 +1,5 @@
+<%= javascript_include_tag "ajax_scripts/mark_notification_as_read"%>
+
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h3>Direct Messages</h3>
     <button id="mark-all-dm-as-read" class="btn btn-md btn-outline-dark">Mark As Read</button>
@@ -17,24 +19,3 @@
         </div>
     <% end %>
 </div>
-
-
-<script>
-    $(() => {
-        $("#mark-all-dm-as-read").on("click", (event)=>{
-            event.preventDefault();
-
-            $.ajax({
-                type: "post",
-                url: `http://localhost:3000/notifications/mark_all_dm_as_read`,
-                success: function (response) {
-                    $("#unread-messages-count").removeClass("visible").addClass("invisible");
-                    $("#message-notificaions-container").empty();
-                }
-            });
-
-            event.stopPropagation();
-            event.stopImmediatePropagation();
-        });
-    });
-</script>

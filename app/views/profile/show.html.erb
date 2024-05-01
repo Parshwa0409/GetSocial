@@ -1,13 +1,17 @@
 <%= stylesheet_link_tag "profile" %>
+<%= stylesheet_link_tag "messages" %>
+
+<%= javascript_include_tag "ajax_scripts/request_handler"%>
 
 <%= render partial: "messages/new_message_modal", locals:{recipient_id: @user.id, sender_id: current_user.id, } %>
 
 <div id="user-profile">
-
     <div class="d-flex align-items-start my-3">
-        <% if @user.profile_picture.attached? %>
+        <% render_profile_pic_if_attached(@user) do%>
             <%= image_tag @user.profile_picture,  class: "user-avatar"%>
-        <% else %>
+        <% end %>
+
+        <% render_default_pic_if_profile_pic_not_attached(@user) do%>
             <%= image_tag 'user_avatar.png', class: "user-avatar" %>
         <% end %>
 
@@ -25,14 +29,14 @@
             <h5><%=simple_format(@user.bio)%></h5>
         </div>
 
-        <% unless @user==current_user%>
-            <%# TODO: REFACTOR & ADD FUNCTIONALITY %>
+        <% unless active_user.myself?(@user) %>
             <div class="dropdown">
             <button class="btn btn-outline-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
             </button>
                 <ul class="dropdown-menu p-1">
                     <li ><%= button_to "Block User", block_path(@user), method: :post, class:"dropdown-item btn btn-sm btn-outline-dark w-100 h-100 text-center"%></li>
+                    <%# TODO: ADD NOTIFICATION PREFERENCES %>
                 </ul>
             </div>
         <% end %>
@@ -45,7 +49,7 @@
 
 <hr/>
 
-<% if current_user.following?(@user) || current_user.myself?(@user)%>
+<% render_profile_posts_if_user_follows_me(@user) do %>
     <div id="user-posts">
         <% @user.posts.reverse.each do |post|%>
             <%= link_to post_path(post), method: :get, class:"post-item", data:{"post-id"=>post.id} do %>

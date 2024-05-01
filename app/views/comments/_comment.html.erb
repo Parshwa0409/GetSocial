@@ -1,19 +1,19 @@
-<hr/>
 <div class="comment-container">
+    <hr/>
     <div class="user-details mb-1">
         <div>
-            <% if comment.user.profile_picture.attached? %>
-            <%= image_tag comment.user.profile_picture, class: "comments-user-avatar" %>
-            <% else %>
-            <%= image_tag 'user_avatar.png', class: "comments-user-avatar" %>
+            <% render_profile_pic_if_attached(comment.user) do%>
+                <%= image_tag comment.user.profile_picture, class: "comments-user-avatar" %>
             <% end %>
+
+            <% render_default_pic_if_profile_pic_not_attached(comment.user) do%>
+                <%= image_tag 'user_avatar.png', class: "comments-user-avatar" %>
+            <% end %>
+
             <div>
                 <span><strong><%= comment.user.email%></strong></span>
             </div>
         </div>
-
-        <%# TODO: LIKE COMMENTS IMPLEMENTATION %>
-        <button class="btn btn-sm btn-outline-dark">❤️</button>
     </div>
     <div class="comment-text">
         <p><%=comment.content%></p>

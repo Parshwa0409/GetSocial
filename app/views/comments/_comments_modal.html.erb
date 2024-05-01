@@ -1,5 +1,3 @@
-<%= stylesheet_link_tag "comments_section" %>
-
 <div class="modal fade" id="commentsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -33,28 +31,3 @@
     </div>
   </div>
 </div>
-
-<script>
-    $(document).ready(function() {
-    $('#post-comment-form').submit(function(event) {
-      event.preventDefault();
-      
-      const method = $(this).attr('method');
-      const formData = $(this).serialize();
-      const postID = $(event.target).find("button").attr("data-post-id");
-
-      $.ajax({
-        url:  `http://localhost:3000/posts/${postID}/comments`,
-        method: method,
-        data: formData, 
-        success: function(response) {
-          $(event.target).find("#post-comment-input").val("");
-          $(document).find("#comment-modal-body > div#comments-content").prepend(response);
-        },
-        error: function(xhr, status, error) {
-          console.error('Error posting comment:', error);
-        }
-      });
-    });
-  });
-</script>

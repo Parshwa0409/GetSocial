@@ -1,6 +1,19 @@
-<%= render partial:"comments/comments_modal" %>
-<%= render partial:"posts/post_share_modal" %>
+<%= stylesheet_link_tag "post" %>
+<%= javascript_include_tag "ajax_scripts/post_interaction_handler"%>
 
-<% @feed.each do |post| %>
-    <%= render partial:"posts/post", locals:{post: post, user: post.user} %>
+<%= stylesheet_link_tag "comments_section" %>
+<%= javascript_include_tag "ajax_scripts/comments_handler"%>
+
+<% if active_user.nil? %>
+    <div id="auth-form">
+        <h2>You need to sign in or sign up before continuing.</h2>
+        <%= link_to 'Sign In', new_user_session_path, class: 'btn btn-outline-dark' %>
+        <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-outline-dark' %>
+    </div>
+<% else %>
+    <%= render partial:"comments/comments_modal" %>
+    <%= render partial:"posts/share_post_modal" %>
+    <% @feed.each do |post| %>
+        <%= render partial:"posts/post", locals:{post: post, user: post.user} %>
+    <% end %>
 <% end %>

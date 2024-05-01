@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_message, only: [:show]
-    
+
     def index
         @msg_notifications = current_user.notifications.newest_first.where(type: "MessageNotifier::Notification")
     end

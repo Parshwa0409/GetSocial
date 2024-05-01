@@ -1,10 +1,18 @@
-<%= render partial:"comments/comments_modal" %>
-<%= render partial:"posts/post_share_modal" %>
+<%= stylesheet_link_tag "post" %>
+<%= javascript_include_tag "ajax_scripts/post_interaction_handler"%>
 
-<% if current_user.following?(@user) || current_user.myself?(@user)%>
-    <%= render partial:"post", locals:{post: @post, user: @user} %>
-    
-<% else %>
-    <%# TODO: ADD A IMAGE SHOWING SMTG %>
-    <h1 class="text-center">You need to follow <u><em><a href=<%=profile_path(@user)%>><%= @user.email%></a></em></u> to view this post.</h1>
+<%= stylesheet_link_tag "comments_section" %>
+<%= javascript_include_tag "ajax_scripts/comments_handler"%>
+
+<%= render partial:"comments/comments_modal" %>
+<%= render partial:"posts/share_post_modal" %>
+
+<% render_post_if_following(@user) do %>
+    <%= render partial: "post", locals: { post: @post, user: @user } %>
+<% end %>
+
+<% render_content_if_not_following(@user) do %>
+    <h1 class="text-center">
+        You need to follow<u><em><a href="<%= profile_path(@user) %>"><%= @user.email %></a></em></u>to view this post.
+    </h1>
 <% end %>

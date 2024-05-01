@@ -5,9 +5,10 @@
         <% unless  current_user.blocked?(user) %>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="result-row">
-                    <% if user.profile_picture.attached? %>
+                    <% render_profile_pic_if_attached(user) do%>
                         <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
-                    <% else %>
+                    <% end %>
+                    <% render_default_pic_if_profile_pic_not_attached(user) do%>
                         <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
                     <% end %>
                     <div>

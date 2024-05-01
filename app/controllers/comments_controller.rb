@@ -1,10 +1,11 @@
 class CommentsController < ApplicationController
+    before_action :authenticate_user!
     skip_before_action :verify_authenticity_token
     before_action :set_post
 
     def index
         comments = @post.comments.includes(:user).order("created_at DESC")
-        render partial:"comments/all_comments", locals: {comments: comments}
+        render partial:"comments/comments", locals: {comments: comments}
     end
 
     def create
@@ -18,7 +19,7 @@ class CommentsController < ApplicationController
             end
             render partial:"comments/comment", locals:{comment: comment}
         else
-            render partial:"comments/error", locals:{comment: comment}
+            render partial:"comments/create_comment_error", locals:{comment: comment}
         end
     end
 
