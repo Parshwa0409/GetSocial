@@ -2,10 +2,11 @@
 
 <%= javascript_include_tag "ajax_scripts/request_handler"%>
 
+<div id="all-pending-requests">
 <% @pending_requests.each do |pending_request|%>
     <% user = User.find(pending_request.followable_id) %>
-    <div>
-    <div class="request-container">
+    <div class="pending">
+    <div class="request-container ">
         <div class="user-details">
             <% if user.profile_picture.attached? %>
             <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
@@ -23,3 +24,4 @@
     <hr/>
     </div>
 <% end %>
+</div>

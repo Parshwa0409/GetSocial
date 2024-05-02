@@ -17,7 +17,7 @@ class SearchController < ApplicationController
       @users = []
     end
 
-    @users = @users.reject {|user| user.blocked_by?(current_user) || current_user.blocked_by?(user) }
+    @users = @users.reject {|user| user.blocked_by?(active_user) || active_user.blocked_by?(user) }
 
     render partial: "users", locals: { users:@users }
   end

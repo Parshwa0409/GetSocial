@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-    # skip_before_action :verify_authenticity_token
     before_action :set_post
 
     def index
@@ -12,8 +11,8 @@ class CommentsController < ApplicationController
         if comment.save()
             recipient = @post.user
             @post.update(total_comments: (@post.total_comments + 1))
-            unless recipient==current_user
-                notification = PostActivityNotifier.with(record: @post, message: " commented on your post: '#{comment.content}'", sender_email: current_user.email, recipient_id: recipient.id, post_create: false).deliver(recipient) 
+            unless recipient==active_user
+                notification = PostActivityNotifier.with(record: @post, message: " commented on your post: '#{comment.content}'", sender_email: active_user.email, recipient_id: recipient.id, post_create: false).deliver(recipient) 
                 ActionCable.server.broadcast("pan_channel",notification)
             end
             render partial:"comments/comment", locals:{comment: comment}

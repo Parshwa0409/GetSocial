@@ -1,6 +1,6 @@
 class NotificationPreferencesController < ApplicationController
   def create
-    preference = NotificationPreference.create({preferred_user_id: get_preferred_user_id, preferred_notifier: current_user})
+    preference = NotificationPreference.create({preferred_user_id: get_preferred_user_id, preferred_notifier: active_user})
     if preference.save
       user = User.find(get_preferred_user_id)
       render partial:"success_subscribe", locals: {user: user}
@@ -10,7 +10,7 @@ class NotificationPreferencesController < ApplicationController
   end
 
   def destroy
-    preference = NotificationPreference.find_by(preferred_user_id: get_preferred_user_id, preferred_notifier: current_user)
+    preference = NotificationPreference.find_by(preferred_user_id: get_preferred_user_id, preferred_notifier: active_user)
 
     if preference.present?
       user = User.find(get_preferred_user_id)

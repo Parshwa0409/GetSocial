@@ -11,11 +11,11 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.create(post_params)
+    @post = active_user.posts.create(post_params)
 
     if @post.save()
-      recipients = NotificationPreference.where(preferred_user: current_user).pluck(:preferred_notifier_id)
-      notification = PostActivityNotifier.with(record: @post, message: " has posted something new.", sender_email: current_user.email, recipient_ids: recipients, post_create: true).deliver(User.where(id: recipients)) 
+      recipients = NotificationPreference.where(preferred_user: active_user).pluck(:preferred_notifier_id)
+      notification = PostActivityNotifier.with(record: @post, message: " has posted something new.", sender_email: active_user.email, recipient_ids: recipients, post_create: true).deliver(User.where(id: recipients)) 
       ActionCable.server.broadcast("pan_channel",notification)
       redirect_to post_path(@post)
     else

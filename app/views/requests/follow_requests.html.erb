@@ -2,28 +2,30 @@
 
 <%= javascript_include_tag "ajax_scripts/request_handler"%>
 
-<% @follow_requests.each do |follow_request|%>
-    <% user = User.find(follow_request.followerable_id) %>
-    <div>
-        <div class="request-container">
-            <div class="user-details">
-                <% if user.profile_picture.attached? %>
-                <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
-                <% else %>
-                <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
-                <% end %>
-                <div>
-                    <h4><%= user.email%></h4>
-                    <h6><%= user.name%></h6>
+<div id="all-follow-requests">
+    <% @follow_requests.each do |follow_request|%>
+        <% user = User.find(follow_request.followerable_id) %>
+        <div class="following">
+            <div class="request-container">
+                <div class="user-details">
+                    <% if user.profile_picture.attached? %>
+                    <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
+                    <% else %>
+                    <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
+                    <% end %>
+                    <div>
+                        <h4><%= user.email%></h4>
+                        <h6><%= user.name%></h6>
+                    </div>
+                </div>
+
+                <div class="approval-button-column">
+                    <button class="btn btn-sm btn-outline-dark user-profile-btn accept w-100" data-user-id=<%=user.id%>>Accept</button>
+
+                    <button class="btn btn-sm  btn-outline-dark user-profile-btn decline w-100" data-user-id=<%=user.id%>>Decline</button>
                 </div>
             </div>
-
-            <div class="approval-button-column">
-                <button class="btn btn-sm btn-outline-dark user-profile-btn accept w-100" data-user-id=<%=user.id%>>Accept</button>
-
-                <button class="btn btn-sm  btn-outline-dark user-profile-btn decline w-100" data-user-id=<%=user.id%>>Decline</button>
-            </div>
+            <hr/>
         </div>
-        <hr/>
-    </div>
-<% end %>
+    <% end %>
+</div>

@@ -3,59 +3,59 @@ class RequestsController < ApplicationController
     before_action :set_user
     skip_before_action :set_user, only: [:follow_requests, :pending_requests, :blocked_users]
 
-    # TODO: How to Redirect !!!!!!
-
     def follow_requests
-        @follow_requests = current_user.follow_requests
+        @follow_requests = active_user.follow_requests
     end
 
     def pending_requests
-        @pending_requests = current_user.pending_requests
+        @pending_requests = active_user.pending_requests
     end
 
     def follow
-        current_user.send_follow_request_to(@user)
+        active_user.send_follow_request_to(@user)
     end
 
     def unfollow
-        current_user.unfollow(@user)
+        active_user.unfollow(@user)
         redirect_to root_path
     end
     
     def cancel
-        current_user.remove_follow_request_for(@user)
+        active_user.remove_follow_request_for(@user)
     end
     
     def accept
-        current_user.accept_follow_request_of(@user)
+        active_user.accept_follow_request_of(@user)
+        redirect_to profile_path(@user)
     end
     
     def decline
-        current_user.decline_follow_request_of(@user)
+        active_user.decline_follow_request_of(@user)
     end
 
     def block
-        current_user.block(@user)
+        active_user.block(@user)
         remove_connections()
         redirect_to root_path
     end
 
     def unblock
-        current_user.unblock(@user)
+        active_user.unblock(@user)
+        # redirect request.referer
     end
 
     def blocked_users
-        @blocked_users = current_user.blocks
+        @blocked_users = active_user.blocks
     end
 
     def remove_connections
-        if current_user.mutual_following_with?(@user)
-            current_user.unfollow(@user)
-            @user.unfollow(current_user)
-        elsif current_user.following?(@user)
-            current_user.unfollow(@user)
-        elsif @user.following?(current_user)
-            @user.unfollow(current_user)
+        if active_user.mutual_following_with?(@user)
+            active_user.unfollow(@user)
+            @user.unfollow(active_user)
+        elsif active_user.following?(@user)
+            active_user.unfollow(@user)
+        elsif @user.following?(active_user)
+            @user.unfollow(active_user)
         end
     end
 

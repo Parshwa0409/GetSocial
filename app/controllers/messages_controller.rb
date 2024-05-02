@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
     before_action :set_message, only: [:show]
 
     def index
-        @msg_notifications = current_user.notifications.newest_first.where(type: "MessageNotifier::Notification")
+        @msg_notifications = active_user.notifications.newest_first.where(type: "MessageNotifier::Notification")
     end
 
 
@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
         if message.save
             display_msg = "<u><strong>#{message.sender.email}</strong></u> says, '#{message.msg}'"
             attachment_attached = message.attachment.attached? 
-            unless message.recipient == current_user
+            unless message.recipient == active_user
                 notification = MessageNotifier.with(record: message, message: display_msg, attachment_attached: attachment_attached, sender_email: message.sender.email, recipient_id: message.recipient_id).deliver(message.recipient)
                 ActionCable.server.broadcast("msg_channel",notification)
             end

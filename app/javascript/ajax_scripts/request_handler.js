@@ -14,9 +14,7 @@ function request_ajax(u_id, request_type) {
         $('meta[name="csrf-token"]').attr("content")
       );
     },
-    success: function (response) {
-      console.log(response);
-    },
+    success: function (response) {},
   });
 }
 
@@ -59,7 +57,14 @@ $(function () {
       request_ajax(u_id, "decline");
     }
 
-    $(event.target).closest("div.request-container").parent().remove();
+    const requests_count = $(".following").length;
+    if (requests_count == 1) {
+      $("#all-follow-requests").append(
+        `<h1 class='text-center'>No follow requests!!!</h1>`
+      );
+    }
+
+    $(event.target).closest("div.following").remove();
   });
 
   $(document).on("click", ".cancel-pending-request", (event) => {
@@ -68,7 +73,14 @@ $(function () {
 
     request_ajax(u_id, "cancel");
 
-    $(event.target).parent().parent().empty();
+    const requests_count = $(".pending").length;
+    if (requests_count == 1) {
+      $("#all-pending-requests").append(
+        `<h1 class='text-center'>No pending requests!!!</h1>`
+      );
+    }
+
+    $(event.target).closest(".pending").remove();
   });
 
   $("button.unblock-btn").on("click", function (event) {
@@ -84,7 +96,13 @@ $(function () {
         );
       },
       success: function (response) {
+        const blocked_divs = $("div.grand-parent").length;
         $(event.target).closest("div.grand-parent").remove();
+        if (blocked_divs == 1) {
+          $("#blocked-users-contianer").append(
+            `<h3 class="text-center mt-3"><em><strong>You have not blocked any uers, Go ahead and block the haters 😉</strong></em></h3>`
+          );
+        }
       },
     });
     event.stopPropagation();
