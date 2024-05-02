@@ -25,6 +25,11 @@
         <span>Activity</span>
       <% end %>
 
+      <%= link_to stories_path, method: :get, class: 'list-group-item list-group-item-action' do %>
+        <i class="fa-solid fa-images"></i>
+        <span>Stories</span>
+      <% end %>
+
       <%= link_to messages_path, class: 'list-group-item list-group-item-action' do %>
         <i class="fa-solid fa-message fa-fw"></i>
         <span  id="unread-messages-count"  class="<%=msg_badge_visibility%> badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" data-user-id=<%= active_user.id %>>

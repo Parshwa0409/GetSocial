@@ -35,3 +35,17 @@ div.show-msg-container > .attachment-contianer > img {
   border-radius: 0.25rem;
   object-fit: contain;
 }
+
+div.each-message {
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  box-shadow: 1px 1px 1px;
+
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+div.each-message > p {
+  margin: 0;
+  font-size: 1.15rem;
+}

@@ -5,10 +5,10 @@ div.notification-container {
 
   border: 1px solid #ddd;
   border-radius: 0.25rem;
-  /* box-shadow: 1px 1px 1px; */
+  box-shadow: 1px 1px 1px;
 
   padding: 1rem;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 div.notification-container > p {

@@ -1,3 +1,5 @@
+// TODO: CHANGE , WRITE FUNCTIOIN FOR EACH THING
+
 function change_button_text(e, text, u_id) {
   const el = $(document).find(`[data-user-id='${u_id}']`);
   $(el).text(text);

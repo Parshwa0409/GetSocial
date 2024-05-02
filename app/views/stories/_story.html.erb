@@ -1,0 +1,12 @@
+<div class="show-story-container">
+    <h4 class="mb-3"><strong>Author:</strong> <%= story.user.email %></h4>
+    <% if story.pic.attached? %>
+        <div class="attachment-contianer">
+            <%= image_tag story.pic %>
+        </div>
+    <% end %>
+
+    <%if story.user == active_user %>
+        <p class="text-center mt-3"><strong>👁️‍🗨️</strong> <%= story.views %></p>
+    <% end %>
+</div>

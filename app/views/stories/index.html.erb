@@ -1,0 +1,39 @@
+<div class="d-flex align-items-center justify-content-between">
+    <h1>View my stories</h1>
+    <%= button_to "View", my_stories_stories_path, method: :get, class:"btn btn-outline-dark btn-lg" %>
+</div>
+<hr/>
+
+<% @stories.each do |story|%>
+    <% render_if_not_viewed(story) do%>
+        <div class="d-flex justify-content-between align-items-center">
+            <p><u><strong><%= story.user.email %></strong></u> uploaded a new story on <u><%=story.created_at.to_s.split(" ")[0]%></u></p>
+            <%= link_to "View Story", story, class: "view-story-btn link-dark", data: {"story-id": story.id} %>
+        </div>
+    <% end %>
+<% end %>
+
+
+<script>
+    $(function () {
+        $(".view-story-btn").on("click", (event)=>{
+            $.ajax({
+                type: "post",
+                url: "http://localhost:3000/story_views",
+                data: {story_id: $(event.target).attr("data-story-id")},
+                beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                    "X-CSRF-Token",
+                    $('meta[name="csrf-token"]').attr("content")
+                );
+                },
+                success: function (response) {
+                    console.log("Story viewed!!!");
+                }
+            });
+
+            event.stopPropogation();
+            event.stopImmediatePropogation();
+        });
+    });
+</script>

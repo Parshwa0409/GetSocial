@@ -1,0 +1,14 @@
+<%= stylesheet_link_tag "stories" %>
+
+<% render_my_stories_if_present(@stories) do %> 
+    <% @stories.each do |story|%>
+        <div class="d-flex justify-content-between align-items-center">
+            <%= render partial: "story", locals:{ story: story}%>
+        </div>
+    <% end %>
+<% end %>
+
+
+<% render_content_if_no_stories(@stories) do %>
+    <h1 class="text-center">You have no stories!!!</h1>
+<% end %>

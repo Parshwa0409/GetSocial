@@ -3,8 +3,7 @@
         <%= button_to "Edit Profile", edit_profile_path(user), method: :get, class: "btn btn-lg btn-outline-dark user-profile-btn w-100" %>
     </div>
     <div class="button-container">
-        <%# TODO: SHARE PROFILE IMPLEMENTATION %>
-        <%= button_to "Share Profile", root_path, method: :get, class: "btn btn-lg btn-outline-dark user-profile-btn w-100" %>
+        <button class="btn btn-lg btn-outline-dark user-profile-btn w-100 " data-bs-toggle="modal" data-bs-target="#storiesModal">Add Story</button>
     </div>
 <% end %>
 

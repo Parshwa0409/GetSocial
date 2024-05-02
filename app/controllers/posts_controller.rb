@@ -49,6 +49,7 @@ class PostsController < ApplicationController
       notification = PostActivityNotifier.with(record: post, message: " shared a post by #{post.user.email}.", sender_email: current_user.email, recipient_id: recipient.id).deliver(recipient) 
       ActionCable.server.broadcast("pan_channel",notification)
     end
+    render ""
   end
 
   private

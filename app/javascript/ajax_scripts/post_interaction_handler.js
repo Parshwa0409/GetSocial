@@ -25,6 +25,7 @@ function AJAX(method, action, data, element, callback) {
     },
   });
 }
+
 $(function () {
   $("button.like-btn").on("click", (e) => {
     e.stopPropagation();

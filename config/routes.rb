@@ -46,6 +46,13 @@ Rails.application.routes.draw do
   # Notification Preferences
   resources :notification_preferences, only: [:create, :destroy]
 
+  # Story & Views
+  resources :stories, only: [:create, :index, :show] do 
+    collection do 
+      get "my_stories"
+    end
+  end
+  resources :story_views, only: [:create]
 
   get "up" => "rails/health#show", as: :rails_health_check
 end

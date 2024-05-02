@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_01_120758) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_02_064813) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -128,6 +128,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_120758) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "stories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "pic"
+    t.integer "views", default: 0
+    t.datetime "end_at", default: "2024-05-03 07:08:25"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_stories_on_user_id"
+  end
+
+  create_table "story_views", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "story_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["story_id"], name: "index_story_views_on_story_id"
+    t.index ["user_id", "story_id"], name: "index_story_views_on_user_id_and_story_id", unique: true
+    t.index ["user_id"], name: "index_story_views_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -155,4 +175,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_120758) do
   add_foreign_key "notification_preferences", "users", column: "preferred_notifier_id"
   add_foreign_key "notification_preferences", "users", column: "preferred_user_id"
   add_foreign_key "posts", "users"
+  add_foreign_key "stories", "users"
+  add_foreign_key "story_views", "stories"
+  add_foreign_key "story_views", "users"
 end

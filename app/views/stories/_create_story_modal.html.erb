@@ -1,0 +1,24 @@
+<div class="modal fade" id="storiesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="storiesModalTitle">Story</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="story-modal-body">
+        <%= form_for Story.new(), url: stories_path, method: :post, id: "create-story-form", data: { turbo: false } do |form| %>
+          <div class="mb-3">
+              <%= form.label :pic, class: "form-label text-capitalize" %>
+              <%= form.file_field :pic, class: "form-control", id: "story-pic", required: true %>
+          </div>
+
+          <div class="text-center mt-4">
+              <%= form.submit 'Share 📤', class: "btn btn-outline-dark w-100", id: "create-story-btn" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
