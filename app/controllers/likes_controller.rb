@@ -9,7 +9,7 @@ class LikesController < ApplicationController
         if like.save()
             recipient = post.user
             unless recipient==current_user
-                notification = PostActivityNotifier.with(record: post, message: " liked your post.", sender_email: current_user.email, recipient_id: recipient.id).deliver(recipient) 
+                notification = PostActivityNotifier.with(record: post, message: " liked your post.", sender_email: current_user.email, recipient_id: recipient.id, post_create: false).deliver(recipient) 
                 ActionCable.server.broadcast("pan_channel",notification)
             end
             likes = post.total_likes + 1

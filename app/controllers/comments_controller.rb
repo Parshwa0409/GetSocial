@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
             recipient = @post.user
             @post.update(total_comments: (@post.total_comments + 1))
             unless recipient==current_user
-                notification = PostActivityNotifier.with(record: @post, message: " commented on your post: '#{comment.content}'", sender_email: current_user.email, recipient_id: recipient.id).deliver(recipient) 
+                notification = PostActivityNotifier.with(record: @post, message: " commented on your post: '#{comment.content}'", sender_email: current_user.email, recipient_id: recipient.id, post_create: false).deliver(recipient) 
                 ActionCable.server.broadcast("pan_channel",notification)
             end
             render partial:"comments/comment", locals:{comment: comment}

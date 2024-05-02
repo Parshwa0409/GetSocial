@@ -19,13 +19,27 @@ consumer.subscriptions.create("Noticed::PanChannel", {
 
     var unc = $("#unread-notification-count");
 
-    if (unc.attr("data-user-id") == data["params"]["recipient_id"]) {
-      if (unc.hasClass("invisible")) {
-        unc.removeClass("invisible").addClass("visible");
-        unc.html(1);
-      } else {
-        unc.html(parseInt(unc.html()) + 1);
+    if (!data["params"]["post_create"]) {
+      if (unc.attr("data-user-id") == data["params"]["recipient_id"]) {
+        if (unc.hasClass("invisible")) {
+          unc.removeClass("invisible").addClass("visible");
+          unc.html(1);
+        } else {
+          unc.html(parseInt(unc.html()) + 1);
+        }
       }
+    } else {
+      console.log(data["params"]["recipient_ids"]);
+      data["params"]["recipient_ids"].forEach((recipient_id) => {
+        if (unc.attr("data-user-id") == recipient_id) {
+          if (unc.hasClass("invisible")) {
+            unc.removeClass("invisible").addClass("visible");
+            unc.html(1);
+          } else {
+            unc.html(parseInt(unc.html()) + 1);
+          }
+        }
+      });
     }
 
     $("div#post-activity-notificaions-container").prepend(html);

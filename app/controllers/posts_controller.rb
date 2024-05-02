@@ -14,9 +14,9 @@ class PostsController < ApplicationController
     @post = current_user.posts.create(post_params)
 
     if @post.save()
-      notification = PostActivityNotifier.with(record: post, message: " has posted something new.", sender_email: current_user.email, recipient_id: recipient.id).deliver(active_user.preferred_notifiers) 
-      debugger
-      # ActionCable.server.broadcast("pan_channel",notification)
+      recipients = NotificationPreference.where(preferred_user: current_user).pluck(:preferred_notifier_id)
+      notification = PostActivityNotifier.with(record: @post, message: " has posted something new.", sender_email: current_user.email, recipient_ids: recipients, post_create: true).deliver(User.where(id: recipients)) 
+      ActionCable.server.broadcast("pan_channel",notification)
       redirect_to post_path(@post)
     else
       flash[:alert] = @post.errors.full_messages.to_sentence
