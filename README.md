@@ -1,24 +1,37 @@
-# README
+# Project Name
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+GetSocial
 
-Things you may want to cover:
+## Description
 
-* Ruby version
+This is a Rails application that [briefly describe what your application does].
 
-* System dependencies
+## Installation
 
-* Configuration
+To get started with this project, follow these steps:
 
-* Database creation
+1. After pulling the repo, run the command `bundle install` to install all the required gems and dependencies.
 
-* Database initialization
+2. Run `rails db:create` to create the database.
 
-* How to run the test suite
+3. Run `rails db:migrate` to apply any pending migrations.
 
-* Services (job queues, cache servers, search engines, etc.)
+4. Run `rails db:seed` to populate the database with seed data.
 
-* Deployment instructions
+## Usage
 
-* ...
+To use this application, follow these steps:
+
+1. [Describe any specific setup or configuration required before using the application, if applicable].
+
+2. Run `rails server` to start the server.
+
+3. [Describe how to access or interact with the application].
+
+## OAuth Configuration
+
+Please note that OAuth functionality is not included in this repository. If you require OAuth functionality, you will need to set up the necessary credentials and configurations separately.
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and create a pull request with your proposed changes.
