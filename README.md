@@ -22,11 +22,9 @@ To get started with this project, follow these steps:
 
 To use this application, follow these steps:
 
-1. [Describe any specific setup or configuration required before using the application, if applicable].
+1. Run `rails server` to start the server.
 
-2. Run `rails server` to start the server.
-
-3. [Describe how to access or interact with the application].
+2. Login / Sign-Up in the app & then start following other users to start interaction & enjoy the app.
 
 ## OAuth Configuration
 
