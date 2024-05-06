@@ -24,7 +24,7 @@ class StoriesController < ApplicationController
     end
 
     def my_stories
-        @stories = active_user.stories
+        @stories = active_user.stories.includes(:pic_attachment)
     end
     private
 

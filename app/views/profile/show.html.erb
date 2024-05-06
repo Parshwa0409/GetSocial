@@ -61,7 +61,7 @@
 
 <% render_profile_posts_if_user_follows_me(@user) do %>
     <div id="user-posts">
-        <% @user.posts.reverse.each do |post|%>
+        <% @posts.each do |post|%>
             <%= link_to post_path(post), method: :get, class:"post-item", data:{"post-id"=>post.id} do %>
                 <%= image_tag post.image,  class: "post-image", data_user_id:@user.id,  data_post_id:post.id %>
                 <div class="post-info">

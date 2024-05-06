@@ -82,3 +82,6 @@ gem "dotenv", groups: [:development, :test]
 # FRIEND REQUESTS
 gem 'followability', github: 'nejdetkadir/followability', branch: 'main'
 gem "noticed", "~> 2.2"
+
+# Performance Check
+gem 'bullet', group: 'development'

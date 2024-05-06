@@ -4,7 +4,7 @@ class CreateStories < ActiveRecord::Migration[7.1]
       t.references :user, null: false, foreign_key: true
       t.string :pic
       t.integer :views, default: 0
-      t.datetime :end_at, default: DateTime.now + 1
+      t.datetime :end_at, default: DateTime.now + 1.day
 
       t.timestamps
     end

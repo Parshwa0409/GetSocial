@@ -6,13 +6,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <% if current_user.following.count > 0%>
-                <% current_user.following.each do |user| %>
+                <% current_user.following.includes(:profile_picture_attachment).each do |user| %>
                     <div class="share-to-container">
                         <div class="user-details">
                             <% if user.profile_picture.attached? %>
-                            <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
+                                <%= image_tag user.profile_picture, class: "posts-user-avatar" %>
                             <% else %>
-                            <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
+                                <%= image_tag 'user_avatar.png', class: "posts-user-avatar" %>
                             <% end %>
                             <div>
                                 <p><strong><%= user.email%></strong></p>

@@ -132,7 +132,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_064813) do
     t.bigint "user_id", null: false
     t.string "pic"
     t.integer "views", default: 0
-    t.datetime "end_at", default: "2024-05-03 07:08:25"
+    t.datetime "end_at", default: "2024-05-07 06:16:09"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_stories_on_user_id"

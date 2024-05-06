@@ -3,6 +3,7 @@ class ProfileController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def show
+    @posts = @user.posts.includes(:image_attachment).order("created_at DESC ")
   end
 
   def edit

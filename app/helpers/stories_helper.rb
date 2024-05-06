@@ -1,6 +1,6 @@
 module StoriesHelper
     def render_if_not_viewed(story)
-        unless StoryView.find_by(user: active_user, story: story).present?
+        if StoryView.find_by(user: active_user, story: story).nil?
             yield
         end
     end

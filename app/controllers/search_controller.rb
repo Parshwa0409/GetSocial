@@ -8,11 +8,11 @@ class SearchController < ApplicationController
     query = search_params
 
     if query[:name].present? && query[:email].present?
-      @users = User.where("name LIKE ? OR email LIKE ?", "%#{query[:name]}%", "%#{query[:email]}%")
+      @users = User.where("name LIKE ? OR email LIKE ?", "%#{query[:name]}%", "%#{query[:email]}%").includes(:profile_picture_attachment)
     elsif query[:name].present?
-      @users = User.where("name LIKE ?", "%#{query[:name]}%")
+      @users = User.where("name LIKE ?", "%#{query[:name]}%").includes(:profile_picture_attachment)
     elsif query[:email].present?
-      @users = User.where("email LIKE ?", "%#{query[:email]}%")
+      @users = User.where("email LIKE ?", "%#{query[:email]}%").includes(:profile_picture_attachment)
     else
       @users = []
     end
