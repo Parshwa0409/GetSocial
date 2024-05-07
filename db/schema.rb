@@ -41,7 +41,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_064813) do
 
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content", null: false
-    t.integer "total_likes", default: 0
     t.bigint "user_id", null: false
     t.bigint "post_id", null: false
     t.datetime "created_at", null: false
@@ -132,7 +131,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_064813) do
     t.bigint "user_id", null: false
     t.string "pic"
     t.integer "views", default: 0
-    t.datetime "end_at", default: "2024-05-07 06:16:09"
+    t.datetime "end_at", default: "2024-05-08 06:43:24"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_stories_on_user_id"

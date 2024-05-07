@@ -3,9 +3,11 @@
 <%= javascript_include_tag "ajax_scripts/request_handler"%>
 
 <div id="blocked-users-contianer">
-    <% if @blocked_users.count == 0 %>
+    <%render_content_if_no_blocked_users(@blocked_users.count) do %>
         <h3 class="text-center mt-3"><em><strong>You have not blocked any uers, Go ahead and block the haters 😉</strong></em></h3>
-    <%else%>
+    <%end%>
+
+    <% render_blocked_users(@blocked_users.count)do  %>
         <% @blocked_users.each do |user|%>
             <%= render partial:"blocked_user", locals: {user: user} %>
         <% end %>

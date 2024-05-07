@@ -22,4 +22,29 @@ module RequestsHelper
       yield
     end
   end
+
+  def render_content_if_no_blocked_users(blocked_users_count)
+    if blocked_users_count == 0 
+      yield
+    end
+  end
+
+  def render_blocked_users(blocked_users_count)
+    unless blocked_users_count == 0 
+      yield
+    end
+  end
+
+  def render_requests_if_available(request_count)
+    if request_count > 0 
+        yield
+    end
+  end
+
+  def render_content_if_available(request_count)
+    unless request_count > 0 
+        yield
+    end
+  end
+
 end

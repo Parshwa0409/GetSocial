@@ -3,9 +3,8 @@ module ApplicationHelper
         @current_user ||= user_signed_in? ? current_user : nil
     end
 
-
     def pan_count
-        @pan_count = active_user.notifications.where(type: "PostActivityNotifier::Notification").unread.count
+        @pan_count = active_user.notifications.where(type: ["PostActivityNotifier::Notification"]).unread.count
     end
 
     def pan_badge_visibility

@@ -10,6 +10,17 @@ module PostsHelper
         end
     end
 
+    def render_followings_if_any(count)
+        if count > 0
+            yield
+        end
+    end
+
+    def render_content_if_no_following(count)
+        unless count > 0
+            yield
+        end
+    end
 
     def render_post_if_following(user)
         if active_user.following?(user) || active_user.myself?(user)

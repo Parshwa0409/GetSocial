@@ -13,11 +13,12 @@ class RequestsController < ApplicationController
 
     def follow
         active_user.send_follow_request_to(@user)
+        notification = RequestNotifier.with(message: "New follow request from: ", sender_email: active_user.email, recipient_id: @user.id).deliver(@user)
+        ActionCable.server.broadcast("request_channel", notification)
     end
 
     def unfollow
         active_user.unfollow(@user)
-        redirect_to root_path
     end
     
     def cancel
@@ -25,8 +26,7 @@ class RequestsController < ApplicationController
     end
     
     def accept
-        active_user.accept_follow_request_of(@user)
-        redirect_to profile_path(@user)
+        active_user.accept_follow_request_of(@user)    
     end
     
     def decline
@@ -41,7 +41,7 @@ class RequestsController < ApplicationController
 
     def unblock
         active_user.unblock(@user)
-        # redirect request.referer
+        redirect_to profile_path(@user)
     end
 
     def blocked_users

@@ -66,7 +66,6 @@ captions = [
     "Legendary performance, everyday usability."
 ]
 
-
 50.times do 
     user = User.find(user_ids.sample())
     idx = ((0...cars.length).map {|i| i}).sample()
@@ -81,3 +80,15 @@ captions = [
         }
     )
 end
+
+User.find(1).send_follow_request_to(User.find(3))
+User.find(1).send_follow_request_to(User.find(4))
+User.find(1).send_follow_request_to(User.find(5))
+User.find(3).send_follow_request_to(User.find(1))
+User.find(4).send_follow_request_to(User.find(1))
+User.find(5).send_follow_request_to(User.find(1))
+
+User.find(5).accept_follow_request_of(User.find(1))
+User.find(4).accept_follow_request_of(User.find(1))
+User.find(1).accept_follow_request_of(User.find(3))
+User.find(1).accept_follow_request_of(User.find(4))

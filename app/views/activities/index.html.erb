@@ -3,17 +3,25 @@
 <%= stylesheet_link_tag "notifications" %>
 <%= javascript_include_tag "ajax_scripts/mark_notification_as_read"%>
 
-<div class="activity-req-container">
-    <h3><%= pluralize(@follow_requests_count, "Follow Request") %></h3>
-    <% if @follow_requests_count > 0 %>
-        <%= link_to "View", follow_requests_path, method: :get, class: "btn btn-md btn-outline-dark" %>
+<div class="activity-req-container follow-request-activity">
+    <h3><%= pluralize(@follow_requests_count, "- Follow Request") %></h3>
+    <% render_view_btn_if_requests_Available(@follow_requests_count) do %>
+        <%= link_to "View", follow_requests_path, method: :get, class: "btn btn-md btn-outline-dark visible" %>
+    <% end %>
+
+    <% do_not_render_view_btn_if_requests_Available(@follow_requests_count) do %>
+        <%= link_to "View", follow_requests_path, method: :get, class: "btn btn-md btn-outline-dark invisible" %>
     <% end %>
 </div>
 
-<div class="activity-req-container">
-    <h3><%= pluralize(@pending_requests_count, "Pending Request") %></h3>
-    <% if @pending_requests_count > 0 %>
-        <%= link_to "View", pending_requests_path, method: :get, class: "btn btn-md btn-outline-dark" %>
+<div class="activity-req-container pending-request-activity">
+    <h3><%= pluralize(@pending_requests_count, "- Pending Request") %></h3>
+    <% render_view_btn_if_requests_Available(@pending_requests_count) do %>
+        <%= link_to "View", pending_requests_path, method: :get, class: "btn btn-md btn-outline-dark visible" %>
+    <% end %>
+
+    <% do_not_render_view_btn_if_requests_Available(@pending_requests_count) do %>
+        <%= link_to "View", pending_requests_path, method: :get, class: "btn btn-md btn-outline-dark invisible" %>
     <% end %>
     </div>
 

@@ -5,7 +5,7 @@
                 <h1 class="modal-title fs-5" id="sharePostModalLabel">Share Post</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <% if current_user.following.count > 0%>
+            <% render_followings_if_any(active_user.following.count) do %>
                 <% current_user.following.includes(:profile_picture_attachment).each do |user| %>
                     <div class="share-to-container">
                         <div class="user-details">
@@ -22,7 +22,9 @@
                         <button class="btn btn-sm btn-outline-dark share-post-btn" data-user-id=<%=user.id%>>➤</button>
                     </div>
                 <% end %>
-            <% else %>
+            <% end %>
+
+            <% render_content_if_no_following(active_user.following.count) do %>
                 <h4 class="text-justify p-3">To enhance your experience and share posts with your network, start following others today. Engage with content and connect with your community!</h4>
             <% end %>
         </div>

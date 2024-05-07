@@ -16,7 +16,6 @@ function request_ajax(u_id, request_type) {
         $('meta[name="csrf-token"]').attr("content")
       );
     },
-    success: function (response) {},
   });
 }
 
@@ -48,13 +47,13 @@ $(function () {
   });
 
   $(document).on("click", ".accept, .decline", (event) => {
-    event.preventDefault();
     const button = $(event.target);
     const u_id = $(event.target).attr("data-user-id");
     const req_accepted = button.hasClass("accept");
 
     if (req_accepted) {
       request_ajax(u_id, "accept");
+      window.location.href = `http://localhost:3000/profile/${u_id}`;
     } else {
       request_ajax(u_id, "decline");
     }
@@ -98,6 +97,7 @@ $(function () {
         );
       },
       success: function (response) {
+        window.location.href = `http://localhost:3000/profile/${userID}`;
         const blocked_divs = $("div.grand-parent").length;
         $(event.target).closest("div.grand-parent").remove();
         if (blocked_divs == 1) {
