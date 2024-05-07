@@ -1,24 +1,12 @@
 class SearchController < ApplicationController
-  before_action :init_users
+  before_action :init_users, only: [:search]
 
   def search
   end
 
   def query
-    query = search_params
-
-    if query[:name].present? && query[:email].present?
-      @users = User.where("name LIKE ? OR email LIKE ?", "%#{query[:name]}%", "%#{query[:email]}%").includes(:profile_picture_attachment)
-    elsif query[:name].present?
-      @users = User.where("name LIKE ?", "%#{query[:name]}%").includes(:profile_picture_attachment)
-    elsif query[:email].present?
-      @users = User.where("email LIKE ?", "%#{query[:email]}%").includes(:profile_picture_attachment)
-    else
-      @users = []
-    end
-
-    @users = @users.reject {|user| user.blocked_by?(active_user) || active_user.blocked_by?(user) }
-
+    @users = Profiles::Search.new(search_params).execute
+    @users.map {|user| !user.blocked_by?(active_user) || !active_user.blocked_by?(user) }
     render partial: "users", locals: { users:@users }
   end
 
@@ -29,6 +17,6 @@ class SearchController < ApplicationController
   end
 
   def init_users
-    @users= []
+    @users = []
   end
 end

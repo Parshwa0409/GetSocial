@@ -47,4 +47,18 @@ module RequestsHelper
     end
   end
 
+
+  def remove_connections_if_any(user)
+
+    if active_user.mutual_following_with?(user)
+      active_user.unfollow(user)
+      user.unfollow(active_user)
+    elsif active_user.following?(user)
+        active_user.unfollow(user)
+    elsif user.following?(active_user)
+        user.unfollow(active_user)
+    end
+    
+  end
+
 end

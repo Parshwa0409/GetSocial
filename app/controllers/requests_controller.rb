@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
     # skip_before_action :verify_authenticity_token
+    include RequestsHelper
     before_action :set_user
     skip_before_action :set_user, only: [:follow_requests, :pending_requests, :blocked_users]
 
@@ -13,8 +14,7 @@ class RequestsController < ApplicationController
 
     def follow
         active_user.send_follow_request_to(@user)
-        notification = RequestNotifier.with(message: "New follow request from: ", sender_email: active_user.email, recipient_id: @user.id).deliver(@user)
-        ActionCable.server.broadcast("request_channel", notification)
+        Notifier::Request.notify( "New follow request from: ", active_user.email, @user)
     end
 
     def unfollow
@@ -49,14 +49,7 @@ class RequestsController < ApplicationController
     end
 
     def remove_connections
-        if active_user.mutual_following_with?(@user)
-            active_user.unfollow(@user)
-            @user.unfollow(active_user)
-        elsif active_user.following?(@user)
-            active_user.unfollow(@user)
-        elsif @user.following?(active_user)
-            @user.unfollow(active_user)
-        end
+        remove_connections_if_any(@user)
     end
 
     private

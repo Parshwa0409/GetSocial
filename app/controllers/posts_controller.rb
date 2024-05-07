@@ -3,7 +3,6 @@ class PostsController < ApplicationController
 
   def show
     @user = @post.user
-    @comments = @post.comments.includes(:user).order("created_at DESC")
   end
 
   def new
@@ -35,9 +34,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post.update(post_params)
-    
-    if @post.save()
+    if  @post.update(post_params)
       redirect_to post_path(@post)
     else
       render :edit

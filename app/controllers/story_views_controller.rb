@@ -6,9 +6,7 @@ class StoryViewsController < ApplicationController
 
         unless view.present?
             new_view = StoryView.create(user: active_user, story: @story)
-            if new_view.save()
-                @story.update(:views => (@story.views + 1))
-            end
+            @story.update(:views => (@story.views + 1)) if new_view.save()
         end
     end
 
