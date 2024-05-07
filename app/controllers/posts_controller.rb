@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :initialize_post, only: [:new]
 
   def show
     @user = @post.user
@@ -8,26 +7,28 @@ class PostsController < ApplicationController
   end
 
   def new
+    @post = current_user.posts.new()
   end
 
   def create
     @post = active_user.posts.create(post_params)
 
     if @post.save()
-      recipients = NotificationPreference.where(preferred_user: active_user).pluck(:preferred_notifier_id)
-      notification = PostActivityNotifier.with(record: @post, message: " has posted something new.", sender_email: active_user.email, recipient_ids: recipients, post_create: true).deliver(User.where(id: recipients)) 
-      ActionCable.server.broadcast("pan_channel",notification)
+      recipients = get_preferred_notifiers()
+
+      Notifier::PostActivity.notify_all(
+        " has posted something new.",
+        true,
+        @post,
+        active_user.email,
+        recipients
+      )
+
       redirect_to post_path(@post)
     else
       flash[:alert] = @post.errors.full_messages.to_sentence
-      redirect_to request.referrer # redirect to same page, see how to just show the flash message
+      redirect_to request.referrer
     end
-  end
-
-  def destroy
-    user = @post.user()
-    @post.destroy()
-    redirect_to profile_path(user)
   end
 
   def edit
@@ -35,6 +36,7 @@ class PostsController < ApplicationController
 
   def update
     @post.update(post_params)
+    
     if @post.save()
       redirect_to post_path(@post)
     else
@@ -42,14 +44,22 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post.destroy()
+
+    redirect_to profile_path(active_user)
+  end
+
   def share
     post = Post.find(params[:post_id])
-    recipient = User.find(params[:user_id])
-    unless recipient==current_user
-      notification = PostActivityNotifier.with(record: post, message: " shared a post by #{post.user.email}.", sender_email: current_user.email, recipient_id: recipient.id).deliver(recipient) 
-      ActionCable.server.broadcast("pan_channel",notification)
-    end
-    render ""
+
+    Notifier::PostActivity.notify(
+      " shared a post by #{post.user.email}.",
+      false,
+      @post,
+      active_user.email,
+      User.find(params[:user_id])
+    )
   end
 
   private
@@ -62,7 +72,12 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  def initialize_post
-    @post = current_user.posts.new()
+  def get_preferred_notifiers()
+    User.where(
+      id: NotificationPreference
+      .where(preferred_user: active_user)
+      .pluck(:preferred_notifier_id)
+    )
   end
+
 end

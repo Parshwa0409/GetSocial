@@ -1,30 +1,40 @@
 class LikesController < ApplicationController
     # skip_before_action :verify_authenticity_token
+    before_action :set_post
 
     def create
-        post = Post.find(params[:id])
-        
-        like = Like.create(user:active_user, post: post)
+        like = Like.create(user:active_user, post: @post)
 
         if like.save()
-            recipient = post.user
-            unless recipient==active_user
-                notification = PostActivityNotifier.with(record: post, message: " liked your post.", sender_email: active_user.email, recipient_id: recipient.id, post_create: false).deliver(recipient) 
-                ActionCable.server.broadcast("pan_channel",notification)
-            end
-            likes = post.total_likes + 1
-            post.update(total_likes: likes)
+            Notifier::PostActivity.notify(
+                " liked your post.",
+                false,
+                @post,
+                active_user.email,
+                @post.user
+            )
+
+            update_post_likes(@post, true)
         end
     end
     
     def destroy
-        post = Post.find(params[:id])
-        like = Like.find_by(user_id: active_user.id, post_id: post.id)
+        like = Like.find_by(user_id: active_user.id, post_id: @post.id)
 
         if like.present?
             like.destroy
-            likes = post.total_likes - 1
-            post.update(total_likes: likes)
+            update_post_likes(@post, false)
         end
+    end
+
+    private
+
+    def set_post
+        @post = Post.find(params[:id])
+    end
+
+    def update_post_likes(post, liked_flag)
+        likes = liked_flag ? (post.total_likes + 1) : (post.total_likes - 1)
+        post.update(total_likes: likes)
     end
 end
