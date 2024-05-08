@@ -59,7 +59,7 @@ $(function () {
     }
 
     const requests_count = $(".following").length;
-    if (requests_count == 1) {
+    if (requests_count == 0) {
       $("#all-follow-requests").append(
         `<h1 class='text-center'>No follow requests!!!</h1>`
       );
@@ -75,7 +75,7 @@ $(function () {
     request_ajax(u_id, "cancel");
 
     const requests_count = $(".pending").length;
-    if (requests_count == 1) {
+    if (requests_count == 0) {
       $("#all-pending-requests").append(
         `<h1 class='text-center'>No pending requests!!!</h1>`
       );

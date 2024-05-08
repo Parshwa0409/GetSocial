@@ -10,7 +10,9 @@ class User < ApplicationRecord
   has_many :stories, dependent: :destroy
   has_many :story_views, dependent: :destroy
   
-  validates :name, presence: { message: "Please enter your name" }
+  validates :name, presence: { message: "cannot be empty." }
+  validates :password, format: {with: /.{8,}/, message: " must be minimum 8 characters"}
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "must be of valid format"}, uniqueness: true
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:github, :google_oauth2]
 

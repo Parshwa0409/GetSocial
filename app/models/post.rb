@@ -2,6 +2,7 @@ class Post < ApplicationRecord
     has_one_attached :image
     has_many :likes, dependent: :destroy
     has_many :comments, dependent: :destroy
+    has_many :noticed_events, as: :record, dependent: :destroy, class_name: "Noticed::Event"
 
     belongs_to :user
 
