@@ -1,10 +1,10 @@
 class Story < ApplicationRecord
-  belongs_to :user
-  has_many :story_views, dependent: :destroy
   has_one_attached :pic
-
+  
   before_create :valid_image
   
+  belongs_to :user
+  has_many :story_views, dependent: :destroy
   private
 
   def valid_image

@@ -7,6 +7,7 @@ class MessagesController < ApplicationController
 
 
     def create
+        # debugger
         message = Message.create(message_params)
         
         if message.save
@@ -16,11 +17,14 @@ class MessagesController < ApplicationController
                 message.attachment.attached?
             )
             flash[:notice] = "Message Sent !!!"
+            
         else
             flash[:alert] = message.errors.full_messages.to_sentence
         end
 
+        # TODO: REDO THE FORM ONCE & TRY
         redirect_to request.referer
+
     end
 
     def show

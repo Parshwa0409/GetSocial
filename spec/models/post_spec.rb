@@ -12,8 +12,12 @@ RSpec.describe Post, type: :model do
     expect(post.valid?).to be(false)
   end
 
-  it "is invalid because of no image" do
+  it "has image" do
+    expect(post.image.attached?).to be(true)
+  end
+
+  it "has no image" do
     post.image.purge
-    expect(post.valid?).to be(false)
+    expect(post.image.attached?).to be(false)
   end
 end

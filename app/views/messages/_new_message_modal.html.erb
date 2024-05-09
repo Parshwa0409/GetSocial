@@ -11,7 +11,7 @@
         <%= form_for Message.new(), url: messages_path, method: :post, id: "create-message-form", data: { turbo: false } do |form| %>
           <div class="mb-3">
               <%= form.label :msg, class: "form-label text-capitalize" %>
-              <%= form.text_area :msg, class: "form-control", placeholder: "Hey There 👋" %>
+              <%= form.text_area :msg, class: "form-control", placeholder: "Hey There 👋", required: true %>
           </div>
           <div class="mb-3">
               <%= form.label :attachment, class: "form-label text-capitalize" %>
