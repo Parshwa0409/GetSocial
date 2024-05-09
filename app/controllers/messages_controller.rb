@@ -8,22 +8,22 @@ class MessagesController < ApplicationController
 
     def create
         # debugger
-        message = Message.create(message_params)
+        @message = Message.create(message_params)
         
-        if message.save
+        if @message.save
             Notifier::Message.notify(
-                message,
-                "<u><strong>#{message.sender.email}</strong></u> says, '#{message.msg}'", 
-                message.attachment.attached?
+                @message,
+                "<u><strong>#{@message.sender.email}</strong></u> says, '#{@message.msg}'", 
+                @message.attachment.attached?
             )
             flash[:notice] = "Message Sent !!!"
             
         else
-            flash[:alert] = message.errors.full_messages.to_sentence
+            flash[:alert] = @message.errors.full_messages.to_sentence
         end
 
         # TODO: REDO THE FORM ONCE & TRY
-        redirect_to request.referer
+        redirect_to profile_path(@message.recipient)
 
     end
 

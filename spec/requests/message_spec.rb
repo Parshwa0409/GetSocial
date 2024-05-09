@@ -29,7 +29,7 @@ RSpec.describe "Messages", type: :request do
       sign_in sender
     end 
 
-    it "is successful request" do
+    it "is redirecting to recipients profile on success" do
       post messages_path(message:{
         msg: "Rspec - Test Message",
         attachment: nil,
@@ -37,7 +37,29 @@ RSpec.describe "Messages", type: :request do
         sender_id: sender.id
       })
       
-      expect(response).to have_http_status(:success)
+      expect(response).to redirect_to(profile_path(recipient.id))
+    end
+
+    it "redirects to recipients profile on failure" do
+      post messages_path(message:{
+        msg: nil,
+        attachment: nil,
+        recipient_id: recipient.id,
+        sender_id: sender.id
+      })
+      
+      expect(response).to redirect_to(profile_path(recipient.id))
+    end
+
+    it "has an error on empty message" do
+      post messages_path(message:{
+        msg: nil,
+        attachment: nil,
+        recipient_id: recipient.id,
+        sender_id: sender.id
+      })
+
+      expect(assigns(:message).errors.full_messages).to include("Msg  cannot be empty 😒")
     end
   end
 end
