@@ -26,7 +26,7 @@ class PostsController < ApplicationController
       redirect_to post_path(@post)
     else
       flash[:alert] = @post.errors.full_messages.to_sentence
-      redirect_to request.referrer
+      redirect_to root_path
     end
   end
 
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
     Notifier::PostActivity.notify(
       " shared a post by #{post.user.email}.",
       false,
-      @post,
+      post,
       active_user.email,
       User.find(params[:user_id])
     )
