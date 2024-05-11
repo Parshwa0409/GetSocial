@@ -25,7 +25,7 @@ $(function () {
   $(document).on("click", "#notify-me, #delete-notify-me", (event) => {
     var button = $(event.target);
     const preferred_user_id = $(event.target).data("user-id");
-    const data = { preferred_user_id: preferred_user_id };
+    const data = { id: preferred_user_id };
     var method, action;
     if (button.attr("id") == "notify-me") {
       method = "POST";

@@ -7,7 +7,7 @@ class NotificationPreferencesController < ApplicationController
 
       render partial:"shared/success", locals: {message: "Stay in the loop! You'll now receive notifications whenever a #{user.email} makes a new post."}
     else
-      render partial:"error"
+      render partial:"shared/danger", locals: {message: "Oops! It seems something went wrong. Please try again."}
     end
   end
 
@@ -28,6 +28,6 @@ class NotificationPreferencesController < ApplicationController
 
   private
   def get_preferred_user_id
-    params[:preferred_user_id]
+    params[:id]
   end
 end
