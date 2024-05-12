@@ -27,21 +27,20 @@ $(function () {
     const isFollowing = button.hasClass("follow");
 
     if (isFollowing) {
+      request_ajax(u_id, "follow");
+
       button.removeClass("follow").addClass("cancel");
       change_button_text(event, "Cancel Request", u_id);
-
-      request_ajax(u_id, "follow");
     } else {
       if (button.hasClass("cancel")) {
-        button.removeClass("cancel").addClass("follow");
         request_ajax(u_id, "cancel");
+        button.removeClass("cancel").addClass("follow");
       } else if (button.hasClass("unfollow")) {
+        request_ajax(u_id, "unfollow");
         $("div.button-container.send-msg-btn").remove();
         $("#user-posts").addClass("invisible");
         button.removeClass("unfollow").addClass("follow");
-        request_ajax(u_id, "unfollow");
       }
-
       change_button_text(event, "Follow", u_id);
     }
   });

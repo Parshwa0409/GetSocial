@@ -4,7 +4,7 @@ RSpec.describe "Notifications", type: :request do
   describe "post /mark_all_pan_as_read" do
     let(:sender) { FactoryBot.create(:user) }
     let(:reciever) { FactoryBot.create(:user) }
-    let(:record) { FactoryBot.create(:post) }
+    let(:record) { FactoryBot.create(:post, :with_image) }
     let(:post_path) { "/notifications/mark_all_pan_as_read" }
 
     before(:each) do
@@ -20,7 +20,6 @@ RSpec.describe "Notifications", type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    
     it "must read all the notifications" do
       Notifier::PostActivity.notify(
         "has shared a post.", 
@@ -30,9 +29,7 @@ RSpec.describe "Notifications", type: :request do
         reciever
       )
       expect(unread_notificatio_count).to eq(1)
-      
       post post_path
-      
       expect(unread_notificatio_count).to eq(0)
     end
   end
@@ -56,7 +53,6 @@ RSpec.describe "Notifications", type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    
     it "must read all the notifications" do
       Notifier::Message.notify(
         record, 
@@ -64,9 +60,7 @@ RSpec.describe "Notifications", type: :request do
         false
       )
       expect(unread_notificatio_count).to eq(1)
-      
       post post_path
-      
       expect(unread_notificatio_count).to eq(0)
     end
   end

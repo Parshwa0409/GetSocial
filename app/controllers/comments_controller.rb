@@ -7,12 +7,9 @@ class CommentsController < ApplicationController
     end
 
     def create
-
         @comment = @post.comments.create(comment_params)
-        
         if @comment.save()
             @post.update(total_comments: (@post.total_comments + 1))
-
             Notifier::PostActivity.notify(
                 " commented on your post: '#{@comment.content}'",
                 false,
@@ -20,7 +17,6 @@ class CommentsController < ApplicationController
                 active_user.email,
                 @post.user
             )
-
             render partial:"comments/comment", locals:{comment: @comment}
         else
             render partial:"comments/create_comment_error", locals:{comment: @comment}

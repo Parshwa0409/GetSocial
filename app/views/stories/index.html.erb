@@ -7,10 +7,10 @@
 <hr/>
 
 <% @stories.each do |story|%>
-    <% render_if_not_viewed(story) do%>
+    
         <div class="d-flex justify-content-between align-items-center">
             <p><u><strong><%= story.user.email %></strong></u> uploaded a new story on <u><%=story.created_at.to_s.split(" ")[0]%></u></p>
-            <%= link_to "View Story", story, class: "view-story-btn link-dark", data: {"story-id": story.id} %>
+            <%= view_story_link(story) %>
         </div>
-    <% end %>
+    
 <% end %>

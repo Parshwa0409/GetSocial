@@ -1,6 +1,4 @@
 class NotificationsController < ApplicationController
-    # skip_before_action :verify_authenticity_token
-
     def mark_all_pan_as_read
         active_user.notifications.where(type: "PostActivityNotifier::Notification").unread.mark_as_read
     end

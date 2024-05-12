@@ -1,51 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}", remove this to add your own test-code
-
-  it "can run tests" do
-    expect(false).to be(false)
-  end
-
-  it "is valid with valid attributes" do
-    user = FactoryBot.create(:user)
-    
+  it "is valid with all valid attributes" do
+    user = FactoryBot.build(:user)
     expect(user).to be_valid
   end
   
   it "is not valid because of no email" do 
-    user = FactoryBot.create(:user)
-    user.email = nil
-    
+    user = FactoryBot.build(:user, email: nil)
     expect(user).to_not be_valid
   end
 
   it "is not valid because of invalid email" do 
-    user = FactoryBot.create(:user)
-    user.email = "test email"
-    
-    expect(user).to_not be_valid
-  end
-
-  it "is not valid because of invalid name" do 
-    user = FactoryBot.create(:user)
-    user.name = nil
-
+    user = FactoryBot.build(:user, email: "email")
     expect(user).to_not be_valid
   end
 
   it "is not valid because of no password" do 
-    user = FactoryBot.create(:user)
-    user.password = nil
+    user = FactoryBot.build(:user, password: nil)
+    expect(user).to_not be_valid
+  end
 
+  it "is not valid because of invalid name" do 
+    user = FactoryBot.build(:user, name: nil)
     expect(user).to_not be_valid
   end
 
   it "is not valid because of invalid password" do 
-    user = FactoryBot.create(:user)
-    user.password = "nil"
-
+    user = FactoryBot.build(:user, password: "pass")
     expect(user).to_not be_valid
   end
-
 end

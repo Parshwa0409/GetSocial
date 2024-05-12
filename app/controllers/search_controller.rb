@@ -6,8 +6,8 @@ class SearchController < ApplicationController
 
   def query
     @users = Profiles::Search.new(search_params).execute
-    @users.map {|user| !user.blocked_by?(active_user) || !active_user.blocked_by?(user) }
-    render partial: "users", locals: { users:@users }
+    @users  = @users.reject {|user| user.blocked_by?(active_user) || active_user.blocked_by?(user) }
+    render partial: "users", locals: { users: @users }
   end
 
   private

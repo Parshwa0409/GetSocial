@@ -8,6 +8,7 @@ class Post < ApplicationRecord
 
     validates :caption, presence: true
     before_create :valid_image
+    before_validation :valid_image
 
     private
     def valid_image

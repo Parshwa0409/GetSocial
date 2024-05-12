@@ -9,24 +9,22 @@ RSpec.describe "NotificationPreferences", type: :request do
       sign_in preferred_notifier
     end 
 
-    it " is successful request" do
+    it "is a successful request" do
       post notification_preferences_path(
         {id: preferred_user.id}
       )
       expect(response).to have_http_status(:success)
     end
 
-    it " renders success_partial on success" do
+    it "renders success_partial on success" do
       post notification_preferences_path(
         {id: preferred_user.id}
       )
-
       expect(response).to render_template("shared/_success")
     end
 
-    it " renders error message on failure" do
+    it "renders error message on failure" do
       post notification_preferences_path()
-
       expect(response).to render_template("shared/_danger")
     end
   end
@@ -37,15 +35,14 @@ RSpec.describe "NotificationPreferences", type: :request do
     let(:notification_preferences_path) {
       "/notification_preferences/#{preferred_user.id}"
     }
+
     before(:each) do
       sign_in preferred_notifier
     end 
 
     it "is a successful request" do
       delete notification_preferences_path
-
       expect(response).to have_http_status(:success)
     end
-    # TODO: HOW TO VERIFY THIS
   end
 end

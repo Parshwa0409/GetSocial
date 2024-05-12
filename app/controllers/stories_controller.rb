@@ -2,21 +2,18 @@ class StoriesController < ApplicationController
     before_action :set_story, only: [:show]
     
     def index
-        @stories = []
-        active_user.following.each do |user|
-            @stories += (user.stories.where("? < end_at", DateTime.now))
-        end
+        @stories = Story.where(user_id: active_user.following.pluck(:id))
     end
     
     def create
-        story = Story.create(story_params)
+        @story = Story.create(story_params)
 
-        if story.save
-            flash[:notice]="Story Uploaded ;)"
-            redirect_to story_path(story)
+        if @story.save
+            flash[:notice]="Story has been successfully uploaded :)"
+            redirect_to story_path(@story)
         else
-            flash[:alert]= story.errors.full_messages.to_sentence
-            redirect_to request.referer
+            flash[:alert]= @story.errors.full_messages.to_sentence
+            redirect_to profile_path(active_user)
         end
     end
 
@@ -26,6 +23,7 @@ class StoriesController < ApplicationController
     def my_stories
         @stories = active_user.stories.includes(:pic_attachment)
     end
+
     private
 
     def set_story

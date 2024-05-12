@@ -1,10 +1,10 @@
 class Story < ApplicationRecord
   has_one_attached :pic
-  
-  before_create :valid_image
-  
   belongs_to :user
   has_many :story_views, dependent: :destroy
+  
+  before_create :valid_image
+  before_validation :valid_image
   private
 
   def valid_image

@@ -5,11 +5,16 @@ FactoryBot.define do
     total_likes { 0 }
     total_comments { 0 }
 
-    after(:build) do |post|
-      post.image.attach(
-        Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'files', 'Bugatti.png'), 'image/png')
-      )
+    trait :with_image do
+      after(:build) do |post|
+        post.image.attach(
+          Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'files', 'Bugatti.png'), 'image/png')
+        )
+      end
     end
-    
+
+    trait :without_image do
+      image { nil }
+    end
   end
 end

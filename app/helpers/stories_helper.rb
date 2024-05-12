@@ -1,9 +1,12 @@
 module StoriesHelper
-    def render_if_not_viewed(story)
+    def view_story_link(story)
         if StoryView.find_by(user: active_user, story: story).nil?
-            yield
+            link_to "View Story", story, class: "view-story-btn link-dark", data: {"story-id": story.id}
+        else
+            link_to "View Again", story, class: "view-story-btn link-dark", data: {"story-id": story.id}
         end
     end
+
 
     def render_my_stories_if_present(stories)
         if stories.length > 0 

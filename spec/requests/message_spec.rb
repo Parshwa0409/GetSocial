@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe "Messages", type: :request do
   describe "GET /index" do
     let(:user) { FactoryBot.create(:user) }
-    
 
     before(:each) do
       sign_in user
@@ -20,7 +19,6 @@ RSpec.describe "Messages", type: :request do
     end
   end
 
-
   describe "POST /create" do
     let(:sender) { FactoryBot.create(:user) }
     let(:recipient) { FactoryBot.create(:user) }
@@ -36,7 +34,6 @@ RSpec.describe "Messages", type: :request do
         recipient_id: recipient.id,
         sender_id: sender.id
       })
-      
       expect(response).to redirect_to(profile_path(recipient.id))
     end
 
@@ -47,7 +44,6 @@ RSpec.describe "Messages", type: :request do
         recipient_id: recipient.id,
         sender_id: sender.id
       })
-      
       expect(response).to redirect_to(profile_path(recipient.id))
     end
 
@@ -58,8 +54,7 @@ RSpec.describe "Messages", type: :request do
         recipient_id: recipient.id,
         sender_id: sender.id
       })
-
-      expect(assigns(:message).errors.full_messages).to include("Msg  cannot be empty 😒")
+      expect(assigns(:message).errors.full_messages).to include("Msg cannot be empty 😒")
     end
   end
 end

@@ -2,13 +2,12 @@ class StoryViewsController < ApplicationController
     before_action :get_story
 
     def create
-        view = StoryView.find_by(user: active_user, story: @story)
-
-        unless view.present?
+        unless StoryView.exists?(user: active_user, story: @story)
             new_view = StoryView.create(user: active_user, story: @story)
-            @story.update(:views => (@story.views + 1)) if new_view.save()
+            @story.increment!(:views) if new_view.persisted?
         end
     end
+
 
     private
     def get_story

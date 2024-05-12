@@ -1,11 +1,11 @@
 class LikesController < ApplicationController
-    # skip_before_action :verify_authenticity_token
     before_action :set_post
 
     def create
         like = Like.create(user:active_user, post: @post)
 
         if like.save()
+            update_post_likes(@post, true)
             Notifier::PostActivity.notify(
                 " liked your post.",
                 false,
@@ -13,8 +13,6 @@ class LikesController < ApplicationController
                 active_user.email,
                 @post.user
             )
-
-            update_post_likes(@post, true)
         end
     end
     

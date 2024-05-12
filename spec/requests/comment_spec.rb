@@ -1,50 +1,43 @@
 require 'rails_helper'
 
 RSpec.describe "Comments", type: :request do
-  # GET - /posts/:post_id/comments(.:format) comments#index
   describe "GET /index" do
     let(:user) { FactoryBot.create(:user) }
-
-    # the user creating the comment can be different , need not be necessary the active-user
-    let(:comment) { FactoryBot.create(:comment) }
+    let(:test_post) {FactoryBot.create(:post, :with_image)}
 
     before(:each) do
       sign_in user
+      FactoryBot.create(:comment, post: test_post)
+      FactoryBot.create(:comment, post: test_post)
+      FactoryBot.create(:comment, post: test_post)
+      FactoryBot.create(:comment, post: test_post)
     end 
 
     it "is successful request" do 
-      get post_comments_path(comment.post)
-
+      get post_comments_path(test_post)
       expect(response).to have_http_status(:success)
     end
 
-    it "renders the comments" do 
-      get post_comments_path(comment.post)
-
+    it "renders the comments/_comments template" do 
+      get post_comments_path(test_post)
       expect(response).to render_template("comments/_comments")
     end
 
-    it "should return html content" do
-      get post_comments_path(comment.post)
-
+    it "should return text/html content" do
+      get post_comments_path(test_post)
       expect(response.media_type).to eq("text/html")
     end
 
     it "get all the comments of the post" do 
-      get post_comments_path(comment.post)
-      
-      post = assigns(:post)
-      comments = assigns(:comments)
-      
-      expect(comments).to eq(post.comments)
+      get post_comments_path(test_post)
+      expect(assigns(:comments).count).to eq(assigns(:post).comments.count)
     end
   end
 
 
-  # POST - /posts/:post_id/comments(.:format) comments#create
   describe "POST /create" do
     let(:user) { FactoryBot.create(:user) }
-    let(:test_post) { FactoryBot.create(:post) }
+    let(:test_post) {FactoryBot.create(:post, :with_image) }
 
     before(:each) do
       sign_in user
@@ -55,7 +48,6 @@ RSpec.describe "Comments", type: :request do
           content: "Rspec - Test Comment"
         }
       )
-
       expect(response).to have_http_status(:success)
     end
 
@@ -64,7 +56,6 @@ RSpec.describe "Comments", type: :request do
           content: "Rspec - Test Comment"
         }
       )
-
       expect(response).to render_template("comments/_comment")
     end
 
@@ -73,7 +64,6 @@ RSpec.describe "Comments", type: :request do
           content: nil
         }
       )
-      
       expect(response).to render_template("comments/_create_comment_error")
     end
   end

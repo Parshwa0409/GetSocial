@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   
   resources :posts do 
     post 'share/:user_id', to: 'posts#share', as: 'share_post'
-    resources :comments, only: [ :index, :create]
+    resources :comments, only: [ :index, :create ]
   end
   
   resources :profile, only: [:show, :edit, :update, :destroy]

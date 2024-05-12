@@ -1,5 +1,4 @@
 class RequestsController < ApplicationController
-    # skip_before_action :verify_authenticity_token
     include RequestsHelper
     before_action :set_user
     skip_before_action :set_user, only: [:follow_requests, :pending_requests, :blocked_users]
@@ -13,48 +12,43 @@ class RequestsController < ApplicationController
     end
 
     def follow
-        active_user.send_follow_request_to(@user)
-        Notifier::Request.notify( "New follow request from: ", active_user.email, @user)
+        active_user.send_follow_request_to(@target)
+        Notifier::Request.notify( "New follow request from: ", active_user.email, @target)
     end
 
     def unfollow
-        active_user.unfollow(@user)
+        active_user.unfollow(@target)
     end
-    
+
     def cancel
-        active_user.remove_follow_request_for(@user)
+        active_user.remove_follow_request_for(@target)
     end
-    
+
     def accept
-        active_user.accept_follow_request_of(@user)    
+        active_user.accept_follow_request_of(@target)    
     end
-    
+
     def decline
-        active_user.decline_follow_request_of(@user)
+        active_user.decline_follow_request_of(@target)
     end
 
     def block
-        active_user.block(@user)
-        remove_connections()
+        active_user.block(@target)
+        remove_connections_if_any(@target)
         redirect_to root_path
     end
 
     def unblock
-        active_user.unblock(@user)
-        redirect_to profile_path(@user)
+        active_user.unblock(@target)
+        redirect_to profile_path(@target)
     end
 
     def blocked_users
         @blocked_users = active_user.blocks
     end
 
-    def remove_connections
-        remove_connections_if_any(@user)
-    end
-
     private
-
     def set_user
-        @user = User.find(params[:id])
+        @target = User.find(params[:id])
     end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Posts", type: :request do
   describe "GET /show" do
-    let(:test_post) { FactoryBot.create(:post) }
+    let(:test_post) { FactoryBot.create(:post, :with_image) }
     let(:user) { FactoryBot.create(:user) }
 
     before(:each) do
@@ -11,14 +11,13 @@ RSpec.describe "Posts", type: :request do
 
     it "is successful request" do
       get post_path(test_post)
-
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "POST /create" do
     let(:user) { FactoryBot.create(:user) }
-    let(:test_post) { FactoryBot.create(:post) }
+    let(:test_post) { FactoryBot.create(:post, :with_image) }
   
     before(:each) do
       sign_in(user)
@@ -35,7 +34,7 @@ RSpec.describe "Posts", type: :request do
         filename: "Bugatti.png",
         content_type: 'image/png'
       )
-  
+
       post posts_path(
         post: {
           caption: "Rspec - Test Post",
@@ -79,7 +78,7 @@ RSpec.describe "Posts", type: :request do
   end
 
   describe "PATCH /update" do 
-    let(:test_post) { FactoryBot.create(:post) }
+    let(:test_post) { FactoryBot.create(:post, :with_image) }
 
     before(:each) do
       sign_in (test_post.user)
@@ -95,13 +94,11 @@ RSpec.describe "Posts", type: :request do
         test_post,
         post: {
           caption: "Rspec - Test Post",
-          image: nil
         }
       )
-  
+
       expect(response.status).to eq(302) 
       expect(response).to redirect_to(post_path(assigns(:post)))
-
     end
 
     it "is an unsuccessful request because it has no caption & renders posts/edit template" do
@@ -110,7 +107,7 @@ RSpec.describe "Posts", type: :request do
         filename: "Bugatti.png",
         content_type: 'image/png'
       )
-  
+
       patch post_path(
         id: test_post.id,
         post: {
@@ -127,7 +124,7 @@ RSpec.describe "Posts", type: :request do
 
 
   describe "DELETE /destroy" do
-    let(:test_post) { FactoryBot.create(:post) }
+    let(:test_post) {FactoryBot.create(:post, :with_image) }
     let(:user) { test_post.user }
 
     before(:each) do
@@ -141,7 +138,7 @@ RSpec.describe "Posts", type: :request do
   end
 
   describe "POST /share" do
-    let(:test_post) { FactoryBot.create(:post) }
+    let(:test_post) {FactoryBot.create(:post, :with_image) }
     let(:sender) { test_post.user }
     let(:reciever) { FactoryBot.create(:user) }
 
@@ -160,6 +157,5 @@ RSpec.describe "Posts", type: :request do
       
       expect(reciever.notifications.where(type: "PostActivityNotifier::Notification").unread.count).to eq(1)
     end
-
   end
 end
