@@ -12,6 +12,7 @@ RSpec.describe "Posts", type: :request do
     it "is successful request" do
       get post_path(test_post)
       expect(response).to have_http_status(:success)
+
     end
   end
 

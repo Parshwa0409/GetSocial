@@ -2,7 +2,7 @@ class StoriesController < ApplicationController
     before_action :set_story, only: [:show]
     
     def index
-        @stories = Story.where(user_id: active_user.following.pluck(:id))
+        @stories = Story.where(user_id: active_user.following.pluck(:id)).order("created_at DESC")
     end
     
     def create

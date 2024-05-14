@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get 'activities/index'
   root "home#index"
+  
+  get 'activities/index'
 
   # mount ActionCable.server => "/"
   

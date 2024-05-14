@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="sharePostModalLabel">Share Post</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" id="share-post-modal-close" aria-label="Close"></button>
             </div>
             <% render_followings_if_any(active_user.following.count) do %>
                 <% current_user.following.includes(:profile_picture_attachment).each do |user| %>

@@ -66,7 +66,7 @@ captions = [
     "Legendary performance, everyday usability."
 ]
 
-50.times do 
+12.times do 
     user = User.find(user_ids.sample())
     idx = ((0...cars.length).map {|i| i}).sample()
 
