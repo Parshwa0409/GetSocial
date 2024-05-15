@@ -40,8 +40,8 @@ consumer.subscriptions.create("Noticed::RequestChannel", {
           <span aria-hidden="true">&times;</span>
       </button>
       </div>`;
-
-      $("div#root > div#content").prepend(toastHTML);
+      $("div#root > div#content > div#request-flash").empty();
+      $("div#root > div#content > div#request-flash").prepend(toastHTML);
     }
   },
 });
