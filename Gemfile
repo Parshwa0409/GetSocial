@@ -68,6 +68,9 @@ group :test do
   gem 'rails-controller-testing', '~> 0.0.3'
   gem "capybara"
   gem "selenium-webdriver"
+
+
+  gem 'test-unit', '~> 3.1', '>= 3.1.8'
 end
 
 
