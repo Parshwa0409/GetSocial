@@ -1,13 +1,13 @@
-# User.create!(
-#     name: "Parshwa",
-#     email: "parshwapatil9@gmail.com",
-#     password: "password",
-#     bio: "Hey, There I'm Using GetSocial",
-#     profile_picture: {
-#         io: File.open("app/assets/images/user_avatar.png"),
-#         filename: "user_avatar.png"
-#     }
-# )
+User.create!(
+    name: "Parshwa",
+    email: "parshwapatil9@gmail.com",
+    password: "password",
+    bio: "Hey, There I'm Using GetSocial",
+    profile_picture: {
+        io: File.open("app/assets/images/user_avatar.png"),
+        filename: "user_avatar.png"
+    }
+)
 
 User.create!(
     name: "Parshwa",
