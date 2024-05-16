@@ -12,7 +12,6 @@ RSpec.describe "Posts", type: :request do
     it "is successful request" do
       get post_path(test_post)
       expect(response).to have_http_status(:success)
-
     end
   end
 
@@ -73,7 +72,7 @@ RSpec.describe "Posts", type: :request do
       )
 
       expect(assigns(:post).errors.full_messages).to include("Post must have an iamge attachment.")
-      expect(response.status).to be >= 300
+      expect(response.status).to eq(302)
       expect(response).to redirect_to(root_path)
     end
   end
@@ -100,6 +99,8 @@ RSpec.describe "Posts", type: :request do
 
       expect(response.status).to eq(302) 
       expect(response).to redirect_to(post_path(assigns(:post)))
+      expect(assigns(:post).caption).to eq("Rspec - Test Post")
+      expect(test_post.reload.caption).to eq("Rspec - Test Post")
     end
 
     it "is an unsuccessful request because it has no caption & renders posts/edit template" do
@@ -117,7 +118,6 @@ RSpec.describe "Posts", type: :request do
         }
       )      
 
-      # Not Redirecting
       expect(assigns(:post).errors.full_messages).to include("Caption can't be blank") 
       expect(response).to render_template("posts/edit")
     end
@@ -152,11 +152,11 @@ RSpec.describe "Posts", type: :request do
     end
 
     it "successful & notifies the notifiers on new event" do
-      expect(reciever.notifications.where(type: "PostActivityNotifier::Notification").unread.count).to eq(0)
+      expect(unread_notification_count(reciever)).to eq(0)
       
       post post_share_post_path(test_post, reciever)
       
-      expect(reciever.notifications.where(type: "PostActivityNotifier::Notification").unread.count).to eq(1)
+      expect(unread_notification_count(reciever)).to eq(1)
     end
   end
 end

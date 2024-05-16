@@ -33,5 +33,28 @@ RSpec.describe "Searches", type: :request do
       expect(assigns(:users).count).to eq(2)
       expect(response).to render_template("search/_users")
     end
+
+    it "is successful request & renders search/users template when searched by name only" do
+      FactoryBot.create(:user, name: "Test User")
+
+      post search_path(search: {
+        name: "Test User"
+      })
+
+      expect(assigns(:users).count).to eq(1)
+      expect(response).to render_template("search/_users")
+    end
+
+    it "is successful request & renders search/users template when searched by email only" do
+
+      FactoryBot.create(:user, email: "TestUser@getsocial.in")
+
+      post search_path(search: {
+        email: "TestUser@getsocial.in"
+      })
+
+      expect(assigns(:users).count).to eq(1)
+      expect(response).to render_template("search/_users")
+    end
   end
 end

@@ -11,7 +11,7 @@ RSpec.describe "Notifications", type: :request do
       sign_in reciever
     end 
 
-    def unread_notificatio_count
+    def unread_notification_count
       reciever.notifications.where(type: "PostActivityNotifier::Notification").unread.count
     end
 
@@ -28,9 +28,9 @@ RSpec.describe "Notifications", type: :request do
         sender.email, 
         reciever
       )
-      expect(unread_notificatio_count).to eq(1)
+      expect(unread_notification_count).to eq(1)
       post post_path
-      expect(unread_notificatio_count).to eq(0)
+      expect(unread_notification_count).to eq(0)
     end
   end
 
@@ -44,7 +44,7 @@ RSpec.describe "Notifications", type: :request do
       sign_in reciever
     end 
 
-    def unread_notificatio_count
+    def unread_notification_count
       reciever.notifications.where(type: "MessageNotifier::Notification").unread.count
     end
 
@@ -59,9 +59,9 @@ RSpec.describe "Notifications", type: :request do
         record.msg,
         false
       )
-      expect(unread_notificatio_count).to eq(1)
+      expect(unread_notification_count).to eq(1)
       post post_path
-      expect(unread_notificatio_count).to eq(0)
+      expect(unread_notification_count).to eq(0)
     end
   end
 end
