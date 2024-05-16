@@ -13,8 +13,4 @@ class StoryViewsController < ApplicationController
     def get_story
         @story = Story.find(params[:story_id])
     end
-
-    def get_params
-        params.permit(:story_id)
-    end
 end

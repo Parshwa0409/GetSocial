@@ -56,5 +56,11 @@ RSpec.describe "Searches", type: :request do
       expect(assigns(:users).count).to eq(1)
       expect(response).to render_template("search/_users")
     end
+
+    it "is successful request & searched result is nil / zero when name, email are both nil" do
+      post search_path(search: {name: nil, email: nil})
+
+      expect(assigns(:users).count).to eq(0)
+    end
   end
 end

@@ -15,6 +15,21 @@ RSpec.describe "Posts", type: :request do
     end
   end
 
+  describe "GET /new" do
+    let(:user) { FactoryBot.create(:user) }
+
+    before(:each) do
+      sign_in(user)
+    end
+
+    it "is successful request & render posts/new template" do
+      get new_post_path
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template("posts/new")
+    end
+  end
+
+
   describe "POST /create" do
     let(:user) { FactoryBot.create(:user) }
     let(:test_post) { FactoryBot.create(:post, :with_image) }

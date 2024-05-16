@@ -32,17 +32,37 @@ RSpec.describe "NotificationPreferences", type: :request do
   describe "DELETE /destroy" do
     let(:preferred_user) { FactoryBot.create(:user) }
     let(:preferred_notifier) { FactoryBot.create(:user) }
-    let(:notification_preferences_path) {
-      "/notification_preferences/#{preferred_user.id}"
-    }
 
     before(:each) do
       sign_in preferred_notifier
     end 
 
-    it "is a successful request" do
-      delete notification_preferences_path
+    it "is a successful request & unsubscribe from users post notification" do
+      np = FactoryBot.create(
+        :notification_preference, 
+        preferred_user: preferred_user, 
+        preferred_notifier: preferred_notifier
+      ) 
+
+      # debugger
+      
+      delete notification_preference_path(
+        {id: preferred_user.id}
+      )
+      
+      expect(assigns(:preference)).to eq(np)
+      expect(assigns(:preference).present?).to eq(true)
       expect(response).to have_http_status(:success)
+    end
+
+    it "is an unsuccessful request & renders shared/danger partial" do
+      delete notification_preference_path(
+        {id: preferred_user.id}
+      )
+      
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template("shared/_danger")
+
     end
   end
 end

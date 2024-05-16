@@ -77,6 +77,7 @@ RSpec.describe "Storeries", type: :request do
 
   describe "GET /my_stories" do
     let(:user) {FactoryBot.create(:user)}
+    
     let(:stories) {
       [ 
         FactoryBot.create(:story, :with_picture, user: user), 
@@ -92,12 +93,17 @@ RSpec.describe "Storeries", type: :request do
 
     it "is a successful request" do
       get my_stories_stories_path
+      
       expect(response).to have_http_status(200)
     end
 
     it "verifies my stories" do
+      my_stories = stories
+
       get my_stories_stories_path
+
       expect(assigns(:stories)).to eq(user.stories)
+      expect(assigns(:stories)).to eq(my_stories)
     end
   end
 end

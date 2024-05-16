@@ -1,6 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe "Messages", type: :request do
+  describe "GET /show" do
+    let(:sender) { FactoryBot.create(:user) }
+    let(:recipient) { FactoryBot.create(:user) }
+    let(:test_message) { FactoryBot.create(:message, :with_attachment, sender: sender, recipient: recipient)}
+
+    before(:each) do
+      sign_in recipient
+    end 
+
+    it "is successful request" do 
+      get message_path(test_message)
+      expect(response).to have_http_status(:success)
+    end
+
+    it "checks the message if is the same" do 
+      get message_path(test_message)
+      expect(assigns(:message)).to eq(test_message)
+    end
+  end
+
   describe "GET /index" do
     let(:user) { FactoryBot.create(:user) }
 

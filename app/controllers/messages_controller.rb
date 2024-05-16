@@ -22,9 +22,7 @@ class MessagesController < ApplicationController
             flash[:alert] = @message.errors.full_messages.to_sentence
         end
 
-        # TODO: REDO THE FORM ONCE & TRY
         redirect_to profile_path(@message.recipient)
-
     end
 
     def show

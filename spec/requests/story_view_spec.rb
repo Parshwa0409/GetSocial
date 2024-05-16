@@ -15,7 +15,7 @@ RSpec.describe "StoryViews", type: :request do
       }.to change { story.reload.views }.by(1)
     end
 
-    it "is a successful request & create add view to story (it's already viewed by user )" do
+    it "is a successful request & create add view to story (it's already viewed by user)" do
       FactoryBot.create(:story_view, story: story, user: user)
 
       expect {

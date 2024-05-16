@@ -12,14 +12,15 @@ class NotificationPreferencesController < ApplicationController
   end
 
   def destroy
-    preference = NotificationPreference.find_by(preferred_user_id: get_preferred_user_id, preferred_notifier: active_user)
+    # debugger
+    @preference = NotificationPreference.find_by(preferred_user_id: get_preferred_user_id, preferred_notifier: active_user)
     
-    if preference.present?
+    if @preference.present?
       user = User.find(get_preferred_user_id)
 
-      preference.destroy
+      @preference.destroy
       
-      render partial:"shared/danger", locals: {message: "You have successfully unsubscribed from receiving notifications. You will no longer receive messages about new posts from #{user.email}."}
+      render partial:"shared/success", locals: {message: "You have successfully unsubscribed from receiving notifications. You will no longer receive messages about new posts from #{user.email}."}
     else
       render partial:"shared/danger", locals: {message: "Oops! It seems something went wrong. Please try again."}
     end
