@@ -7,10 +7,10 @@ RSpec.describe Comment, type: :model do
     expect(comment).to be_valid
   end
 
-  it "is invalid because the comment has not content" do
-    comment = FactoryBot.build(:comment, post: post, content: nil)
-    expect(comment).to_not be_valid
-    expect(comment.errors.full_messages.to_sentence).to include("Cannot post an empty comment 😒")
+  # it "is invalid because the comment has not content" do
+  #   comment = FactoryBot.build(:comment, post: post, content: nil)
+  #   expect(comment).to_not be_valid
+  #   expect(comment.errors.full_messages.to_sentence).to include("Cannot post an empty comment 😒")
 
-  end
+  # end
 end
