@@ -36,3 +36,6 @@
 
 # environment variable files
 /.env
+
+# coverage files
+/coverage/*
